@@ -2,15 +2,14 @@
     <thead class="bg-gray-50">
         <tr class="text-sm border-b border-gray-200">
             <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">#</th>
-            <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">Name</th>
-            <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">Email</th>
-            <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">Role</th>
-            <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">Status</th>
+            <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">Icon</th>
+            <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">Title</th>
+            <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">Created Date</th>
             <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">Action</th>
         </tr>
     </thead>
     <tbody class="text-gray-700 divide-y divide-gray-100">
-        @forelse ($users as $i => $user)
+        {{--  @forelse ($users as $i => $user)
             <tr class="hover:bg-gray-50 transition-colors duration-150">
                 <td class="px-6 py-4 kantumruy-pro font-medium text-gray-600">{{ $i + 1 }}</td>
                 <td class="px-6 py-4 kantumruy-pro text-gray-600">{{ $user->userDetail->first_name ?? '' }} &nbsp;{{ $user->userDetail->last_name ?? '' }}</td>
@@ -76,6 +75,6 @@
                     <div class="text-gray-400">មិនមានទិន្នន័យ</div>
                 </td>
             </tr>
-        @endforelse
+        @endforelse  --}}
     </tbody>
 </table>

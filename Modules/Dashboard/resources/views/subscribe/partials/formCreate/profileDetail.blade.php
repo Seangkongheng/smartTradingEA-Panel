@@ -1,39 +1,39 @@
 <div class="tab-content hidden  rounded-lg bg-white" id="styled-dashboard" role="tabpanel"  style="box-shadow: rgba(17, 17, 26, 0.05) 0px 2px 8px, rgba(17, 17, 26, 0.05) 0px 0px 32px;">
     <div class="card-title inter font-[500] py-3 border-b flex items-center  justify-center w-full text-center ">
-        <h1 class="m-0 p-0 kantumruy-pro text-lg"><i class="fas fa-user text-yellow-500 mr-2"></i>  <span>  Information  </span></h1>
+        <h1 class="m-0 p-0 kantumruy-pro text-lg"><i class="fas fa-user text-yellow-500 mr-2"></i>  <span>  ពត៌មានផ្ទាល់ខ្លួន  </span></h1>
     </div>
     <div class=" inter flex flex-col   justify-center  gap-4 w-[100%] p-10  rounded-2xl">
 
-        {{--  Noted : Start fist name  --}}
+        <!-- Start fist name -->
         <div class="grid grid-cols-12 gap-3 kantumruy-pro ">
             <div class="col-start-1 col-end-3 w-full">
-                <label for="">First Name </label>
+                <label for="">គោត្តនាម</label>
             </div>
             <div class="col-start-3 col-end-13 w-full ">
-                <input type="text"   value="{{ old('first_name', isset($userEdit->id) && isset($userEdit->userDetail) ? $userEdit->userDetail->first_name : '') }}" name="first_name" class="px-6 py-3.5 text-black bg-gray-100 rounded-xl w-full outline-none" placeholder="First Name *">
+                <input type="text"   value="{{ old('first_name', isset($userEdit->id) && isset($userEdit->userDetail) ? $userEdit->userDetail->first_name : '') }}" name="first_name" class="px-6 py-3.5 text-black bg-gray-100 rounded-xl w-full outline-none" placeholder="គោត្តនាម*">
             </div>
             @error('name')
                 <span class="text-red-500">{{ $message }}</span>
             @enderror
         </div>
 
-        {{--  Noted : Start Last Name  --}}
+        <!-- Start Last Name -->
         <div class="grid grid-cols-12 gap-3 kantumruy-pro ">
             <div class="col-start-1 col-end-3 w-full">
-                <label for="">Last Name</label>
+                <label for="">នាមខ្លួន</label>
             </div>
             <div class="col-start-3 col-end-13 w-full ">
-                <input type="text" name="last_name"  value="{{ old('last_name',isset($userEdit->id)&& isset($userEdit->userDetail) ? $userEdit->userDetail->last_name : "") }}"  class="px-6 py-3.5 text-black bg-gray-100 rounded-xl w-full outline-none " placeholder="Last Name*">
+                <input type="text" name="last_name"  value="{{ old('last_name',isset($userEdit->id)&& isset($userEdit->userDetail) ? $userEdit->userDetail->last_name : "") }}"  class="px-6 py-3.5 text-black bg-gray-100 rounded-xl w-full outline-none " placeholder="នាមខ្លួន*">
             </div>
             @error('name')
                 <span class="text-red-500">{{ $message }}</span>
             @enderror
         </div>
 
-        {{--  Noted :start date of birth  --}}
+        <!-- start date of birth-->
         <div class="grid grid-cols-12 gap-3 kantumruy-pro ">
             <div class="col-start-1 col-end-3 w-full">
-                <label for="">Date Of Birth</label>
+                <label for="">ជ្រើសរើសថ្ងៃកំណើត</label>
             </div>
             <div class="col-start-3 col-end-13 w-full ">
                 <input type="date" name="date_of_birth" value="{{ old('date_of_birth',isset($userEdit->id) && isset($userEdit->userDetail)? $userEdit->userDetail->date_of_birth : "") }}" class="px-6 py-3.5 text-black bg-gray-100 rounded-xl w-full outline-none " placeholder="នាមខ្លួន*">
@@ -43,23 +43,23 @@
             @enderror
         </div>
 
-        {{--  Note :start phone number  --}}
+        <!-- start phone number-->
         <div class="grid grid-cols-12 gap-3 kantumruy-pro ">
             <div class="col-start-1 col-end-3 w-full">
-                <label for="">Phone Number</label>
+                <label for="">លេខទូរស័ព្ទ</label>
             </div>
             <div class="col-start-3 col-end-13 w-full ">
-                <input type="number" name="phone_number" value="{{ old('phone_number',isset($userEdit->id)&&isset($userEdit->userDetail) ? $userEdit->userDetail->phone_number : "") }}"  class="px-6 py-3.5 text-black bg-gray-100 rounded-xl w-full outline-none " placeholder="Phone Number">
+                <input type="number" name="phone_number" value="{{ old('phone_number',isset($userEdit->id)&&isset($userEdit->userDetail) ? $userEdit->userDetail->phone_number : "") }}"  class="px-6 py-3.5 text-black bg-gray-100 rounded-xl w-full outline-none " placeholder="លេខទូរស័ព្ទ">
             </div>
             @error('name')
                 <span class="text-red-500">{{ $message }}</span>
             @enderror
         </div>
 
-        {{--  Noted : Start Photo  --}}
+        <!-- Start Photo -->
         <div class="grid grid-cols-12 gap-3 kantumruy-pro ">
             <div class="col-start-1 col-end-3 w-full">
-                <label for="">Photo</label>
+                <label for="">រូបថត</label>
             </div>
             <div class="col-start-3 col-end-13 w-full">
                 <label  class="flex flex-col items-center px-6 py-8 bg-white border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-blue-500 hover:bg-gray-50 transition-colors duration-200 ease-in-out">
@@ -94,9 +94,6 @@
 
     </div>
 </div>
-
-
-{{--  Noted : Script  --}}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const input = document.querySelector('input[name="image"]');

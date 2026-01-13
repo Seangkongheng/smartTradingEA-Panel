@@ -9,10 +9,12 @@ use Modules\Dashboard\App\Http\Controllers\RegisterController\RegisterController
 use Modules\Dashboard\App\Http\Controllers\SchoolController\TeacherController;
 use Modules\Dashboard\App\Http\Controllers\SchoolPartner\TeacherPartnerController;
 use Modules\Dashboard\App\Http\Controllers\SettingController\SocailPlatformController;
+use Modules\Dashboard\App\Http\Controllers\SubscribeController\SubscribeController;
 use Modules\Dashboard\App\Http\Controllers\UserController\UserController;
 use Modules\Dashboard\App\Http\Controllers\AuthController\AuthController;
 use Modules\Dashboard\App\Http\Controllers\LibraryController\LibraryController;
 use Modules\Dashboard\App\Http\Controllers\MarketplaceController\MarketplaceController;
+use Modules\Dashboard\App\Http\Controllers\MeetingController\MeetingController;
 use Modules\Dashboard\App\Http\Controllers\MembershipController\MembershipController;
 use Modules\Dashboard\App\Http\Controllers\ProductController\ProductController;
 use Modules\Dashboard\App\Http\Controllers\ProfessorController\ProfessorController;
@@ -476,8 +478,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/index', [MembershipController::class, 'index'])->name('index');
         Route::get('/create', [MembershipController::class, 'create'])->name('create');
     });
-     Route::prefix('contact')->name('contact.')->group(function () {
+    Route::prefix('contact')->name('contact.')->group(function () {
         Route::get('/index', [MembershipController::class, 'index'])->name('index');
         Route::get('/create', [MembershipController::class, 'create'])->name('create');
+    });
+    Route::prefix('meeting')->name('meeting.')->group(function () {
+        Route::get('/index', [MeetingController::class, 'index'])->name('index');
+        Route::get('/create', [MeetingController::class, 'create'])->name('create');
+    });
+     Route::prefix('subscribe')->name('subscribes.')->group(function () {
+        Route::get('/index', [SubscribeController::class, 'index'])->name('index');
+        Route::get('/create', [SubscribeController::class, 'create'])->name('create');
     });
 });

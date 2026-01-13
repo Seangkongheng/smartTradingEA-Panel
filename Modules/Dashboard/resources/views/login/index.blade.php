@@ -21,6 +21,14 @@
 </head>
 <body>
 
+<style>
+    body {
+        background-image: url("{{ asset('images/login-bg.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+</style>
 
 
 

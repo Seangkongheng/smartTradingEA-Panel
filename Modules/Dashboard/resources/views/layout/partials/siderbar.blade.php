@@ -7,7 +7,6 @@
                 <img src="{{ asset('images/SuperTradingEA_logo.png') }}" alt="2A Panel Logo"
                     class="w-10 h-10 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105">
                 <h1 class="text-lg font-semibold text-violet-700 tracking-wide group-hover:text-violet-700">
-
                     Smart TrandingEA
                 </h1>
             </a>
@@ -26,7 +25,7 @@
 
             {{-- Noted : home page --}}
             <div
-                class="componet-content w-full h-full hover:bg-violet-700 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -37,7 +36,7 @@
                                 </svg></span>
                         </div>
                         <div class="component-txt">
-                            ទំព័រដំបូង
+                            Dashbaord
                         </div>
                     </div>
                 </a>
@@ -47,8 +46,8 @@
 
             {{-- Noted : EA Meeting --}}
             <div
-                class="componet-content w-full h-full hover:bg-violet-700 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
-                <a href="{{ route('admin.streaming.index') }}">
+                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                <a href="{{ route('admin.meeting.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
                             <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
@@ -66,7 +65,7 @@
 
             {{-- Noted : Register --}}
             <div
-                class="componet-content w-full h-full hover:bg-violet-700 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.register.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -85,7 +84,7 @@
 
             {{-- Noted : Marketplace --}}
             <div
-                class="componet-content w-full h-full hover:bg-violet-700 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.marketplace.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -104,8 +103,8 @@
 
             {{-- Noted : Subscription --}}
             <div
-                class="componet-content w-full h-full hover:bg-violet-700 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
-                <a href="{{ route('admin.streaming.index') }}">
+                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                <a href="{{ route('admin.subscribes.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
                             <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
@@ -123,7 +122,7 @@
 
             {{-- Noted : Membership --}}
             <div
-                class="componet-content w-full h-full hover:bg-violet-700 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.membership.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -142,7 +141,7 @@
 
             {{-- Noted : Reward --}}
             <div
-                class="componet-content w-full h-full hover:bg-violet-700 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.streaming.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -160,76 +159,70 @@
             </div>
 
             {{-- Noted : Attachment --}}
-            <div
-                class="componet-content w-full h-full hover:bg-violet-700 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+            {{-- Noted : Attachment --}}
+            <div class="componet-content w-full h-full hover:bg-gradient-to-br from-[#070C0F] via-[#0A1219] to-[#070C0F]
+           transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.attachment.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
-                                    class="fill-current group-hover:text-white">
-                                    <path
-                                        d="M16.5 6.5L8 15c-1.104 1.104-2.896 1.104-4 0s-1.104-2.896 0-4l7-7c1.104-1.104 2.896-1.104 4 0s1.104 2.896 0 4l-7 7c-.391.391-1.023.391-1.414 0s-.391-1.023 0-1.414l5-5"
-                                        stroke="currentColor" stroke-width="2" fill="none" />
-                                </svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.19 9.19a2 2 0 01-2.83-2.83l8.48-8.48" />
+                            </svg>
                         </div>
-                        <div class="component-txt">
-                            Attachment
-                        </div>
+                        <div class="component-txt">Attachment</div>
                     </div>
                 </a>
             </div>
 
-             {{-- Noted : product --}}
-            <div
-                class="componet-content w-full h-full hover:bg-violet-700 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+
+            {{-- Noted : Product --}}
+            <div class="componet-content w-full h-full hover:bg-gradient-to-br from-[#070C0F] via-[#0A1219] to-[#070C0F]
+           transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.product.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
-                                    class="fill-current group-hover:text-white">
-                                    <path
-                                        d="M16.5 6.5L8 15c-1.104 1.104-2.896 1.104-4 0s-1.104-2.896 0-4l7-7c1.104-1.104 2.896-1.104 4 0s1.104 2.896 0 4l-7 7c-.391.391-1.023.391-1.414 0s-.391-1.023 0-1.414l5-5"
-                                        stroke="currentColor" stroke-width="2" fill="none" />
-                                </svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                                <line x1="12" y1="22.08" x2="12" y2="12" />
+                            </svg>
                         </div>
-                        <div class="component-txt">
-                            Product
-                        </div>
+                        <div class="component-txt">Product</div>
                     </div>
                 </a>
             </div>
 
-             {{-- Noted : product --}}
-            <div
-                class="componet-content w-full h-full hover:bg-violet-700 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+
+            {{-- Noted : Contact --}}
+            <div class="componet-content w-full h-full hover:bg-gradient-to-br from-[#070C0F] via-[#0A1219] to-[#070C0F]
+           transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.contact.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
-                                    class="fill-current group-hover:text-white">
-                                    <path
-                                        d="M16.5 6.5L8 15c-1.104 1.104-2.896 1.104-4 0s-1.104-2.896 0-4l7-7c1.104-1.104 2.896-1.104 4 0s1.104 2.896 0 4l-7 7c-.391.391-1.023.391-1.414 0s-.391-1.023 0-1.414l5-5"
-                                        stroke="currentColor" stroke-width="2" fill="none" />
-                                </svg>
-                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
                         </div>
-                        <div class="component-txt">
-                            Contact
-                        </div>
+                        <div class="component-txt">Contact</div>
                     </div>
                 </a>
             </div>
+
 
 
             {{-- Noted : Setting --}}
             <div class="px-5 mt-4 mb-1 text-gray-500 font-semibold text-sm uppercase">General Setting</div>
             <div
-                class="componet-content w-full h-full hover:bg-violet-700 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.user.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -248,7 +241,7 @@
 
             {{-- Noted : Settings --}}
             <div
-                class="componet-content w-full h-full hover:bg-violet-700 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.setting.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -267,7 +260,7 @@
 
             {{-- Noted : Logout --}}
             <div
-                class="componet-content w-full text-red-500 h-full hover:bg-violet-700 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full text-red-500 h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('logout') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -296,7 +289,7 @@
         const selectedIndex = parseInt(localStorage.getItem("selectedMenuIndex"), 10);
         if (!isNaN(selectedIndex) && selectedIndex >= 0 && selectedIndex < components.length) {
             const selectedComponent = components[selectedIndex];
-            selectedComponent.classList.add("bg-violet-700", "text-white");
+            selectedComponent.classList.add("bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F]", "text-white");
             const svg = selectedComponent.querySelector("svg");
             if (svg) svg.setAttribute("fill", "#ffffff");
         }
@@ -306,13 +299,13 @@
             component.addEventListener("click", () => {
                 // Remove highlight from all
                 components.forEach(item => {
-                    item.classList.remove("bg-violet-700", "text-white");
+                    item.classList.remove("bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F]", "text-white");
                     const svg = item.querySelector("svg");
                     if (svg) svg.setAttribute("fill", "#000000");
                 });
 
                 // Add highlight to selected
-                component.classList.add("bg-violet-700", "text-white");
+                component.classList.add("bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F]", "text-white");
                 const svg = component.querySelector("svg");
                 if (svg) svg.setAttribute("fill", "#ffffff");
 

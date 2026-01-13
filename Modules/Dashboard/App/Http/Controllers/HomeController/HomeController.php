@@ -27,7 +27,9 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        return view('dashboard::index.index');
+        $userId = Auth()->user()->id;
+        $authName = UserDetail::where('user_id', $userId)->first();
+        return view('dashboard::index.index',compact('authName'));
     }
 
 }

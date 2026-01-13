@@ -5,9 +5,9 @@
 <div class="title-table mt-5 flex items-center justify-between  border-gray-200 pb-4">
     <div class="flex-1 min-w-[160px]">
         <h1 class="text-xl font-semibold text-gray-800 kantumruy-pro">
-            <span class="text-green-600">អ្នកប្រើប្រាស់</span>
+            <span class="text-green-600">User</span>
             <span class="text-gray-300 mx-2">/</span>
-            <span  class="text-gray-600">{{ isset($userEdit->id) ? 'កែប្រែអ្នកប្រើប្រាស់' : 'បង្កើតអ្នកប្រើប្រាស់ ' }}</span>
+            <span  class="text-gray-600">{{ isset($userEdit->id) ? 'Update User' : 'Create User' }}</span>
         </h1>
     </div>
 
@@ -19,7 +19,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 19l-7-7 7-7" />
                 </svg>
             </span>
-            <span class="font-medium">ត្រឡបក្រោយ</span>
+            <span class="font-medium">Back</span>
         </a>
     </div>
 </div>
@@ -41,19 +41,19 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
                         <path stroke-linecap="round" stroke-linejoin="round"   d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                     </svg>
-                    <span class="kantumruy-pro text-xl">គ្រប់គ្រងគណនី</span>
+                    <span class="kantumruy-pro text-xl">Manage Account</span>
                 </h1>
 
             </div>
             <ul class=" flex-wrap flex-col  -mb-px text-sm font-medium text-center items-center justify-center w-full"  role="tablist">
                 <li class="me-2 w-full " role="presentation">
-                    <button class="tab-button inline-block p-4 inter w-full rounded-t-2xl kantumruy-pro" data-tab="styled-profile" type="button" role="tab"><span  class="kantumruy-pro text-lg">គណនីលំអិត</span></button>
+                    <button class="tab-button inline-block p-4 inter w-full rounded-t-2xl kantumruy-pro" data-tab="styled-profile" type="button" role="tab"><span  class="kantumruy-pro text-lg">Account Detail</span></button>
                 </li>
                 <li class="me-2 w-full" role="presentation">
-                    <button class="tab-button inline-block p-4 inter w-full kantumruy-pro " data-tab="styled-dashboard"   type="button" role="tab"><span   class="kantumruy-pro text-lg">ពត៌មានផ្ទាល់ខ្លួន</span></button>
+                    <button class="tab-button inline-block p-4 inter w-full kantumruy-pro " data-tab="styled-dashboard"   type="button" role="tab"><span   class="kantumruy-pro text-lg">Information</span></button>
                 </li>
                 <li class="me-2 w-full" role="presentation">
-                    <button class="tab-button inline-block p-4 inter w-full  " data-tab="styled-settings" type="button" role="tab"><span class="kantumruy-pro text-lg">កំណត់តួនាទី</span></button>
+                    <button class="tab-button inline-block p-4 inter w-full  " data-tab="styled-settings" type="button" role="tab"><span class="kantumruy-pro text-lg">Role and Permission</span></button>
                 </li>
             </ul>
             <div class="flex items-center gap-5 justify-center">
@@ -67,7 +67,7 @@
                    @if (!$userEdit->userDetail->is_active)
                         {{-- Show unblock --}}
                         <a href="#" onclick="event.preventDefault(); document.getElementById('unblock-user-form').submit();" class="inter px-5 py-2 p-8 backdrop-blur-lg text-white bg-blue-600 rounded-lg inline-flex items-center gap-1 border border-white/15 hover:bg-blue-700 transition-all">
-                            <span class="kantumruy-pro font-[500]">បើកអាខោន</span>
+                            <span class="kantumruy-pro font-[500]">Unblock</span>
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 24 24" width="20px" class="fill-current">
                                     <path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm6-7V7a6 6 0 0 0-12 0v3H4v12h16V10h-2zm-8-3a4 4 0 0 1 8 0v3H6V7zm10 15H6V12h12v10z" />
@@ -77,7 +77,7 @@
                     @else
                         {{-- Show block --}}
                         <a href="#" onclick="event.preventDefault(); document.getElementById('block-user-form').submit();" class="inter px-5 py-2 p-8 backdrop-blur-lg text-white bg-red-600 rounded-lg inline-flex items-center gap-1 border border-white/15 hover:bg-red-700 transition-all">
-                            <span class="kantumruy-pro font-[500]">បិទអាខោន</span>
+                            <span class="kantumruy-pro font-[500]">Block</span>
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 24 24" width="20px" class="fill-current">
                                     <path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm6-7V7a6 6 0 0 0-12 0v3H4v12h16V10h-2zm-8-3a4 4 0 0 1 8 0v3H6V7zm10 15H6V12h12v10z" />
@@ -111,7 +111,8 @@
 
 </div>
 
-<!-- JavaScript -->
+
+{{--  Noted : Script  --}}
 <script>
     function isBlock(event) {
     event.preventDefault(); // Prevent link from reloading the page

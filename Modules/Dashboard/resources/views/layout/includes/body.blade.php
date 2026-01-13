@@ -10,10 +10,11 @@
                 @include('dashboard::layout.partials.siderbar')
             </div>
 
+
             <div class="dashboard-body col-start-1 col-end-13 xl:col-start-3 xl:col-end-13 p-5">
                 <div class="dashboard-body-content h-full">
                     <div class="dashboard-full-content bg-gray-50/15 h-full  ">
-                        <div class="dashboard-navbar min-h-[5rem] px-5 lg:px-10 flex w-full items-center rounded-2xl"
+                        <div class="dashboard-navbar  min-h-[5rem] px-5 lg:px-10 flex w-full items-center rounded-2xl"
                             style="box-shadow: rgba(17, 17, 26, 0.05) 0px 2px 8px, rgba(17, 17, 26, 0.05) 0px 0px 32px;">
                             @include('dashboard::layout.partials.navbar')
                         </div>

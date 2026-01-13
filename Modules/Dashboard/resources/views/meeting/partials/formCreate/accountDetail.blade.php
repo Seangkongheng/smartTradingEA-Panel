@@ -1,7 +1,7 @@
   <div class="tab-content hidden  rounded-lg  bg-white" id="styled-profile" role="tabpanel"
       style="box-shadow: rgba(17, 17, 26, 0.05) 0px 2px 8px, rgba(17, 17, 26, 0.05) 0px 0px 32px;">
       <div class="card-title inter font-[500] py-3 border-b flex items-center justify-center w-full text-center ">
-          <h1 class="m-0 p-0 text-lg">  <i class="fas fa-user-circle text-yellow-500 mr-2"></i> <span class="kantumruy-pro text-lg"> Account Detail </span></h1>
+          <h1 class="m-0 p-0 text-lg">  <i class="fas fa-user-circle text-yellow-500 mr-2"></i> <span class="kantumruy-pro text-lg"> គណនីលំអិត </span></h1>
       </div>
       <div class=" inter flex flex-col justify-center gap-4 w-[100%] p-10  rounded-2xl">
 
@@ -9,10 +9,10 @@
 
               <!-- Username-->
               <div class="col-start-1 col-end-3 w-full">
-                  <label for="">Name</label>
+                  <label for="">ឈ្មោះគណនី</label>
               </div>
               <div class="col-start-3 col-end-13 w-full">
-                  <input type="text" value="{{ old('username',isset($userEdit->id) ?$userEdit->username : "") }}" name="username" class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none "   placeholder="Name*">
+                  <input type="text" value="{{ old('username',isset($userEdit->id) ?$userEdit->username : "") }}" name="username" class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none "   placeholder="ឈ្មោះគណនី*">
                   @error('username')
                       <span class="text-red-500">{{ $message }}</span>
                   @enderror
@@ -23,12 +23,12 @@
 
               <!-- email-->
               <div class="col-start-1 col-end-3 w-full">
-                  <label for="">Email</label>
+                  <label for="">អ៊ីម៉ែល</label>
               </div>
               <div class="col-start-3 col-end-13 w-full">
                   <input type="email" name="email" value="{{ old('email',isset($userEdit->id) ?$userEdit->email : "") }}"
                       class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none "
-                      placeholder="Email*">
+                      placeholder="អ៊ីម៉ែល*">
                   @error('email')
                       <span class="text-red-500">{{ $message }}</span>
                   @enderror
@@ -38,13 +38,13 @@
           <!-- password -->
           <div class="grid grid-cols-12 gap-3 kantumruy-pro ">
               <div class="col-start-1 col-end-3 w-full">
-                  <label for="">Password</label>
+                  <label for="">ពាក្យសម្ងាត់</label>
               </div>
               <div class="col-start-3 col-end-13 w-full">
                   <div class="relative w-full">
                       <input type="password" id="txtPassword" name="password" value="{{ old('password',isset($userEdit->id) ? "" : "") }}"
                           class="px-6 py-3.5 rounded-xl text-black outline-none bg-gray-100 block w-full "
-                          placeholder="Password*" />
+                          placeholder="ពាក្យសម្ងាត់*" />
                       <span id="actioveViewoPassword" onclick="showPassword()"
                           class="absolute top-0 end-0 p-3.5 h-full  text-white ">
                           <svg id="iconShowPassword" xmlns="http://www.w3.org/2000/svg" height="20px"
@@ -65,16 +65,16 @@
               </div>
 
           </div>
-          {{--  Noted : onfirm password  --}}
+          <!-- confirm password -->
           <div class="grid grid-cols-12 gap-3 kantumruy-pro ">
               <div class="col-start-1 col-end-3 w-full">
-                  <label for="">Confirm Password</label>
+                  <label for="">បញ្ញាក់ពាក្យសម្ងាត់</label>
               </div>
               <div class="col-start-3 col-end-13 w-full">
                   <div class="relative w-full">
                       <input type="password" id="txtPasswordConfirm" name="password"  value="{{ old('password',isset($userEdit->id) ? "" : "") }}"
                           class="px-6 py-3.5 rounded-xl text-black outline-none bg-gray-100 block w-full "
-                          placeholder="Confirm Password*" />
+                          placeholder="បញ្ញាក់ពាក្យសម្ងាត់*" />
                       <span id="actioveViewoPassword" onclick="showPasswordConfirm()"
                           class="absolute top-0 end-0 p-3.5 h-full  text-white ">
                           <svg id="iconShowPasswordConfirm" xmlns="http://www.w3.org/2000/svg" height="20px"

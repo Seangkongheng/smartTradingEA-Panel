@@ -12,9 +12,9 @@
 <div class="title-table mt-5 flex items-center justify-between  border-gray-200 pb-4">
      <div class="flex-1 min-w-[160px]">
         <h1 class="text-xl font-semibold text-gray-800 kantumruy-pro">
-            <span class="text-green-600">អ្នកប្រើប្រាស់</span>
+            <span class="text-green-600">User</span>
             <span class="text-gray-300 mx-2">/</span>
-             <span class="text-gray-600">ព័ត៍មានលម្អិត</span>
+             <span class="text-gray-600">Detail</span>
         </h1>
     </div>
 
@@ -27,7 +27,7 @@
                           d="M15 19l-7-7 7-7"/>
                 </svg>
             </span>
-            <span class="font-medium">ត្រឡបក្រោយ</span>
+            <span class="font-medium">Back</span>
         </a>
     </div>
 </div>
@@ -78,11 +78,11 @@
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7.07 18.28c.43-.9 3.05-1.78 4.93-1.78s4.51.88 4.93 1.78C15.57 19.36 13.86 20 12 20s-3.57-.64-4.93-1.72zm11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36 2.33C4.62 15.49 4 13.82 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 1.82-.62 3.49-1.64 4.83zM12 6c-1.94 0-3.5 1.56-3.5 3.5S10.06 13 12 13s3.5-1.56 3.5-3.5S13.94 6 12 6zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z"/>
                             </svg>
                         </div>
-                        <h3 class="text-lg font-semibold kantumruy-pro text-gray-800">ព័ត៍ផ្ទាល់ខ្លួន</h3>
+                        <h3 class="text-lg font-semibold kantumruy-pro text-gray-800">Information</h3>
                     </div>
                     <div class="space-y-2 text-gray-600">
-                        <p><span class="font-medium kantumruy-pro">លេខទូរស័ព្ទ:</span> {{ $shows->userDetail->phone_number }}</p>
-                        <p><span class="font-medium kantumruy-pro">ថ្ងៃខែ ឆ្នាំកំណើត:</span> {{ $shows->userDetail->date_of_birth }}</p>
+                        <p><span class="font-medium kantumruy-pro">Phone Number:</span> {{ $shows->userDetail->phone_number }}</p>
+                        <p><span class="font-medium kantumruy-pro">Date Of Birth:</span> {{ $shows->userDetail->date_of_birth }}</p>
                     </div>
                 </div>
 
@@ -93,11 +93,11 @@
                                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
                             </svg>
                         </div>
-                        <h3 class="text-lg font-semibold kantumruy-pro text-gray-800">គណនីលំអិត</h3>
+                        <h3 class="text-lg font-semibold kantumruy-pro text-gray-800">Account Detail</h3>
                     </div>
                     <div class="space-y-2 text-gray-600">
-                        <p><span class="font-medium kantumruy-pro">អុីម៉ែល:</span> {{ $shows->email }}</p>
-                        <p><span class="font-medium kantumruy-pro">លេខសំងាត់:</span> ••••••••••</p>
+                        <p><span class="font-medium kantumruy-pro">Email:</span> {{ $shows->email }}</p>
+                        <p><span class="font-medium kantumruy-pro">Password:</span> ••••••••••</p>
                     </div>
                 </div>
 

@@ -17,7 +17,7 @@
     <!-- Title Section -->
     <div class="flex-1 flex justify-between w-full md:min-w-[160px]">
         <h1 class="text-xl font-semibold text-gray-800 kantumruy-pro m-0 p-0">
-            <span class="text-green-600">Marketplace</span></span>
+            <span class="text-green-600">Subscribes</span></span>
             <span class="text-gray-300 mx-2">/</span>
             <span class="text-gray-600">List</span>
         </h1>
@@ -69,7 +69,7 @@
     <div class="main-full-content w-full">
         <div class="table-content w-full">
             <div class="relative overflow-x-auto sm:rounded-lg">
-               @include('dashboard::marketplace.partials.tableInformation.productTable')
+               @include('dashboard::subscribe.partials.tableInformation.productTable')
             </div>
         </div>
     </div>
