@@ -1,0 +1,7 @@
+@include('dashboard::layout.includes.header')
+@include('dashboard::layout.includes.body')
+@include('dashboard::components.messageAlert')
+@include('dashboard::components.messageAlertError')
+@stack('alert-toast')
+@stack('alert-error')
+@include('dashboard::layout.includes.footer')
