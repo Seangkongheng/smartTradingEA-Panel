@@ -1,12 +1,12 @@
 <aside class="w-full">
     <div class="siderbar-full-content w-full">
-        <div class="sidebar-title flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <div class="sidebar-title flex items-center justify-between px-6 py-4 border-b border-red-900">
 
             {{-- Noted : Logo / Title --}}
             <a href="{{ route('admin.index') }}" class="flex items-center gap-3 group">
                 <img src="{{ asset('images/SuperTradingEA_logo.png') }}" alt="2A Panel Logo"
                     class="w-10 h-10 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105">
-                <h1 class="text-lg font-semibold text-violet-700 tracking-wide group-hover:text-violet-700">
+                <h1 class="text-lg font-bold text-white tracking-wide group-hover:text-violet-700">
                     Smart TrandingEA
                 </h1>
             </a>
@@ -25,7 +25,7 @@
 
             {{-- Noted : home page --}}
             <div
-                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -44,28 +44,9 @@
 
             <div class="px-5 mt-4 mb-1 text-gray-500 font-semibold text-sm uppercase">All Pages</div>
 
-            {{-- Noted : EA Meeting --}}
-            <div
-                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
-                <a href="{{ route('admin.meeting.index') }}">
-                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
-                        <div class="component-icon">
-                            <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
-                                    width="24px" class="fill-current group-hover:text-white">
-                                    <path
-                                        d="M0-240v-63q0-43 44-70t116-27q13 0 25 .5t23 2.5q-14 21-21 44t-7 48v65H0Zm240 0v-65q0-32 17.5-58.5T307-410q32-20 76.5-30t96.5-10q53 0 97.5 10t76.5 30q32 20 49 46.5t17 58.5v65H240Zm540 0v-65q0-26-6.5-49T754-397q11-2 22.5-2.5t23.5-.5q72 0 116 26.5t44 70.5v63H780Zm-455-80h311q-10-20-55.5-35T480-370q-55 0-100.5 15T325-320ZM160-440q-33 0-56.5-23.5T80-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T160-440Zm640 0q-33 0-56.5-23.5T720-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T800-440Zm-320-40q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T600-600q0 50-34.5 85T480-480Zm0-80q17 0 28.5-11.5T520-600q0-17-11.5-28.5T480-640q-17 0-28.5 11.5T440-600q0 17 11.5 28.5T480-560Zm1 240Zm-1-280Z" />
-                                </svg></span>
-                        </div>
-                        <div class="component-txt">
-                            EA Meeting
-                        </div>
-                    </div>
-                </a>
-            </div>
-
             {{-- Noted : Register --}}
             <div
-                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.register.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -84,7 +65,7 @@
 
             {{-- Noted : Marketplace --}}
             <div
-                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.marketplace.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -103,7 +84,7 @@
 
             {{-- Noted : Subscription --}}
             <div
-                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.subscribes.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -122,7 +103,7 @@
 
             {{-- Noted : Membership --}}
             <div
-                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.membership.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -141,7 +122,7 @@
 
             {{-- Noted : Reward --}}
             <div
-                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.streaming.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -159,8 +140,7 @@
             </div>
 
             {{-- Noted : Attachment --}}
-            {{-- Noted : Attachment --}}
-            <div class="componet-content w-full h-full hover:bg-gradient-to-br from-[#070C0F] via-[#0A1219] to-[#070C0F]
+            <div class="componet-content w-full h-full hover:bg-green-600
            transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.attachment.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
@@ -179,7 +159,7 @@
 
 
             {{-- Noted : Product --}}
-            <div class="componet-content w-full h-full hover:bg-gradient-to-br from-[#070C0F] via-[#0A1219] to-[#070C0F]
+            <div class="componet-content w-full h-full hover:bg-green-600
            transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.product.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
@@ -200,7 +180,7 @@
 
 
             {{-- Noted : Contact --}}
-            <div class="componet-content w-full h-full hover:bg-gradient-to-br from-[#070C0F] via-[#0A1219] to-[#070C0F]
+            <div class="componet-content w-full h-full hover:bg-green-600
            transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.contact.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
@@ -222,7 +202,7 @@
             {{-- Noted : Setting --}}
             <div class="px-5 mt-4 mb-1 text-gray-500 font-semibold text-sm uppercase">General Setting</div>
             <div
-                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.user.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -241,7 +221,7 @@
 
             {{-- Noted : Settings --}}
             <div
-                class="componet-content w-full h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full h-full hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.setting.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -260,7 +240,7 @@
 
             {{-- Noted : Logout --}}
             <div
-                class="componet-content w-full text-red-500 h-full hover:bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F] transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                class="componet-content w-full text-red-500 h-full hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('logout') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -289,7 +269,7 @@
         const selectedIndex = parseInt(localStorage.getItem("selectedMenuIndex"), 10);
         if (!isNaN(selectedIndex) && selectedIndex >= 0 && selectedIndex < components.length) {
             const selectedComponent = components[selectedIndex];
-            selectedComponent.classList.add("bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F]", "text-white");
+            selectedComponent.classList.add("bg-green-600", "text-white");
             const svg = selectedComponent.querySelector("svg");
             if (svg) svg.setAttribute("fill", "#ffffff");
         }
@@ -299,13 +279,13 @@
             component.addEventListener("click", () => {
                 // Remove highlight from all
                 components.forEach(item => {
-                    item.classList.remove("bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F]", "text-white");
+                    item.classList.remove("bg-green-600", "text-white");
                     const svg = item.querySelector("svg");
                     if (svg) svg.setAttribute("fill", "#000000");
                 });
 
                 // Add highlight to selected
-                component.classList.add("bg-gradient-to-br  from-[#070C0F] via-[#0A1219] to-[#070C0F]", "text-white");
+                component.classList.add("bg-green-600", "text-white");
                 const svg = component.querySelector("svg");
                 if (svg) svg.setAttribute("fill", "#ffffff");
 

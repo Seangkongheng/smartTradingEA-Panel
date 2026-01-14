@@ -15,13 +15,13 @@ class ContactController extends Controller
 
     public function index()
     {
-        return view('dashboard::index');
+        return view('dashboard::contact.index');
     }
 
 
     public function create()
     {
-        return view('dashboard::create');
+      return view('dashboard::contact.createOrUpdate');
     }
 
 

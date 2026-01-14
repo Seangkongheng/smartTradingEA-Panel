@@ -17,10 +17,7 @@
     <!-- Title Section -->
     <div class="flex-1 flex justify-between w-full md:min-w-[160px]">
         <h1 class="text-xl font-semibold text-gray-800 kantumruy-pro m-0 p-0">
-            <span class="text-gradient-to-br
-        from-[#070C0F]/95
-        via-[#0A1219]/85
-        to-[#070C0F]/95">Users</span></span>
+            <span class="text-white font-bold">Users</span></span>
             <span class="text-gray-300 mx-2">/</span>
             <span class="text-gray-600">List</span>
         </h1>
@@ -60,20 +57,20 @@
         </div>
 
         <!-- Add Button -->
-        <a href="{{ route('admin.user.create') }}" class="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-white hover:bg-bg-gradient-to-br
+        <a href="{{ route('admin.user.create') }}" class="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-green-600 hover:bg-bg-gradient-to-br
         from-[#070C0F]/95
         via-[#0A1219]/85
         to-[#070C0F]/95 transition-colors">
-            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
-            <span class="kantumruy-pro font-medium text-green-600">Add New</span>
+            <span class="kantumruy-pro font-medium text-white">Add New</span>
         </a>
     </div>
 </div>
 
 {{-- start main --}}
-<div class="main-content mt-5 w-full rounded-xl border border-gray-100 bg-white">
+<div class="main-content mt-5 w-full rounded-xl  text-white  bg-[#131d41]  ">
     <div class="main-full-content w-full">
         <div class="table-content w-full">
             <div class="relative overflow-x-auto sm:rounded-lg">

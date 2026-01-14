@@ -1,20 +1,20 @@
-<table id="table-data" class="w-full text-left bg-transparent border-collapse">
-    <thead class="bg-gray-50">
-        <tr class="text-sm border-b border-gray-200">
-            <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">#</th>
-            <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">Name</th>
-            <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">Email</th>
-            <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">Role</th>
-            <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">Status</th>
-            <th class="px-6 py-4 kantumruy-pro font-medium text-gray-500">Action</th>
+<table id="table-data" class="w-full text-left bg-transparent ">
+    <thead class=" ">
+        <tr class="text-sm border-b">
+            <th class="px-6 py-4 kantumruy-pro font-bold text-white">#</th>
+            <th class="px-6 py-4 kantumruy-pro font-bold text-white">Name</th>
+            <th class="px-6 py-4 kantumruy-pro font-bold text-white">Email</th>
+            <th class="px-6 py-4 kantumruy-pro font-bold text-white">Role</th>
+            <th class="px-6 py-4 kantumruy-pro font-bold text-white">Status</th>
+            <th class="px-6 py-4 kantumruy-pro font-bold text-white">Action</th>
         </tr>
     </thead>
-    <tbody class="text-gray-700 divide-y divide-gray-100">
+    <tbody class="text-white divide-y">
         @forelse ($users as $i => $user)
-            <tr class="hover:bg-gray-50 transition-colors duration-150">
-                <td class="px-6 py-4 kantumruy-pro font-medium text-gray-600">{{ $i + 1 }}</td>
-                <td class="px-6 py-4 kantumruy-pro text-gray-600">{{ $user->userDetail->first_name ?? '' }} &nbsp;{{ $user->userDetail->last_name ?? '' }}</td>
-                <td class="px-6 py-4 kantumruy-pro text-gray-600">{{ $user->email ?? '' }}</td>
+            <tr class="hover:text-amber-400 transition-colors duration-150">
+                <td class="px-6 py-4 kantumruy-pro font-medium">{{ $i + 1 }}</td>
+                <td class="px-6 py-4 kantumruy-pro ">{{ $user->userDetail->first_name ?? '' }} &nbsp;{{ $user->userDetail->last_name ?? '' }}</td>
+                <td class="px-6 py-4 kantumruy-pro ">{{ $user->email ?? '' }}</td>
                 <td class="px-6 py-4 kantumruy-pro">
                     @forelse ($user->getRoleNames() as $roleName)
                     <span class="text-sm px-2.5 py-1 rounded-full bg-blue-600 text-white mx-1">
@@ -31,7 +31,7 @@
                             $isActive = $user->userDetail?->is_active ?? null;
                         @endphp
                         <span class="w-2 h-2 rounded-full {{ $isActive === 1 ? 'bg-green-500' : 'bg-red-500' }}"></span>
-                        <span class="text-sm text-gray-700">
+                        <span class="text-sm ">
                             {{ $isActive === 1 ? 'Active' : 'Blocked' }}
                         </span>
                     </div>

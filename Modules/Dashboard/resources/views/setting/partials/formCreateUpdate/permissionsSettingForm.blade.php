@@ -1,9 +1,8 @@
 <div class="tab-content hidden" id="permissions-settings">
     <div class="space-y-6 relative">
-        <!-- Header -->
         <div class="flex justify-between items-center">
-            <h3 class="text-xl font-semibold text-gray-900 kantumruy-pro border-l-4 border-green-600 pl-4">
-                ការកំណត់សិទ្ធ
+            <h3 class="text-xl font-bold text-white kantumruy-pro border-l-4 border-green-600 pl-4">
+                Permissions
             </h3>
             <a href="{{ route('admin.permission.create') }}" class=" bg-green-600 text-white rounded-full p-2 shadow-lg hover:bg-green-700 transition-all duration-200 flex items-center">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -15,8 +14,6 @@
 
       @php
     $groupedPermissions = [];
-
-    // Group permissions by the prefix (e.g., news, users, slider)
     foreach ($permissions as $permission) {
         $parts = explode('.', $permission->name);
         if (count($parts) === 2) {
@@ -36,7 +33,7 @@
     => $permissionList)
         <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
             <div class="flex justify-between items-center mb-4">
-                <h4 class="text-lg font-semibold text-gray-800 kantumruy-pro">មុខងារ {{ ucfirst($title) }}</h4>
+                <h4 class="text-lg font-semibold text-gray-800 kantumruy-pro">Feature <span class="font-bold">{{ ucfirst($title) }}</span> </h4>
                 <span class="text-indigo-500 text-xs font-semibold bg-indigo-50 px-2 py-1 rounded-full">{{ ucfirst($title) }}</span>
             </div>
             <ul>
@@ -46,7 +43,7 @@
                        <div class="flex space-x-3 items-center">
                     <a href="{{ route('admin.permission.edit', $permission['id']) }}"
                        class="text-indigo-600 text-xs font-medium hover:text-indigo-800 transition duration-200">
-                        កែប្រែ
+                        Edit
                     </a>
 
                     <form action="{{ route('admin.permission.destroy', $permission['id']) }}" method="POST"  onsubmit="return confirm('Delete this contact?')" class="inline-block">
@@ -54,7 +51,7 @@
                         @method('DELETE')
                         <button type="submit"
                                 class="text-red-500 text-xs font-medium hover:text-red-700 transition duration-200">
-                            លុប
+                            Delete
                         </button>
                     </form>
                 </div>

@@ -1,1 +1,1 @@
-@include('dashboard::meeting.partials.index')
+@include('dashboard::subscribe.partials.index')

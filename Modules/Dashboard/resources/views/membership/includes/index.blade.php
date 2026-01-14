@@ -1,1 +1,1 @@
-@include('dashboard::contact.partials.index')
+@include('dashboard::membership.partials.index')

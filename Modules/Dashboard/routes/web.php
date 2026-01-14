@@ -479,8 +479,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', [MembershipController::class, 'create'])->name('create');
     });
     Route::prefix('contact')->name('contact.')->group(function () {
-        Route::get('/index', [MembershipController::class, 'index'])->name('index');
-        Route::get('/create', [MembershipController::class, 'create'])->name('create');
+        Route::get('/index', [ContactController::class, 'index'])->name('index');
+        Route::get('/create', [ContactController::class, 'create'])->name('create');
     });
     Route::prefix('meeting')->name('meeting.')->group(function () {
         Route::get('/index', [MeetingController::class, 'index'])->name('index');
