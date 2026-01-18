@@ -1,4 +1,4 @@
 @extends('dashboard::layout.master')
 @section('content')
-    @include('dashboard::contact.includes.createOrUpdate')
+    @include('dashboard::membership.includes.createOrUpdate')
 @endsection

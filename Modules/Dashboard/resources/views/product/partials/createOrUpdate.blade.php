@@ -3,9 +3,9 @@
 <div class="title-table mt-5 flex items-center justify-between  border-gray-200 pb-4">
     <div class="flex-1 min-w-[160px]">
         <h1 class=" text-balance lg:text-lg xl:text-xl font-semibold text-gray-800 kantumruy-pro">
-            <span class="text-green-600">Registers</span>
+            <span class="text-white font-bod">Products</span>
             <span class="text-gray-300 mx-1 lg:mx-2">/</span>
-            <span class="text-gray-600">{{ isset($schoolEdit->id) ? 'Update Registers' : 'Create Registers' }}</span>
+            <span class="text-gray-600">{{ isset($schoolEdit->id) ? 'Update Product' : 'Create Product' }}</span>
         </h1>
     </div>
 
@@ -21,7 +21,7 @@
         </a>
     </div>
 </div>
-    @include('dashboard::register.partials.formCreate.createOrUpdate')
+    @include('dashboard::product.partials.formCreate.createOrUpdate')
 </div>
 
 <script>

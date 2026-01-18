@@ -13,8 +13,8 @@ class ClassCategory extends Model
     /**
      * The attributes that are mass assignable.
      */
-   protected $table='class_categories';
-    protected $primarykey='id';
+    protected $table = 'class_categories';
+    protected $primarykey = 'id';
     protected $fillable = [
         'name',
         'updated_at',

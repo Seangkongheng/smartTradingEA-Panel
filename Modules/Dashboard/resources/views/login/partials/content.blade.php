@@ -7,9 +7,9 @@
     <section>
         <div class="container min-h-screen flex mx-auto ">
             <div class="form-login w-full flex   items-center justify-center px-2 md:px-0">
-                <!-- Start Form Login -->
+                {{--  Noted : Start Form Login   --}}
                 @include('dashboard::login.partials.formCreate.formCreate')
-                <!-- End Form Login -->
+                {{--  Noted : End Form Login   --}}
             </div>
         </div>
     </section>

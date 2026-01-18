@@ -1,0 +1,11 @@
+{
+    "name": "APIFrontEnd",
+    "alias": "apifrontend",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\APIFrontEnd\\App\\Providers\\APIFrontEndServiceProvider"
+    ],
+    "files": []
+}

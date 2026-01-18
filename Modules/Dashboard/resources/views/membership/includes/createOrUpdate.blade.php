@@ -1,1 +1,1 @@
-@include('dashboard::contact.partials.createOrUpdate')
+@include('dashboard::membership.partials.createOrUpdate')

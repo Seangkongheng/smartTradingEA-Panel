@@ -65,7 +65,7 @@
 </div>
 
 {{-- start main --}}
-<div class="main-content mt-5 w-full rounded-xl  shadow-lg p-4  bg-[#131d41] ">
+<div class="main-content mt-5 w-full rounded-3xl  shadow-lg p-5  bg-[#131d41] ">
     <div class="main-full-content w-full">
         <div class="table-content w-full">
             <div class="relative overflow-x-auto sm:rounded-lg">

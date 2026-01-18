@@ -3,7 +3,7 @@
 <div class="title-table mt-5 flex items-center justify-between  border-gray-200 pb-4">
     <div class="flex-1 min-w-[160px]">
         <h1 class=" text-balance lg:text-lg xl:text-xl font-semibold text-gray-800 kantumruy-pro">
-            <span class="text-green-600">Contacts</span>
+            <span class="text-white font-bold">Contacts</span>
             <span class="text-gray-300 mx-1 lg:mx-2">/</span>
             <span class="text-gray-600">{{ isset($schoolEdit->id) ? 'Update Contacts' : 'Create Contacts' }}</span>
         </h1>
@@ -21,11 +21,11 @@
         </a>
     </div>
 </div>
-    @include('dashboard::membership.partials.formCreate.createOrUpdate')
-</div>
+
+@include('dashboard::membership.partials.formCreate.createOrUpdate')
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
     // Configuration for image uploads
     const uploadConfigs = [
         {

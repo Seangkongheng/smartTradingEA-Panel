@@ -56,7 +56,7 @@
             </svg>
         </div>
 
-        <!-- Add Button -->
+        {{--  Noted :Add Button   --}}
         <a href="{{ route('admin.user.create') }}" class="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-green-600 hover:bg-bg-gradient-to-br
         from-[#070C0F]/95
         via-[#0A1219]/85

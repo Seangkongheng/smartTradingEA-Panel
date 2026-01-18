@@ -3,25 +3,27 @@
 <div class="title-table mt-5 flex items-center justify-between  border-gray-200 pb-4">
     <div class="flex-1 min-w-[160px]">
         <h1 class=" text-balance lg:text-lg xl:text-xl font-semibold text-gray-800 kantumruy-pro">
-            <span class="text-green-600">Attachment</span>
+            <span class="text-white font-bold">Attachment</span>
             <span class="text-gray-300 mx-1 lg:mx-2">/</span>
-            <span class="text-gray-600">{{ isset($schoolEdit->id) ? 'Update Attachment' : 'Create Attachment ' }}</span>
+            <span class="text-gray-600">{{ isset($attachmentEdit->id) ? 'Update Attachment' : 'Create Attachment ' }}</span>
         </h1>
     </div>
 
+    {{--  Noted : Button Back  --}}
     <div class="flex items-center gap-3">
-        <a href="{{ route('admin.school.index') }}"
-            class="flex items-center gap-1 lg:gap-2 kantumruy-pro text-gray-600 hover:text-green-600 transition-colors group">
+        <a href="{{ route('admin.attachment.index') }}"
+            class="flex items-center gap-1 lg:gap-2 kantumruy-pro text-white hover:text-green-600 transition-colors group">
             <span class="p-2 rounded-lg bg-gray-100 group-hover:bg-green-100 transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 19l-7-7 7-7" />
                 </svg>
             </span>
-            <span class="font-medium text-nowrap">Back</span>
+            <span class="font-bold text-nowrap">Back</span>
         </a>
     </div>
+
 </div>
-    @include('dashboard::product.partials.formCreate.createOrUpdate')
+    @include('dashboard::attachment.partials.formCreate.createOrUpdate')
 </div>
 
 <script>

@@ -2,11 +2,11 @@
 $userRole = auth()->user()->roles->pluck('name')->first();
 @endphp
 
-<div class="main-content w-full">
+<div class="main-content bg-d w-full">
      {{--  action="{{ isset($attachmentLessonDetailEdit->id) ? route('', $attachmentLessonDetailEdit->id) : route('') }}"  --}}
     <form
         action=""
-        method="POST" class="main-full-content w-full grid lg:grid-cols-12 gap-10" enctype="multipart/form-data">
+        method="POST" class="main-full-content  w-full grid lg:grid-cols-12 gap-10" enctype="multipart/form-data">
         @csrf
         @if (isset($attachmentLessonDetailEdit->id))
         @method('PUT')
@@ -14,7 +14,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
         {{-- Start Content create --}}
         <div class="lg:col-start-1 lg:col-end-13  rounded-2xl table-content w-full flex flex-col ">
             <div id="default-styled-tab-content" class=" w-full">
-                <div class="tab-content   rounded-lg  bg-white" id="styled-profile" role="tabpanel"
+                <div class="tab-content   rounded-3xl bg-[#131d41]  p-5" id="styled-profile" role="tabpanel"
                     style="box-shadow: rgba(17, 17, 26, 0.05) 0px 2px 8px, rgba(17, 17, 26, 0.05) 0px 0px 32px;">
                     <div
                         class="card-title inter font-[500] py-3 border-b flex items-center justify-center w-full text-center ">

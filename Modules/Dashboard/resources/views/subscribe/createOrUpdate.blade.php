@@ -1,4 +1,4 @@
 @extends('dashboard::layout.master')
 @section('content')
-    @include('dashboard::meeting.includes.createOrUpdate')
+    @include('dashboard::subscribe.includes.createOrUpdate')
 @endsection

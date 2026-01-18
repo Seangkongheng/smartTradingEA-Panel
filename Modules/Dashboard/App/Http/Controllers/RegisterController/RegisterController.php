@@ -3,6 +3,7 @@
 namespace Modules\Dashboard\App\Http\Controllers\RegisterController;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,7 +15,10 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('dashboard::register.index');
+
+        $userRegisters = User::role('user')->get();
+
+        return view('dashboard::register.index',compact('userRegisters'));
     }
 
     /**

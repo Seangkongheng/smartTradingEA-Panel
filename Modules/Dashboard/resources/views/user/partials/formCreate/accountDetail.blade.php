@@ -1,4 +1,4 @@
-  <div class="tab-content hidden  rounded-lg  bg-white" id="styled-profile" role="tabpanel"
+  <div class="tab-content hidden  rounded-lg bg-[#131d41] " id="styled-profile" role="tabpanel"
       style="box-shadow: rgba(17, 17, 26, 0.05) 0px 2px 8px, rgba(17, 17, 26, 0.05) 0px 0px 32px;">
       <div class="card-title inter font-[500] py-3 border-b flex items-center justify-center w-full text-center ">
           <h1 class="m-0 p-0 text-lg">  <i class="fas fa-user-circle text-yellow-500 mr-2"></i> <span class="kantumruy-pro text-lg"> Account Detail </span></h1>

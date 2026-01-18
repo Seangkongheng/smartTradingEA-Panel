@@ -5,7 +5,7 @@
 <div class="title-table mt-5 flex items-center justify-between  border-gray-200 pb-4">
     <div class="flex-1 min-w-[160px]">
         <h1 class="text-xl font-semibold text-gray-800 kantumruy-pro">
-            <span class="text-green-600">User</span>
+            <span class="text-white font-bold">User</span>
             <span class="text-gray-300 mx-2">/</span>
             <span  class="text-gray-600">{{ isset($userEdit->id) ? 'Update User' : 'Create User' }}</span>
         </h1>
@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<div class="main-content w-full ">
+<div class="main-content w-full bg-[#131d41]  rounded-lg ">
     <form action="{{ isset($userEdit->id) ? route('admin.user.update', $userEdit->id) : route('admin.user.store') }}"
         method="POST" class="main-full-content w-full grid lg:grid-cols-12 gap-10" enctype="multipart/form-data">
         @csrf
@@ -57,7 +57,7 @@
                 </li>
             </ul>
             <div class="flex items-center gap-5 justify-center">
-                    <button type="submit"  class="inter px-5 py-2 p-8  backdrop-blur-lg text-white bg-green-600  rounded-lg items-center gap-0.5 inline-flex border border-white/15 hover:bg-green-600 transition-all duration-300 ease-in-out "><span class="kantumruy-pro font-[500]">{{ isset($userEdit->id) ? 'កែប្រែ' : 'រក្សាទុក' }}</span>
+                    <button type="submit"  class="inter px-5 py-2 p-8  backdrop-blur-lg text-white bg-green-600  rounded-lg items-center gap-0.5 inline-flex border border-white/15 hover:bg-green-600 transition-all duration-300 ease-in-out "><span class="kantumruy-pro font-[500]">{{ isset($userEdit->id) ? 'Update' : 'Save ' }}</span>
                         <span><svg  xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" class="fill-current">
                             <path  d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z" />
                         </svg>

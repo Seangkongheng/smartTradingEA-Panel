@@ -460,7 +460,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // User Routes
     Route::prefix('attachment')->name('attachment.')->group(function () {
         Route::get('/index', [AttachmentController::class, 'index'])->name('index');
+        Route::post('/store', [AttachmentController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [AttachmentController::class, 'edit'])->name('edit');
         Route::get('/create', [AttachmentController::class, 'create'])->name('create');
+        Route::get('/search', [AttachmentController::class, 'search'])->name('search');
+        Route::delete('/destroy/{id}', [AttachmentController::class, 'destroy'])->name('destroy');
+        Route::put('/update/{id}', [AttachmentController::class, 'update'])->name('update');
+
+
     });
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/index', [ProductController::class, 'index'])->name('index');

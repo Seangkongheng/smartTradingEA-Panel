@@ -21,7 +21,7 @@
             <span class="text-gray-300 mx-2">/</span>
             <span class="text-gray-600">List</span>
         </h1>
-         <a href="{{ route('admin.attachment.create') }}" class="flex md:hidden items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-green-600 hover:bg-green-50 transition-colors">
+         <a href="{{ route('admin.attachment.create') }}" class="flex md:hidden items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-green-600 hover:bg-green-500  transition-colors">
             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
@@ -34,7 +34,7 @@
         <div class="flex-1 md:min-w-[160px]">
             <form action="" method="POST">
                 <div class="relative">
-                    <input type="text" id="search" name="search" placeholder="Search here..." class="w-full kantumruy-pro pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 bg-gray-50  focus:ring-1 focus:ring-green-400 focus:border-green-400 focus:outline-none placeholder-gray-400 text-gray-700 focus:border-none transition-all">
+                    <input type="text" id="search" name="search" placeholder="Search title here..." class="w-full kantumruy-pro pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 bg-gray-50  focus:ring-1 focus:ring-green-400 focus:border-green-400 focus:outline-none placeholder-gray-400 text-gray-700 focus:border-none transition-all">
                     <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
@@ -45,9 +45,9 @@
         {{--  Noted : Status Dropdown   --}}
         <div class="relative sm:w-[160px]">
             <select name="status" id="status" class="w-full px-2 md:px-4 kantumruy-pro  pr-8 py-2.5 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:ring-1 focus:ring-green-500 focus:outline-none focus:border-green-500 text-gray-700 appearance-none transition-all">
-                <option value="1" selected>Status</option>
-                <option value="2">Active</option>
-                <option value="3">Block</option>
+                <option value="" selected>Select Status</option>
+                <option value="1" class="text-green-500">Public</option>
+                <option value="0" class="text-red-600">Unpublic</option>
             </select>
             <svg class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -55,8 +55,8 @@
         </div>
 
         {{--  Noted : Add Button   --}}
-        <a href="{{ route('admin.attachment.create') }}" class="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-green-600 hover:bg-green-50 transition-colors">
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <a href="{{ route('admin.attachment.create') }}" class="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-lg  bg-[#9EFF00] hover:bg-green-500 transition-colors">
+            <svg class="w-5 h-5 text-white font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
             <span class="kantumruy-pro font-medium text-white">Add New</span>
@@ -64,8 +64,10 @@
     </div>
 </div>
 
+
+
 {{-- start main --}}
-<div class="main-content mt-5 w-full rounded-xl bg-[#131d41] ">
+<div class="main-content mt-5 w-full rounded-3xl p-5 bg-[#131d41] ">
     <div class="main-full-content w-full">
         <div class="table-content w-full">
             <div class="relative overflow-x-auto sm:rounded-lg">
@@ -74,6 +76,7 @@
         </div>
     </div>
 </div>
+{{--  @include('dashboard::components.confirmDelete');  --}}
 {{--  {{ $users->onEachSide(5)->links() }}  --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
@@ -93,7 +96,7 @@
         let search_string = $(this).val();
         let status = $('#status').val();
         $.ajax({
-            url: "{{ route('admin.user.search') }}",
+            url: "{{ route('admin.attachment.search') }}",
             method: 'GET',
             data: { search_string: search_string },
             success: function (res) {
@@ -107,7 +110,7 @@
         let status = $(this).val();
 
         $.ajax({
-            url: "{{ route('admin.user.search') }}",
+            url: "{{ route('admin.attachment.search') }}",
             method: 'GET',
             data: { status: status },
             success: function (res) {
