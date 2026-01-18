@@ -11,6 +11,7 @@ use Modules\Dashboard\App\Http\Controllers\MarketplaceController\MarketplaceCont
 use Modules\Dashboard\App\Http\Controllers\MeetingController\MeetingController;
 use Modules\Dashboard\App\Http\Controllers\MembershipController\MembershipController;
 use Modules\Dashboard\App\Http\Controllers\ProductController\ProductController;
+use Modules\Dashboard\App\Http\Controllers\RewardController\RewardController;
 use Modules\Dashboard\App\Http\Controllers\SettingController\SettingController;
 use Modules\Dashboard\App\Http\Controllers\UserController\PermissionController;
 use Modules\Dashboard\App\Http\Controllers\UserController\RoleController;
@@ -125,5 +126,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/show/{id}', [UserController::class, 'show'])->name('show');
         Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
         Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
+    });
+
+        // User Routes
+    Route::prefix('reward')->name('reward.')->group(function () {
+        Route::get('/index', [RewardController::class, 'index'])->name('index');
+        Route::get('/create', [RewardController::class, 'create'])->name('create');
+        Route::get('/show/{id}', [RewardController::class, 'show'])->name('show');
+        Route::put('/update/{id}', [RewardController::class, 'update'])->name('update');
+        Route::delete('/destroy/{id}', [RewardController::class, 'destroy'])->name('destroy');
     });
 });

@@ -17,7 +17,7 @@
     <!-- Title Section -->
     <div class="flex-1 flex justify-between w-full md:min-w-[160px]">
         <h1 class="text-xl font-semibold text-gray-800 kantumruy-pro m-0 p-0">
-            <span class="text-white font-bold">Registers</span></span>
+            <span class="text-white font-bold">Reward</span></span>
             <span class="text-gray-300 mx-2">/</span>
             <span class="text-gray-600">List</span>
         </h1>

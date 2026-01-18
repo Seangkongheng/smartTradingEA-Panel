@@ -1,1 +1,1 @@
-@include('dashboard::register.partials.createOrUpdate')
+@include('dashboard::reward.partials.createOrUpdate')
