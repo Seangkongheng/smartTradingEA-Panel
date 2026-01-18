@@ -20,14 +20,14 @@
 
                 <div class="dashboard-account flex items-center justify-center gap-2">
                     <div class="account-image bg-gray-200 rounded-full">
-                        <img src="{{ asset('profiles/' . $userName->userDetail->profile) }}" alt=""
+                        <img src="{{ asset('profiles/' . $userName->profile) }}" alt=""
                             class="w-10 h-10 rounded-full object-cover">
                     </div>
                     <div class="account-txt text-center">
                         <span class="text-xs text-gray-600">Welcome Back</span>
                         <h1 class="m-0 p-0 text-sm kantumruy-pro font-[500] ">
-                            <span>{{ $userName->userDetail->first_name ?? '' }} &nbsp;
-                                {{ $userName->userDetail->last_name ?? '' }}</span>
+                            <span>{{ $userName->first_name ?? '' }} &nbsp;
+                                {{ $userName->last_name ?? '' }}</span>
                         </h1>
                     </div>
                 </div>

@@ -5,23 +5,11 @@
       </div>
       <div class=" inter flex flex-col justify-center gap-4 w-[100%] p-10  rounded-2xl">
 
-          <div class="grid grid-cols-12 gap-3  kantumruy-pro ">
 
-              <!-- Username-->
-              <div class="col-start-1 col-end-3 w-full">
-                  <label for="">Name</label>
-              </div>
-              <div class="col-start-3 col-end-13 w-full">
-                  <input type="text" value="{{ old('username',isset($userEdit->id) ?$userEdit->username : "") }}" name="username" class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none "   placeholder="Name*">
-                  @error('username')
-                      <span class="text-red-500">{{ $message }}</span>
-                  @enderror
-              </div>
-          </div>
 
           <div class="grid grid-cols-12 gap-3  kantumruy-pro ">
 
-              <!-- email-->
+              {{--  Noted : Email  --}}
               <div class="col-start-1 col-end-3 w-full">
                   <label for="">Email</label>
               </div>
@@ -35,7 +23,7 @@
               </div>
           </div>
 
-          <!-- password -->
+          {{--  Noted :password   --}}
           <div class="grid grid-cols-12 gap-3 kantumruy-pro ">
               <div class="col-start-1 col-end-3 w-full">
                   <label for="">Password</label>
@@ -65,7 +53,8 @@
               </div>
 
           </div>
-          {{--  Noted : onfirm password  --}}
+
+          {{--  Noted : Confirm password  --}}
           <div class="grid grid-cols-12 gap-3 kantumruy-pro ">
               <div class="col-start-1 col-end-3 w-full">
                   <label for="">Confirm Password</label>

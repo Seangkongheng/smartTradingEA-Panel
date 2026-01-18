@@ -70,7 +70,7 @@
 </div>
 
 {{-- start main --}}
-<div class="main-content mt-5 w-full rounded-xl  text-white  bg-[#131d41]  ">
+<div class="main-content mt-5 w-full rounded-3xl p-5  text-white  bg-[#131d41]  ">
     <div class="main-full-content w-full">
         <div class="table-content w-full">
             <div class="relative overflow-x-auto sm:rounded-lg">

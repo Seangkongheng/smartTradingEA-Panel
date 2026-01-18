@@ -30,32 +30,6 @@
             @enderror
         </div>
 
-        {{--  Noted :start date of birth  --}}
-        <div class="grid grid-cols-12 gap-3 kantumruy-pro ">
-            <div class="col-start-1 col-end-3 w-full">
-                <label for="">Date Of Birth</label>
-            </div>
-            <div class="col-start-3 col-end-13 w-full ">
-                <input type="date" name="date_of_birth" value="{{ old('date_of_birth',isset($userEdit->id) && isset($userEdit->userDetail)? $userEdit->userDetail->date_of_birth : "") }}" class="px-6 py-3.5 text-black bg-gray-100 rounded-xl w-full outline-none " placeholder="នាមខ្លួន*">
-            </div>
-            @error('name')
-                <span class="text-red-500">{{ $message }}</span>
-            @enderror
-        </div>
-
-        {{--  Note :start phone number  --}}
-        <div class="grid grid-cols-12 gap-3 kantumruy-pro ">
-            <div class="col-start-1 col-end-3 w-full">
-                <label for="">Phone Number</label>
-            </div>
-            <div class="col-start-3 col-end-13 w-full ">
-                <input type="number" name="phone_number" value="{{ old('phone_number',isset($userEdit->id)&&isset($userEdit->userDetail) ? $userEdit->userDetail->phone_number : "") }}"  class="px-6 py-3.5 text-black bg-gray-100 rounded-xl w-full outline-none " placeholder="Phone Number">
-            </div>
-            @error('name')
-                <span class="text-red-500">{{ $message }}</span>
-            @enderror
-        </div>
-
         {{--  Noted : Start Photo  --}}
         <div class="grid grid-cols-12 gap-3 kantumruy-pro ">
             <div class="col-start-1 col-end-3 w-full">

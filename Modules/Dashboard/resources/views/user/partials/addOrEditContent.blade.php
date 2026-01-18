@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<div class="main-content w-full bg-[#131d41]  rounded-lg ">
+<div class="main-content w-full bg-[#131d41]  rounded-3xl ">
     <form action="{{ isset($userEdit->id) ? route('admin.user.update', $userEdit->id) : route('admin.user.store') }}"
         method="POST" class="main-full-content w-full grid lg:grid-cols-12 gap-10" enctype="multipart/form-data">
         @csrf
@@ -47,7 +47,7 @@
             </div>
             <ul class=" flex-wrap flex-col  -mb-px text-sm font-medium text-center items-center justify-center w-full"  role="tablist">
                 <li class="me-2 w-full " role="presentation">
-                    <button class="tab-button inline-block p-4 inter w-full rounded-t-2xl kantumruy-pro" data-tab="styled-profile" type="button" role="tab"><span  class="kantumruy-pro text-lg">Account Detail</span></button>
+                    <button class="tab-button inline-block p-4 inter w-full kantumruy-pro" data-tab="styled-profile" type="button" role="tab"><span  class="kantumruy-pro text-lg">Account Detail</span></button>
                 </li>
                 <li class="me-2 w-full" role="presentation">
                     <button class="tab-button inline-block p-4 inter w-full kantumruy-pro " data-tab="styled-dashboard"   type="button" role="tab"><span   class="kantumruy-pro text-lg">Information</span></button>
@@ -56,7 +56,7 @@
                     <button class="tab-button inline-block p-4 inter w-full  " data-tab="styled-settings" type="button" role="tab"><span class="kantumruy-pro text-lg">Role and Permission</span></button>
                 </li>
             </ul>
-            <div class="flex items-center gap-5 justify-center">
+            <div class="flex items-center gap-5 mt-5 justify-center">
                     <button type="submit"  class="inter px-5 py-2 p-8  backdrop-blur-lg text-white bg-green-600  rounded-lg items-center gap-0.5 inline-flex border border-white/15 hover:bg-green-600 transition-all duration-300 ease-in-out "><span class="kantumruy-pro font-[500]">{{ isset($userEdit->id) ? 'Update' : 'Save ' }}</span>
                         <span><svg  xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" class="fill-current">
                             <path  d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z" />
@@ -64,7 +64,7 @@
                     </span>
                 </button>
                 @if(isset($userEdit->id))
-                   @if (!$userEdit->userDetail->is_active)
+                   @if (!$userEdit->is_active)
                         {{-- Show unblock --}}
                         <a href="#" onclick="event.preventDefault(); document.getElementById('unblock-user-form').submit();" class="inter px-5 py-2 p-8 backdrop-blur-lg text-white bg-blue-600 rounded-lg inline-flex items-center gap-1 border border-white/15 hover:bg-blue-700 transition-all">
                             <span class="kantumruy-pro font-[500]">Unblock</span>

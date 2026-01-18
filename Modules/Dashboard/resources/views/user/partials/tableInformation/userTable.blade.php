@@ -1,6 +1,6 @@
 <table id="table-data" class="w-full text-left bg-transparent ">
-    <thead class=" ">
-        <tr class="text-sm border-b">
+    <thead class="bg-gray-800/60 text-gray-200 uppercase">
+        <tr class="">
             <th class="px-6 py-4 kantumruy-pro font-bold text-white">#</th>
             <th class="px-6 py-4 kantumruy-pro font-bold text-white">Name</th>
             <th class="px-6 py-4 kantumruy-pro font-bold text-white">Email</th>
@@ -9,11 +9,11 @@
             <th class="px-6 py-4 kantumruy-pro font-bold text-white">Action</th>
         </tr>
     </thead>
-    <tbody class="text-white divide-y">
+    <tbody class="divide-y divide-gray-700">
         @forelse ($users as $i => $user)
-            <tr class="hover:text-amber-400 transition-colors duration-150">
+            <tr class="hover:bg-gray-800/40 transition">
                 <td class="px-6 py-4 kantumruy-pro font-medium">{{ $i + 1 }}</td>
-                <td class="px-6 py-4 kantumruy-pro ">{{ $user->userDetail->first_name ?? '' }} &nbsp;{{ $user->userDetail->last_name ?? '' }}</td>
+                <td class="px-6 py-4 kantumruy-pro ">{{ $user->first_name ?? '' }} &nbsp;{{ $user->last_name ?? '' }}</td>
                 <td class="px-6 py-4 kantumruy-pro ">{{ $user->email ?? '' }}</td>
                 <td class="px-6 py-4 kantumruy-pro">
                     @forelse ($user->getRoleNames() as $roleName)
@@ -28,7 +28,7 @@
                 <td class="px-6 py-4">
                     <div class="flex items-center space-x-2">
                         @php
-                            $isActive = $user->userDetail?->is_active ?? null;
+                            $isActive = $user->is_active ?? null;
                         @endphp
                         <span class="w-2 h-2 rounded-full {{ $isActive === 1 ? 'bg-green-500' : 'bg-red-500' }}"></span>
                         <span class="text-sm ">

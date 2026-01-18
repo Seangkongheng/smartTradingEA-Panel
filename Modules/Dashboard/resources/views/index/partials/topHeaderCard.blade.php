@@ -21,7 +21,7 @@
             <span class="text-4xl sm:text-5xl transform transition-transform duration-300 hover:scale-110">🌤️</span>
             <span class="text-xl">Hello,</span>
             <strong class="text-2xl sm:text-3xl tracking-wide group-hover:underline">
-                {{ $authName->first_name ?? "Unknown" }} {{ $authName->last_name ?? "Unknown"}}
+                {{ $authName ?? "Unknown" }}
             </strong>
         </div>
 

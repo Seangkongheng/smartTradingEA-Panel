@@ -17,8 +17,6 @@
             {{-- Index --}}
             <td class="px-6 py-4 font-medium">{{ $i + 1 }}</td>
 
-
-
             {{-- Title --}}
             <td class="px-6 py-4 font-medium text-white">
                 {{ $userRegister->userDetail->first_name ?? '-' }}

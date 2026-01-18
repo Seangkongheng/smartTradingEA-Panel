@@ -4,10 +4,8 @@ namespace Modules\Dashboard\App\Http\Controllers\AttachmentController;
 
 use App\Http\Controllers\Controller;
 use Exception;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Http\Response;
 use Modules\Dashboard\App\Models\Attachment;
 
 class AttachmentController extends Controller

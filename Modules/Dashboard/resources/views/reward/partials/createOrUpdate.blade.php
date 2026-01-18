@@ -3,14 +3,14 @@
 <div class="title-table mt-5 flex items-center justify-between  border-gray-200 pb-4">
     <div class="flex-1 min-w-[160px]">
         <h1 class=" text-balance lg:text-lg xl:text-xl font-semibold text-gray-800 kantumruy-pro">
-            <span class="text-white font-bold">Contacts</span>
+            <span class="text-white font-bold">Registers</span>
             <span class="text-gray-300 mx-1 lg:mx-2">/</span>
-            <span class="text-gray-600">{{ isset($schoolEdit->id) ? 'Update Contacts' : 'Create Contacts' }}</span>
+            <span class="text-gray-600">{{ isset($schoolEdit->id) ? 'Update Registers' : 'Create Registers ' }}</span>
         </h1>
     </div>
 
     <div class="flex items-center gap-3">
-        <a href="{{ route('admin.contact.index') }}"
+        <a href="{{ route('admin.school.index') }}"
             class="flex items-center gap-1 lg:gap-2 kantumruy-pro text-gray-600 hover:text-green-600 transition-colors group">
             <span class="p-2 rounded-lg bg-gray-100 group-hover:bg-green-100 transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -21,11 +21,11 @@
         </a>
     </div>
 </div>
-
-@include('dashboard::membership.partials.formCreate.createOrUpdate')
+    @include('dashboard::register.partials.formCreate.createOrUpdate')
+</div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     // Configuration for image uploads
     const uploadConfigs = [
         {

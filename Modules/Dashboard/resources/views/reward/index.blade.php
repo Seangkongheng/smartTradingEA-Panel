@@ -1,4 +1,4 @@
 @extends('dashboard::layout.master')
 @section('content')
-    @include('dashboard::platform.includes.createOrEdit')
+    @include('dashboard::reward.includes.index')
 @endsection

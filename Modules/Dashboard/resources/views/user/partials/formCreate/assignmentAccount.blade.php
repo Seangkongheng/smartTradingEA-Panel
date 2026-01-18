@@ -6,18 +6,20 @@
        </div>
        <div class=" inter flex flex-col   justify-center  gap-4 w-[100%] p-10  h-fit rounded-2xl">
            <div class=" border-l-4 border-green-600 kantumruy-pro bg-yellow-50 p-4" role="alert">
-               <p class="font-bold text-gray-600">ចំណំា*</p>
-               <p>សូមជ្រើសរើសតួនាទីដើម្បីមានសិទ្ធចូលប្រើប្រាស់ប្រព័ន្ធ៕</p>
+               <p class="font-bold text-gray-600">Remember*</p>
+               <p class="text-gray-600">Please select a role to access this system.</p>
            </div>
-           <!-- Start Roles -->
+
+
+           {{--  Noted :Start Roles  --}}
            <div class="grid grid-cols-12 gap-3 kantumruy-pro">
                <div class="col-start-1 col-end-3 w-full">
-                   <label for="">តួរនាទី</label>
+                   <label for="">Roles</label>
                </div>
                <div class="col-start-3 col-end-13 w-full relative group">
                    <select name="roles"
                        class="px-6 py-3.5 text-black bg-gray-100  appearance-none w-full rounded-xl outline-none ">
-                       <option selected value="1">ជ្រើសរើសតួនាទី</option>
+                       <option selected value="1">Please Select Role</option>
                        @if (isset($userEdit->id)){
                            @foreach ($roles as $item)
                                <option value="{{ $item }}" {{ in_array($item, $userRoles) ? 'selected' : '' }}>

@@ -22,8 +22,6 @@
         <div class="lg:w-1/4 space-y-4">
             <div class="p-4  rounded-xl">
 
-
-
                 {{--  dashbaord setting  --}}
                 <h2 class="text-lg font-semibold text-white mb-4 kantumruy-pro mt-2">
                     <svg class="w-5 h-5 inline-block mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

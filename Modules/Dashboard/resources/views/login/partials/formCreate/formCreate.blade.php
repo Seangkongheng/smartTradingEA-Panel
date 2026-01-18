@@ -18,9 +18,7 @@
             Welcome Back
         </h1>
 
-        
-
-
+    
         <p class="text-[#A8E900] text-lg tracking-wide">
             SmartTradingEA Control Panel
         </p>

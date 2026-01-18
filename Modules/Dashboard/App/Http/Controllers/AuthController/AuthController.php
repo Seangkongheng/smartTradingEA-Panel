@@ -38,15 +38,11 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
-            return back()->withInput()->withErrors(['email' => 'អុីម៉ែលរបស់លោកអ្នកមិនត្រឹមត្រូវ!']);
-        }
-         // Check if user is blocked
-        if (!$user->userDetail->is_active) {
-            return back()->withInput()->withErrors(['email' => 'គណនីរបស់លោកអ្នកត្រូវបានបិទ!']);
+            return back()->withInput()->withErrors(['email' => 'Your email is incorrect, please try again!']);
         }
 
         if (!Hash::check($request->password, $user->password)) {
-            return back()->withInput()->withErrors(['password' => 'ពាក្យសម្ងាត់របស់លោកអ្នកមិនត្រឹមត្រូវ!']);
+            return back()->withInput()->withErrors(['password' => 'Your password is incorrect, please try again!!']);
         }
         Auth::login($user, $request->filled('remember'));
 
@@ -58,6 +54,7 @@ class AuthController extends Controller
         return redirect()->route('admin.index')->with('message', 'Login successful!');
     }
 
+    
 
     // logout function
     public function logout(Request $request): RedirectResponse

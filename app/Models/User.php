@@ -7,12 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Modules\Dashboard\App\Models\UserDetail;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable , HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -21,10 +20,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'profile',
         'login_verify_token',
-        'login_token_expires_at'
+        'login_token_expires_at',
+        'is_verity',
+        'is_active',
     ];
 
     /**
@@ -46,8 +50,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function userDetail()
-{
-    return $this->hasOne(UserDetail::class, 'user_id');
-}
 }
