@@ -17,22 +17,20 @@
             {{-- Index --}}
             <td class="px-6 py-4 font-medium">{{ $i + 1 }}</td>
 
-
-
             {{-- Title --}}
             <td class="px-6 py-4 font-medium text-white">
-                {{ $userRegister->userDetail->first_name ?? '-' }}
+                {{ $userRegister->first_name ?? '-' }}
             </td>
 
             <td class="px-6 py-4 font-medium text-white">
-                {{ $userRegister->userDetail->last_name ?? '0' }}
+                {{ $userRegister->last_name ?? '-' }}
             </td>
 
             <td class="px-6 py-4 font-medium text-white">
                 {{ $userRegister->email ?? '0' }}
             </td>
             <td class="px-6 py-4 font-medium text-white">
-                {{ $userRegister->created_at?->format('d M Y') ?? '0' }}
+                {{ $userRegister->created_at?->format('d M Y') ?? '---' }}
             </td>
 
 

@@ -15,7 +15,9 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::paginate(12);
+      
+        $users = User::withoutRole('user')->paginate(12);
+
         return view('dashboard::user.index', compact('users'));
     }
 

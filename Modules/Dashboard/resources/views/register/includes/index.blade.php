@@ -1,1 +1,1 @@
-@include('dashboard::reward.partials.index')
+@include('dashboard::register.partials.index')

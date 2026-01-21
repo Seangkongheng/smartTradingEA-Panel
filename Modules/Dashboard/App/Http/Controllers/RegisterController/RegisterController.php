@@ -17,7 +17,6 @@ class RegisterController extends Controller
     {
 
         $userRegisters = User::role('user')->get();
-
         return view('dashboard::register.index',compact('userRegisters'));
     }
 
