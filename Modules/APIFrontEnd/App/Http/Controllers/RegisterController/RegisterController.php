@@ -39,87 +39,110 @@ class RegisterController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function register(Request $request)
     {
-        // Validate input
-        $request->validate([
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8|confirmed',
-            'captcha' => 'null',
-        ]);
+        try {
+            // ✅ Validate input
+            $request->validate([
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:8|confirmed',
+                'captcha' => 'nullable',
+            ]);
 
-        // Verify Turnstile token
-        $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
-            'secret' => env('TURNSTILE_SECRET'),
-            'response' => $request->captcha,
-            'remoteip' => $request->ip(),
-        ]);
+            if ($request->filled('captcha')) {
+                $response = Http::asForm()->post(
+                    'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+                    [
+                        'secret' => env('TURNSTILE_SECRET'),
+                        'response' => $request->captcha,
+                        'remoteip' => $request->ip(),
+                    ]
+                );
 
-        $result = $response->json();
-        if (!isset($result['success']) || !$result['success']) {
+                $result = $response->json();
+
+                if (empty($result['success']) || $result['success'] !== true) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Captcha verification failed.',
+                    ], 422);
+                }
+            }
+
+            // ✅ Create user
+            $user = User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'is_active' => 1,
+                'profile' => null,
+            ]);
+
+            // ✅ Assign default role
+            $user->assignRole('user');
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Register successfully',
+                'user' => $user,
+            ], 201);
+
+        } catch (\Throwable $e) {
             return response()->json([
                 'status' => false,
-                'message' => 'Captcha verification failed. Please try again.',
-            ], 422);
+                'error' => $e->getMessage(),
+                'line' => $e->getLine(),
+            ], 500);
         }
-
-        $user = User::create([
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'is_active' => 1,
-            'profile' => null,
-        ]);
-        $user->syncRoles($request->roles);
-        $user->assignRole('user');
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Register successfully',
-            'user' => $user,
-        ], 201);
     }
+
 
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
+        try {
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required'
+            ]);
 
-        $user = User::where('email', $request->email)->first();
+            $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+            if (!$user || !Hash::check($request->password, $user->password)) {
+                return response()->json([
+                    'message' => 'Invalid credentials'
+                ], 401);
+            }
+
+            // Generate login verification token
+            $loginToken = Str::uuid();
+
+            $user->update([
+                'login_verify_token' => $loginToken,
+                'verification_expires_at' => Carbon::now('Asia/Phnom_Penh')->addMinutes(10),
+            ]);
+
+            $url = config('app.frontend_url')
+                . "/verify-login?token={$loginToken}&user={$user->id}";
+
+            Mail::to($user->email)->send(
+                new VerificationCodeMail($url, $user->id)
+            );
+
             return response()->json([
-                'message' => 'Invalid credentials'
-            ], 401);
+                'message' => 'Verification email sent'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
         }
 
-        // Generate login verification token
-        $loginToken = Str::uuid();
 
-        $user->update([
-            'login_verify_token' => $loginToken,
-            'verification_expires_at' => Carbon::now('Asia/Phnom_Penh')->addMinutes(10),
-        ]);
-
-        $url = config('app.frontend_url')
-            . "/verify-login?token={$loginToken}&user={$user->id}";
-
-        Mail::to($user->email)->send(
-            new VerificationCodeMail($url, $user->id)
-        );
-
-        return response()->json([
-            'message' => 'Verification email sent'
-        ]);
     }
-
-
-
 
     public function verifyLogin(Request $request)
     {
