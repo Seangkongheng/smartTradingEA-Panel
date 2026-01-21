@@ -14,12 +14,14 @@ class VerificationCodeMail extends Mailable
     use Queueable, SerializesModels;
 
     public $url;
+    public $userID;
     /**
      * Create a new message instance.
      */
-    public function __construct($url)
+    public function __construct($url,$userID)
     {
         $this->url = $url;
+        $this->userID=$userID;
     }
 
     /**

@@ -49,7 +49,6 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                         </div>
 
 
-
                         {{-- Thumbnail --}}
                         <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
                             <div class="md:col-span-2 flex items-center h-full">

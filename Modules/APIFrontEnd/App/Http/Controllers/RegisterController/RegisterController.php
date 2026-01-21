@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\LoginVerifyMail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Modules\APIFrontEnd\App\Models\Register;
 use Modules\Dashboard\App\Models\userDetail;
+use Nwidart\Modules\Json;
 
 class RegisterController extends Controller
 {
@@ -49,83 +51,37 @@ class RegisterController extends Controller
         ]);
 
         // Verify Turnstile token
-        // $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
-        //     'secret' => env('TURNSTILE_SECRET'),
-        //     'response' => $request->captcha,
-        //     'remoteip' => $request->ip(),
-        // ]);
+        $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+            'secret' => env('TURNSTILE_SECRET'),
+            'response' => $request->captcha,
+            'remoteip' => $request->ip(),
+        ]);
 
-        // $result = $response->json();
-        // if (!isset($result['success']) || !$result['success']) {
-        //     return response()->json([
-        //         'status' => false,
-        //         'message' => 'Captcha verification failed. Please try again.',
-        //     ], 422);
-        // }
+        $result = $response->json();
+        if (!isset($result['success']) || !$result['success']) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Captcha verification failed. Please try again.',
+            ], 422);
+        }
 
         $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
-        $user->syncRoles($request->roles);
-
-        userDetail::create([
-            'user_id' => $user->id,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'is_active' => 1,
             'profile' => null,
         ]);
-
+        $user->syncRoles($request->roles);
         $user->assignRole('user');
+
         return response()->json([
             'status' => true,
             'message' => 'Register successfully',
             'user' => $user,
         ], 201);
     }
-
-    // public function login(Request $request)
-    // {
-
-    //     try {
-    //         $credentials = $request->validate([
-    //             'email' => 'required|email',
-    //             'password' => 'required',
-    //         ]);
-
-    //         $user = User::where('email', $request->email)->first();
-
-
-    //         if (!$token = auth()->attempt($credentials)) {
-    //             return response()->json([
-    //                 'message' => 'Invalid credentials'
-    //             ], 401);
-    //         }
-
-    //         // Generate 6-digit code
-    //         // $code = rand(100000, 999999);
-    //         // $user->verification_code = $code;
-    //         // $user->verification_expires_at = Carbon::now()->addMinutes(5);
-    //         // $user->save();
-
-    //         // Send email
-    //         Mail::to($user->email)->send(new VerificationCodeMail($code));
-
-    //         return response()->json([
-    //             'access_token' => $token,
-    //             'token_type' => 'bearer',
-    //             'user' => auth()->user(),
-    //         ]);
-    //     } catch (Exception $e) {
-    //         return response($e->getMessage());
-    //     }
-
-
-
-
-    // }
-
 
     public function login(Request $request)
     {
@@ -138,34 +94,46 @@ class RegisterController extends Controller
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
-                'message' => 'Email or password is incorrect!'
+                'message' => 'Invalid credentials'
             ], 401);
         }
 
-        // generate token
-        $token = Str::random(64);
+        // Generate login verification token
+        $loginToken = Str::uuid();
 
         $user->update([
-            'login_verify_token' => hash('sha256', $token),
-            'login_token_expires_at' => now()->addMinutes(10),
+            'login_verify_token' => $loginToken,
+            'verification_expires_at' => Carbon::now('Asia/Phnom_Penh')->addMinutes(10),
         ]);
 
-        // send email
+        $url = config('app.frontend_url')
+            . "/verify-login?token={$loginToken}&user={$user->id}";
+
         Mail::to($user->email)->send(
-            new VerificationCodeMail($token)
+            new VerificationCodeMail($url, $user->id)
         );
 
         return response()->json([
-            'message' => 'Verification link sent to your email'
+            'message' => 'Verification email sent'
         ]);
     }
 
 
+
+
     public function verifyLogin(Request $request)
     {
-        $user = User::where('login_verify_token', $request->token)
-            // ->where('verification_expires_at', '>', now())
+        $request->validate([
+            'token' => 'required',
+            'user' => 'required'
+        ]);
+
+
+        $user = User::where('id', $request->user)
+            // ->where('login_verify_token', $request->token)
+            // ->where('verification_expires_at', '>', Carbon::now('Asia/Phnom_Penh'))
             ->first();
+
 
         if (!$user) {
             return response()->json([
@@ -173,18 +141,47 @@ class RegisterController extends Controller
             ], 401);
         }
 
+        // Clear login verification
         $user->update([
             'login_verify_token' => null,
             'verification_expires_at' => null,
         ]);
 
+        // Now issue access token
         $token = $user->createToken('login')->plainTextToken;
 
         return response()->json([
             'access_token' => $token,
-            'user' => $user
+            'user' => $user,
+            'message' => 'Login verified successfully'
         ]);
+    }
 
+
+    public function isVerify()
+    {
+
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return response()->json([
+            'messages' => "Logout Successfull"
+        ]);
+    }
+
+
+    public function username(Request $request)
+    {
+        $user = $request->user(); // better than Auth::user()
+
+        return response()->json([
+            'id' => $user->id,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'email' => $user->email,
+        ]);
     }
 
 

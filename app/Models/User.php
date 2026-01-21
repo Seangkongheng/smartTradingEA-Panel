@@ -26,8 +26,9 @@ class User extends Authenticatable
         'password',
         'profile',
         'login_verify_token',
+        'verification_expires_at',
         'login_token_expires_at',
-        'is_verity',
+        'is_verify',
         'is_active',
     ];
 
