@@ -49,7 +49,7 @@ class RegisterController extends Controller
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|min:8|confirmed',
-                'captcha' => 'nullable',
+                'captcha' => 'required',
             ]);
 
             if ($request->filled('captcha')) {
@@ -106,8 +106,30 @@ class RegisterController extends Controller
         try {
             $request->validate([
                 'email' => 'required|email',
-                'password' => 'required'
+                'password' => 'required',
+                'captcha' => 'required',
+
             ]);
+
+            if ($request->filled('captcha')) {
+                $response = Http::asForm()->post(
+                    'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+                    [
+                        'secret' => env('TURNSTILE_SECRET'),
+                        'response' => $request->captcha,
+                        'remoteip' => $request->ip(),
+                    ]
+                );
+
+                $result = $response->json();
+
+                if (empty($result['success']) || $result['success'] !== true) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Captcha verification failed.',
+                    ], 422);
+                }
+            }
 
             $user = User::where('email', $request->email)->first();
 
