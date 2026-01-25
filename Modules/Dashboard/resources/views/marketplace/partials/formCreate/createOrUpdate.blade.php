@@ -47,6 +47,8 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                         </div>
 
+
+
                         {{-- Feature --}}
                         <div class="grid lg:grid-cols-12 gap-3 kantumruy-pro">
                             <div class="lg:col-start-1 lg:col-end-3 w-full">
@@ -66,8 +68,10 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                 <span class="text-sm text-red-500">*</span>
                             </div>
                             <div class="lg:col-start-3 lg:col-end-13 w-full">
-                                <textarea class="w-full text-black h-36 p-3 rounded-lg" name="feature"
-                                    placeholder="Enter Feature">{{ old('description', isset($marketplaceEdit->id) ? $marketplaceEdit->feature : '')}}</textarea>
+
+
+                                 <textarea name="feature" id="mytextarea" class="w-full text-black h-36 p-3 rounded-lg" placeholder=""
+                                        rows="3" style="height: 150px;">{{ old('feature', isset($marketplaceEdit->id) ? $marketplaceEdit->feature : '')}}</textarea>
                             </div>
                         </div>
 
@@ -407,3 +411,172 @@ $userRole = auth()->user()->roles->pluck('name')->first();
 </script>
 
 @endpush
+
+
+<script src="https://cdn.jsdelivr.net/npm/tinymce@6.1/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#mytextarea',
+        plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinymcespellchecker image imagetools codesample template textcolor colorpicker fullscreen',
+        toolbar: 'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent | removeformat | image media link code fullscreen preview | forecolor backcolor | formatselect fontselect fontsizeselect',
+        toolbar_mode: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        height: 300,
+        menubar: 'file edit view insert format tools table help',
+        branding: false,
+        content_css: '//www.tiny.cloud/css/codepen.min.css',
+        content_style: 'body { font-family:Helvetica, Arial, sans-serif; }',
+        link_title: false,
+        automatic_uploads: true,
+        images_upload_url: '/upload-images', // URL for image uploads
+        file_picker_types: 'image media',
+        file_picker_callback: function(callback, value, meta) {
+            if (meta.filetype === 'image') {
+                // Provide file and text URL via callback function
+                callback('path/to/image.jpg', {
+                    alt: 'My alt text'
+                });
+            }
+            if (meta.filetype === 'media') {
+                callback('path/to/media.mp4', {
+                    poster: 'path/to/poster.jpg'
+                });
+            }
+        },
+        image_advtab: true,
+        image_caption: true,
+        image_title: true,
+        image_list: [{
+                title: 'My image',
+                value: 'path/to/image.jpg'
+            },
+            {
+                title: 'My other image',
+                value: 'path/to/other.jpg'
+            }
+        ],
+        importcss_append: true,
+        importcss_selector: 'h1, h2, h3, h4, h5, h6, p, a, li, img',
+        table_advtab: true,
+        table_default_attributes: {
+            border: '1',
+            cellpadding: '4',
+            cellspacing: '0',
+            width: '100%'
+        },
+        style_formats: [{
+                title: 'Bold text',
+                inline: 'b'
+            },
+            {
+                title: 'Red text',
+                inline: 'span',
+                styles: {
+                    color: '#ff0000'
+                }
+            },
+            {
+                title: 'Red header',
+                block: 'h1',
+                styles: {
+                    color: '#ff0000'
+                }
+            },
+            {
+                title: 'Example 1',
+                inline: 'span',
+                classes: 'example1'
+            },
+            {
+                title: 'Example 2',
+                inline: 'span',
+                classes: 'example2'
+            }
+        ],
+        formats: {
+            bold: {
+                inline: 'b'
+            },
+            italic: {
+                inline: 'i'
+            },
+            underline: {
+                inline: 'u'
+            },
+            strikethrough: {
+                inline: 's'
+            }
+        },
+        paste_as_text: true,
+        contextmenu: 'link image inserttable | cell row column deletetable',
+        list: {
+            styles: 'disc circle square',
+            list_styles: {
+                disc: 'Disc',
+                circle: 'Circle',
+                square: 'Square'
+            }
+        },
+        language: 'km', // Set the language to Khmer
+        language_url: 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.5/langs/km.js', // URL for Khmer language file
+        directionality: 'ltr', // Khmer is typically written left-to-right
+        autosave_ask_before_unload: true,
+        autosave_interval: '30s',
+        autosave_retention: '30m',
+        end_container_on_empty_block: true,
+        paste_preprocess: function(plugin, args) {
+            console.log('Pasting:', args.node);
+        },
+        paste_postprocess: function(plugin, args) {
+            console.log('Pasted:', args.node);
+        },
+        image_dimensions: true,
+        image_title: true,
+        media_poster: true,
+        templates: [{
+                title: 'Template 1',
+                description: 'Description 1',
+                content: '<p>Template 1 content</p>'
+            },
+            {
+                title: 'Template 2',
+                description: 'Description 2',
+                content: '<p>Template 2 content</p>'
+            }
+        ],
+        font_formats: 'Andale Mono=andale mono, monospace; Arial=arial, helvetica, sans-serif; Courier New=courier new, courier; Georgia=georgia, serif; Times New Roman=times new roman, times; Trebuchet MS=trebuchet ms, helvetica; Verdana=verdana, geneva; Khmer OS=Khmer OS, khmer; Hanuman=Hanuman, khmer',
+        fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
+        textcolor_map: [
+            "000000", "Black",
+            "FF0000", "Red",
+            "00FF00", "Green",
+            "0000FF", "Blue",
+            "FFFF00", "Yellow",
+            "FF00FF", "Magenta",
+            "00FFFF", "Cyan",
+            "C0C0C0", "Silver",
+            "808080", "Gray",
+            "800000", "Maroon",
+            "808000", "Olive",
+            "008000", "Dark Green",
+            "800080", "Purple",
+            "008080", "Teal",
+            "F0F8FF", "AliceBlue",
+            "FAEBD7", "AntiqueWhite",
+            "00FFFF", "Aqua",
+            "F0FFFF", "Azure",
+            "F5F5DC", "Beige",
+            "FFE4C4", "Bisque",
+            "FFE4E1", "MistyRose",
+            "FFB6C1", "LightPink",
+            "FFA07A", "LightSalmon",
+            "FFD700", "Gold",
+            "DAA520", "GoldenRod",
+            "808080", "Gray",
+            "F0F8FF", "AliceBlue",
+            "FAEBD7", "AntiqueWhite",
+            "00FFFF", "Aqua"
+        ]
+    });
+</script>

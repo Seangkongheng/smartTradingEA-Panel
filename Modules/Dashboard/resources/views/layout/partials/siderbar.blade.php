@@ -121,7 +121,7 @@
 
 
             {{-- Noted : Product --}}
-            <div class="componet-content w-full h-full hover:bg-green-600
+            {{--  <div class="componet-content w-full h-full hover:bg-green-600
            transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.product.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
@@ -138,7 +138,7 @@
                         <div class="component-txt">Product</div>
                     </div>
                 </a>
-            </div>
+            </div>  --}}
 
 
             <div class="px-5 mt-4 mb-1 text-gray-500 font-semibold text-sm uppercase">Marketplace</div>

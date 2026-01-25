@@ -22,7 +22,11 @@
                     </svg>
                     <h3>Feature</h3>
                 </div>
-                <p class="info-content">{{ $marketplace->feature }}</p>
+
+                <div class="info-content [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mb-2">
+                    {!! $marketplace->feature !!}
+                </div>
+
             </div>
 
             <div class="info-card">
