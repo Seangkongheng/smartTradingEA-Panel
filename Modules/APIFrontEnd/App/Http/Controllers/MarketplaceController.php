@@ -27,25 +27,21 @@ class MarketplaceController extends Controller
     }
 
 
-    public function show($id)
+    public function show($uuid)
     {
-        $marketplace = Maketplace::with('subscriptionPlans.plan')->findOrFail($id);
+        $marketplace = Maketplace::with('subscriptionPlans.plan')->where('uuid', $uuid)->first();
         return response()->json([
-            'marketplace'=>$marketplace
+            'marketplace' => $marketplace
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit($id)
     {
         return view('apifrontend::edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, $id)
     {
         //

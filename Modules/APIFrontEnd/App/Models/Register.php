@@ -10,7 +10,7 @@ class Register extends Model
 {
     use HasFactory;
 
-     protected $table = 'registers';
+    protected $table = 'registers';
     protected $primarykey = 'id';
     protected $fillable = [
         'first_name',

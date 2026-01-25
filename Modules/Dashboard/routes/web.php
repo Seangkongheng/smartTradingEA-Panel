@@ -134,7 +134,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
     Route::prefix('subscribe')->name('subscribes.')->group(function () {
         Route::get('/index', [SubscribeController::class, 'index'])->name('index');
-        Route::get('/create', [SubscribeController::class, 'create'])->name('create');
+        Route::get('/show/{id}', [SubscribeController::class, 'show'])->name('show');
     });
 
     // User Routes

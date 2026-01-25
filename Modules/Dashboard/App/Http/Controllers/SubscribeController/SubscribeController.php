@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\APIFrontEnd\App\Models\Order;
 
 class SubscribeController extends Controller
 {
@@ -14,7 +15,8 @@ class SubscribeController extends Controller
      */
     public function index()
     {
-        return view('dashboard::subscribe.index');
+        $orders = Order::with('items.marketplacePlan', 'items.marketplace')->get();
+        return view('dashboard::subscribe.index',compact('orders'));
     }
 
     /**
@@ -38,7 +40,8 @@ class SubscribeController extends Controller
      */
     public function show($id)
     {
-        return view('dashboard::show');
+        $order = Order::find($id);
+        return view('dashboard::subscribe.show',compact('order'));
     }
 
     /**
