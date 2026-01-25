@@ -10,6 +10,7 @@ use Modules\Dashboard\App\Http\Controllers\AuthController\AuthController;
 use Modules\Dashboard\App\Http\Controllers\MarketplaceController\MarketplaceController;
 use Modules\Dashboard\App\Http\Controllers\MeetingController\MeetingController;
 use Modules\Dashboard\App\Http\Controllers\MembershipController\MembershipController;
+use Modules\Dashboard\App\Http\Controllers\PlanController;
 use Modules\Dashboard\App\Http\Controllers\ProductController\ProductController;
 use Modules\Dashboard\App\Http\Controllers\RewardController\RewardController;
 use Modules\Dashboard\App\Http\Controllers\SettingController\SettingController;
@@ -99,11 +100,28 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
     Route::prefix('marketplace')->name('marketplace.')->group(function () {
         Route::get('/index', [MarketplaceController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [MarketplaceController::class, 'show'])->name('show');
+        Route::post('/store', [MarketplaceController::class, 'store'])->name('store');
         Route::get('/create', [MarketplaceController::class, 'create'])->name('create');
+        Route::delete('/destroy/{id}', [MarketplaceController::class, 'destroy'])->name('destroy');
+        Route::put('/update/{id}', [MarketplaceController::class, 'update'])->name('update');
+        Route::get('/edit/{id}', [MarketplaceController::class, 'edit'])->name('edit');
+
+    });
+    Route::prefix('plan')->name('plan.')->group(function () {
+        Route::get('/index', [PlanController::class, 'index'])->name('index');
+        Route::post('/store', [PlanController::class, 'store'])->name('store');
+        Route::get('/create', [PlanController::class, 'create'])->name('create');
+        Route::get('/edit/{id}', [PlanController::class, 'edit'])->name('edit');
+        Route::delete('/destroy/{id}', [PlanController::class, 'destroy'])->name('destroy');
+        Route::put('/update/{id}', [PlanController::class, 'update'])->name('update');
     });
     Route::prefix('register')->name('register.')->group(function () {
         Route::get('/index', [RegisterController::class, 'index'])->name('index');
         Route::get('/create', [RegisterController::class, 'create'])->name('create');
+        Route::get('/show/{id}', [RegisterController::class, 'show'])->name('show');
+        Route::delete('/destroy/{id}', [RegisterController::class, 'destroy'])->name('destroy');
+
     });
     Route::prefix('membership')->name('membership.')->group(function () {
         Route::get('/index', [MembershipController::class, 'index'])->name('index');
@@ -128,7 +146,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
     });
 
-        // User Routes
+    // User Routes
     Route::prefix('reward')->name('reward.')->group(function () {
         Route::get('/index', [RewardController::class, 'index'])->name('index');
         Route::get('/create', [RewardController::class, 'create'])->name('create');

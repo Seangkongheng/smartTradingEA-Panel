@@ -17,16 +17,16 @@
     <!-- Title Section -->
     <div class="flex-1 flex justify-between w-full md:min-w-[160px]">
         <h1 class="text-xl font-semibold text-gray-800 kantumruy-pro m-0 p-0">
-            <span class="text-white font-bold">Registers</span></span>
+            <span class="text-white font-bold">Plan</span></span>
             <span class="text-gray-300 mx-2">/</span>
             <span class="text-gray-600">List</span>
         </h1>
-         <button disabled  class="flex md:hidden items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-green-600  hover:bg-green-50 transition-colors">
+         <a href="{{ route('admin.plan.create') }}" class="flex md:hidden items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-green-600 hover:bg-green-50 transition-colors">
             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
             <span class="kantumruy-pro font-medium text-white">Add New</span>
-        </button>
+        </a>
     </div>
 
     {{--  Noted : Controls Section  --}}
@@ -53,15 +53,23 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
         </div>
+
+        {{--  Noted : Add Button   --}}
+        <a href="{{ route('admin.plan.create') }}" class="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-green-600 hover:bg-green-50 transition-colors">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            <span class="kantumruy-pro font-medium text-white">Add New</span>
+        </a>
     </div>
 </div>
 
 {{-- start main --}}
-<div class="main-content mt-5 w-full rounded-3xl p-5 bg-[#131d41]">
+<div class="main-content mt-5 w-full rounded-3xl p-5 bg-[#131d41] ">
     <div class="main-full-content w-full">
         <div class="table-content w-full">
             <div class="relative overflow-x-auto sm:rounded-lg">
-               @include('dashboard::register.partials.tableInformation.productTable')
+               @include('dashboard::plan.partials.tableInformation.productTable')
             </div>
         </div>
     </div>

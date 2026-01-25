@@ -4,9 +4,7 @@ namespace Modules\Dashboard\App\Http\Controllers\RegisterController;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Exception;
 
 class RegisterController extends Controller
 {
@@ -17,7 +15,7 @@ class RegisterController extends Controller
     {
 
         $userRegisters = User::role('user')->get();
-        return view('dashboard::register.index',compact('userRegisters'));
+        return view('dashboard::register.index', compact('userRegisters'));
     }
 
     /**
@@ -25,23 +23,14 @@ class RegisterController extends Controller
      */
     public function create()
     {
-          return view('dashboard::register.createOrUpdate');
+        return view('dashboard::register.createOrUpdate');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Show the specified resource.
-     */
     public function show($id)
     {
-        return view('dashboard::show');
+        $userRegister = User::role('user')->where('id', $id)->first();
+        return view('dashboard::register.show', compact('userRegister'));
     }
 
     /**
@@ -52,19 +41,15 @@ class RegisterController extends Controller
         return view('dashboard::edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
-        //
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return redirect()->route('admin.register.index')->with("message", 'User Delete successfull');
+        } catch (Exception $e) {
+            return redirect()->route('admin.register.index')->with("error", $e->getMessage());
+        }
     }
 }

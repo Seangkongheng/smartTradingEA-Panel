@@ -25,7 +25,7 @@
             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
-            <span class="kantumruy-pro font-medium text-white">Add New</span>
+            <span class="kantumruy-pro font-medium text-white">Back</span>
         </button>
     </div>
 
@@ -53,6 +53,14 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
         </div>
+
+        {{--  Noted : Add Button   --}}
+        <button disabled href=""  class="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-green-600 hover:bg-green-50 transition-colors">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            <span class="kantumruy-pro font-medium text-white">Back</span>
+        </button>
     </div>
 </div>
 
@@ -61,54 +69,9 @@
     <div class="main-full-content w-full">
         <div class="table-content w-full">
             <div class="relative overflow-x-auto sm:rounded-lg">
-               @include('dashboard::register.partials.tableInformation.productTable')
+               @include('dashboard::register.partials.tableInformation.show')
             </div>
         </div>
     </div>
 </div>
 {{--  {{ $users->onEachSide(5)->links() }}  --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    // Add keyboard support for accessibility
-    document.querySelectorAll('[role="button"]').forEach(wrapper => {
-        wrapper.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                wrapper.click();
-            }
-        });
-    });
-
-   $(document).ready(function () {
-    $(document).on('keyup', '#search', function (e) {
-        e.preventDefault();
-        let search_string = $(this).val();
-        let status = $('#status').val();
-        $.ajax({
-            url: "{{ route('admin.user.search') }}",
-            method: 'GET',
-            data: { search_string: search_string },
-            success: function (res) {
-                $('#table-data').html(res);
-            }
-        });
-    });
-
-    // Status filter only
-    $(document).on('change', '#status', function () {
-        let status = $(this).val();
-
-        $.ajax({
-            url: "{{ route('admin.user.search') }}",
-            method: 'GET',
-            data: { status: status },
-            success: function (res) {
-                $('#table-data').html(res);
-            }
-        });
-    });
-});
-
-
-</script>
-

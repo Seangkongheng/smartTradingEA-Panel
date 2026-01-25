@@ -6,9 +6,15 @@ return [
 
     'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 
+    // 'allowed_origins' => [
+    //     'https://seangkongheng.site',
+    //     'https://panel.seangkongheng.site',
+    // ],
+
+
     'allowed_origins' => [
-        'https://seangkongheng.site',
-        'https://panel.seangkongheng.site',
+        'http://localhost:5174',
+        'http://127.0.0.1:5174',
     ],
 
     'allowed_origins_patterns' => [],

@@ -4,11 +4,11 @@ $userRole = auth()->user()->roles->pluck('name')->first();
 
 <div class="main-content bg-d w-full">
 
-    <form
-        action="{{ isset($marketplaceEdit->id) ? route('admin.marketplace.update', $marketplaceEdit->id) : route('admin.marketplace.store') }}"
-        method="POST" class="main-full-content  w-full grid lg:grid-cols-12 gap-10" enctype="multipart/form-data">
+    <form action="{{ isset($planEdit->id) ? route('admin.plan.update', $planEdit->id) : route('admin.plan.store') }}"
+     method="POST" class="main-full-content  w-full grid lg:grid-cols-12 gap-10"
+        enctype="multipart/form-data">
         @csrf
-        @if (isset($marketplaceEdit->id))
+        @if (isset($planEdit->id))
         @method('PUT')
         @endif
         {{-- Start Content Create --}}
@@ -26,7 +26,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                 <path
                                     d="m380-340 280-180-280-180v360Zm-60 220v-80H160q-33 0-56.5-23.5T80-280v-480q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v480q0 33-23.5 56.5T800-200H640v80H320ZM160-280h640v-480H160v480Zm0 0v-480 480Z" />
                             </svg>
-                            <span class="kantumruy-pro text-lg">Marketplace Details</span>
+                            <span class="kantumruy-pro text-lg">Plan Details</span>
                         </h1>
                     </div>
 
@@ -36,157 +36,24 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                         {{-- Title --}}
                         <div class="grid lg:grid-cols-12 gap-3 kantumruy-pro">
                             <div class="lg:col-start-1 lg:col-end-3 w-full">
-                                <label>Title</label>
+                                <label>Name</label>
                                 <span class="text-sm text-red-500">*</span>
                             </div>
                             <div class="lg:col-start-3 lg:col-end-13 w-full">
-                                <input type="text"
-                                    value="{{ old('title', isset($marketplaceEdit->id) ? $marketplaceEdit->title : '') }}"
-                                    name="title" placeholder="Enter Title*"
+                                <input type="text" name="name"  value="{{ old('name', isset($planEdit->id) ? $planEdit->name : '') }}" placeholder="Enter name*"
                                     class="px-6 py-3.5 text-black bg-gray-100 w-full rounded-xl outline-none">
                             </div>
                         </div>
 
-                        {{-- Feature --}}
+                         {{-- price --}}
                         <div class="grid lg:grid-cols-12 gap-3 kantumruy-pro">
                             <div class="lg:col-start-1 lg:col-end-3 w-full">
-                                <label>Description</label>
+                                <label>Price</label>
                                 <span class="text-sm text-red-500">*</span>
                             </div>
                             <div class="lg:col-start-3 lg:col-end-13 w-full">
-                                <textarea class="w-full text-black h-36 p-3 rounded-lg" name="description"
-                                    placeholder="Enter Description">{{ old('description', isset($marketplaceEdit->id) ? $marketplaceEdit->description : '')}}</textarea>
-                            </div>
-                        </div>
-
-                        {{-- Feature --}}
-                        <div class="grid lg:grid-cols-12 gap-3 kantumruy-pro">
-                            <div class="lg:col-start-1 lg:col-end-3 w-full">
-                                <label>Feature</label>
-                                <span class="text-sm text-red-500">*</span>
-                            </div>
-                            <div class="lg:col-start-3 lg:col-end-13 w-full">
-                                <textarea class="w-full text-black h-36 p-3 rounded-lg" name="feature"
-                                    placeholder="Enter Feature">{{ old('description', isset($marketplaceEdit->id) ? $marketplaceEdit->feature : '')}}</textarea>
-                            </div>
-                        </div>
-
-                        {{-- Note --}}
-                        <div class="grid lg:grid-cols-12 gap-3 kantumruy-pro">
-                            <div class="lg:col-start-1 lg:col-end-3 w-full">
-                                <label>Note</label>
-                                <span class="text-sm text-gray-500">(optional)</span>
-                            </div>
-                            <div class="lg:col-start-3 lg:col-end-13 w-full">
-                                <textarea class="w-full text-black h-36 p-3 rounded-lg" name="note"
-                                    placeholder="Enter Note">{{ old('description', isset($marketplaceEdit->id) ? $marketplaceEdit->note : '')}}</textarea>
-                            </div>
-                        </div>
-
-                        {{-- Subscription Plans --}}
-                        {{-- Subscription Plans --}}
-                        <div class="grid lg:grid-cols-12 gap-6 kantumruy-pro">
-                            <div class="lg:col-start-1 lg:col-end-3 w-full flex flex-col">
-                                <label class="text-lg font-semibold text-gray-100">
-                                    Subscription Plans <span class="text-red-500">*</span>
-                                </label>
-                                <p class="text-sm text-gray-400 mt-1">Select one or more plans</p>
-                            </div>
-
-                            <div class="lg:col-start-3 lg:col-end-13 w-full">
-                                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-                                    @foreach ($plans as $index => $plan)
-                                    @php
-                                    // Default values
-                                    $isChecked = false;
-                                    $planPrice = $plan['price'] ?? '';
-
-                                    // Only run this when editing
-                                    if (isset($marketplaceEdit) && isset($marketplaceEdit->subscriptionPlans)) {
-                                    $selectedPlan = $marketplaceEdit->subscriptionPlans
-                                    ->firstWhere('plan_id', $plan['id']);
-
-                                    if (isset($selectedPlan)) {
-                                    $isChecked = true;
-                                    $planPrice = $selectedPlan->price ?? $planPrice;
-                                    }
-                                    }
-                                    @endphp
-
-                                    <div class="relative group">
-                                        {{-- Checkbox --}}
-                                        <input type="checkbox" name="plans[{{ $index }}][plan_id]"
-                                            id="plan_{{ $plan['id'] }}" value="{{ $plan['id'] }}" class="peer sr-only"
-                                            {{ $isChecked ? 'checked' : '' }}>
-
-                                        <label for="plan_{{ $plan['id'] }}" class="flex flex-col p-5 bg-gray-800 text-gray-100 border-2 border-gray-700 rounded-2xl cursor-pointer
-                               transition-all duration-200 hover:border-green-400 hover:shadow-lg
-                               peer-checked:border-green-500 peer-checked:bg-green-900/20 peer-checked:shadow-xl">
-
-                                            {{-- Plan Info --}}
-                                            <div class="flex items-start justify-between mb-3">
-                                                <div class="flex-1">
-                                                    <h3 class="text-xl font-bold transition-colors
-                                           group-hover:text-green-500 peer-checked:text-green-500">
-                                                        {{ $plan['name'] }}
-                                                    </h3>
-                                                    <p class="text-sm text-gray-400 mt-1">
-                                                        {{ $plan['desc'] ?? '' }}
-                                                    </p>
-                                                </div>
-
-                                                {{-- Checkbox Icon --}}
-                                                <div class="flex-shrink-0 w-6 h-6 border-2 border-gray-500 rounded-md
-                                       flex items-center justify-center
-                                       peer-checked:bg-green-500 peer-checked:border-green-500 transition">
-                                                    <svg class="w-4 h-4 text-white hidden peer-checked:block"
-                                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="3" d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-
-                                            {{-- Price Input --}}
-                                            <input type="number" name="plans[{{ $index }}][price]"
-                                                value="{{ old('plans.'.$index.'.price', $planPrice) }}"
-                                                class="mt-2 px-3 py-2 rounded-xl outline-none bg-gray-100 text-black w-full"
-                                                placeholder="Enter price">
-                                        </label>
-                                    </div>
-                                    @endforeach
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        {{-- status button --}}
-                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
-                            <div class="md:col-span-3 flex items-center h-full">
-                                <label class="text-lg kantumruy-pro font-bold text-right pr-4">
-                                    Status
-                                    <span class="text-sm text-red-500 align-baseline">*</span>
-                                </label>
-                            </div>
-
-                            <div class="md:col-span-9 flex items-center gap-6">
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="is_public" value="1" {{ old('is_public',
-                                        $marketplaceEdit->is_public ?? 1)
-                                    == 1 ? 'checked' : '' }}
-                                    class="text-green-600 focus:ring-green-500">
-                                    <span class="text-green-600">Public</span>
-                                </label>
-
-                                <label class="flex items-center gap-2 cursor-pointer">
-                                    <input type="radio" name="is_public" value="0" {{ old('is_public',
-                                        $marketplaceEdit->is_public ?? 1)
-                                    == 0 ? 'checked' : '' }}
-                                    class="text-red-600 focus:ring-red-500">
-                                    <span class="text-red-600">Private</span>
-                                </label>
+                                <input type="number" name="price"  value="{{ old('price', isset($planEdit->id) ? $planEdit->price : '') }}" placeholder="Enter price*"
+                                    class="px-6 py-3.5 text-black bg-gray-100 w-full rounded-xl outline-none">
                             </div>
                         </div>
 

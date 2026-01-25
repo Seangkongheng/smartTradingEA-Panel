@@ -10,13 +10,24 @@ class Maketplace extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     */
-    protected $fillable = [];
-    
-    protected static function newFactory(): MaketplaceFactory
+    protected $table = 'marketplaces';
+    protected $primarykey = 'id';
+    protected $fillable = [
+        'title',
+        'description',
+        'feature',
+        'note',
+        'is_public',
+        'updated_at',
+        'created_at'
+    ];
+
+    public function subscriptionPlans()
     {
-        //return MaketplaceFactory::new();
+        // Specify foreign key
+        return $this->hasMany(MarketplacePlan::class, 'marketplace_id', 'id')->with('plan');
     }
+
+
+
 }

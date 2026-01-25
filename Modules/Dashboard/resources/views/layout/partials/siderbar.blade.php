@@ -63,45 +63,7 @@
                 </a>
             </div>
 
-            {{-- Noted : Marketplace --}}
-            <div
-                class="componet-content w-full h-full hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
-                <a href="{{ route('admin.marketplace.index') }}">
-                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
-                        <div class="component-icon">
-                            <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
-                                    width="24px" class="fill-current group-hover:text-white">
-                                    <path
-                                        d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
-                                </svg></span>
-                        </div>
-                        <div class="component-txt">
-                            Marketplace
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            {{-- Noted : Subscription --}}
-            <div
-                class="componet-content w-full h-full hover:hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
-                <a href="{{ route('admin.subscribes.index') }}">
-                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
-                        <div class="component-icon">
-                            <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
-                                    width="24px" class="fill-current group-hover:text-white">
-                                    <path
-                                        d="m438-240 226-226-58-58-169 169-84-84-57 57 142 142ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z" />
-                                </svg></span>
-                        </div>
-                        <div class="component-txt">
-                            Subscription
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            {{-- Noted : Membership --}}
+                        {{-- Noted : Membership --}}
             <div
                 class="componet-content w-full h-full hover:hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.membership.index') }}">
@@ -168,7 +130,7 @@
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
                                 <path
-                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 00 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
                                 <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
                                 <line x1="12" y1="22.08" x2="12" y2="12" />
                             </svg>
@@ -179,24 +141,68 @@
             </div>
 
 
-            {{-- Noted : Contact --}}
-            <div class="componet-content w-full h-full hover:bg-green-600
-           transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
-                <a href="">
+            <div class="px-5 mt-4 mb-1 text-gray-500 font-semibold text-sm uppercase">Marketplace</div>
+
+            {{-- Noted : Marketplace --}}
+            <div
+                class="componet-content w-full h-full hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                <a href="{{ route('admin.marketplace.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
-                                <polyline points="22,6 12,13 2,6" />
-                            </svg>
+                            <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                    width="24px" class="fill-current group-hover:text-white">
+                                    <path
+                                        d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z" />
+                                </svg></span>
                         </div>
-                        <div class="component-txt">Contact</div>
+                        <div class="component-txt">
+                            Marketplace
+                        </div>
                     </div>
                 </a>
             </div>
 
+
+            {{-- Noted : Product --}}
+            <div class="componet-content w-full h-full hover:bg-green-600
+     transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                <a href="{{ route('admin.plan.index') }}">
+                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
+
+                        <!-- ICON (REPLACED HERE) -->
+                        <div class="component-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 1v22" />
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                        </div>
+
+                        <div class="component-txt">Marketplace Plan</div>
+                    </div>
+                </a>
+            </div>
+
+
+            {{-- Noted : Subscription --}}
+            <div
+                class="componet-content w-full h-full hover:hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                <a href="{{ route('admin.subscribes.index') }}">
+                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
+                        <div class="component-icon">
+                            <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                    width="24px" class="fill-current group-hover:text-white">
+                                    <path
+                                        d="m438-240 226-226-58-58-169 169-84-84-57 57 142 142ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z" />
+                                </svg></span>
+                        </div>
+                        <div class="component-txt">
+                            Subscription
+                        </div>
+                    </div>
+                </a>
+            </div>
 
 
             {{-- Noted : Setting --}}
