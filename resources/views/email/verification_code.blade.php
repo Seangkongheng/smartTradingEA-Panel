@@ -83,7 +83,7 @@
             background: linear-gradient(to right, #FFD700, #BAFD00, #9EFF00);
         ">
             <!-- Logo -->
-            <img src="http://127.0.0.1:8000/images/SuperTradingEA_logo.png" alt="Logo" width="150"
+            <img src="https://panel.seangkongheng.site/images/SuperTradingEA_logo.png" alt="Logo" width="150"
                  style="display:block; margin:auto;">
 
             <!-- Title with gradient text -->
