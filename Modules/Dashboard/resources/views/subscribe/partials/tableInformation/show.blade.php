@@ -15,9 +15,9 @@
                         }}</span>
                 </p>
                 <p class="text-sm md:text-base text-slate-500">
-                    Customer: <span class="font-medium text-slate-700">{{ $order->user->first_name }} {{
-                        $order->user->last_name }}</span>
-                    (<span class="font-medium text-slate-700">{{ $order->user->email }}</span>)
+                    Customer: <span class="font-medium text-slate-700">{{ $order->user->first_name ?? "Unknow" }} {{
+                        $order->user->last_name ?? "Unknow" }}</span>
+                    (<span class="font-medium text-slate-700">{{ $order->user->email ?? "No Email" }}</span>)
                 </p>
             </div>
 
