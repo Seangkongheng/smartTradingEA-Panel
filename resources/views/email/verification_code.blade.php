@@ -140,7 +140,7 @@
         <div class="email-header">
             <img src="https://vsadmin.smarttradingea.com/images/SuperTradingEA_logo.png" alt="Logo">
             <h1>Verify Your Email</h1>
-            <p>SmartTradingEA Control Panel</p>
+            <p>SmartTrading By V.S Client Portal</p>
         </div>
 
         <!-- Body -->
