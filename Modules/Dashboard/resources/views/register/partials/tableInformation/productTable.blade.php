@@ -31,17 +31,15 @@
                 {{ $userRegister->email ?? '0' }}
             </td>
 
-             <td class="px-6 py-4">
-                    <div class="flex items-center space-x-2">
-                        @php
-                            $isActive = $userRegister->is_active ?? null;
-                        @endphp
-                        <span class="w-2 h-2 rounded-full {{ $isActive === 1 ? 'bg-green-500' : 'bg-red-500' }}"></span>
-                        <span class="text-sm ">
-                            {{ $isActive === 1 ? 'Active' : 'Blocked' }}
-                        </span>
-                    </div>
-                </td>
+            <td class="px-6 py-4">
+                <div class="flex items-center space-x-2">
+                    <span
+                        class="w-2 h-2 rounded-full {{ $userRegister->is_active ? 'bg-green-500' : 'bg-red-500' }}"></span>
+                    <span class="text-sm">
+                        {{ $userRegister->is_active ? 'Active' : 'Blocked' }}
+                    </span>
+                </div>
+            </td>
 
             <td class="px-6 py-4 font-medium text-white">
                 {{ $userRegister->created_at?->format('d M Y') ?? '---' }}
