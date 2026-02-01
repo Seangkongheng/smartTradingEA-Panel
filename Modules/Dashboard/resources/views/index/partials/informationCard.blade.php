@@ -1,120 +1,82 @@
 <div class="main-full-card mt-5">
+
+    <!-- Title -->
     <div class="main-card-title kantumruy-pro flex items-center justify-between mb-6 border-b pb-2">
-        <h1 class="text-2xl text-green-700 font-bold tracking-wide flex items-center gap-2">
-            <i class="fas fa-info-circle text-green-600"></i>
-            ព័ត៌មានទូទៅ
+        <h1 class="text-2xl text-white font-bold tracking-wide flex items-center gap-2">
+            <i class="fas fa-info-circle"></i>
+            General Information
         </h1>
     </div>
 
-
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 xl:gap-8 mt-6">
-    {{-- Card Component --}}
     @php
     $cards = [
-        [
-            'title' => 'មេរៀនកំពុងផ្សាយផ្ទាល់',
-            'count' => $streammingLessionsCounts,
+    [
+    'title' => 'Membership Account',
+    'count' => 0,
+    'icon' => 'fa-id-card',
+    'bg' => 'bg-blue-100',
+    'text' => 'text-blue-600',
+    'route'=> route('admin.membership.index')
+    ],
+    [
+    'title' => 'Register Account',
+    'count' => 0,
+    'icon' => 'fa-user-plus',
+    'bg' => 'bg-green-100',
+    'text' => 'text-green-600',
+    'route'=> route('admin.register.index')
+    ],
+    [
+    'title' => 'All Subscription',
+    'count' => 0,
+    'icon' => 'fa-list-alt',
+    'bg' => 'bg-purple-100',
+    'text' => 'text-purple-600',
+    'route'=> route('admin.subscribes.index')
+    ],
+    [
+    'title' => 'Total Sale',
+    'count' => 0,
+    'icon' => 'fa-coins',
+    'bg' => 'bg-yellow-100',
+    'text' => 'text-yellow-600',
+    'route'=> route('admin.index')
+    ],
 
-            'icon' => 'fa-video' // live streaming
-        ],
-        [
-            'title' => 'មេរៀនកំពុងផ្សាយផ្ទាល់ពិសេស',
-            'count' => $streamingVideoPartners,
-
-            'icon' => 'fa-video'
-        ],
-        [
-            'title' => 'សាលារៀនសរុប',
-            'count' => $schoolCounts,
-
-            'icon' => 'fa-school'
-        ],
-        [
-            'title' => 'សាលារៀនដៃគូ',
-            'count' => $schoolPartnerCounts,
-
-            'icon' => 'fa-handshake'
-        ],
-
-        [
-            'title' => 'គម្រោង',
-            'count' => $schoolProjectCounts,
-
-            'icon' => 'fa-briefcase'
-        ],
-        [
-            'title' => 'ព័ត៌មានថ្មីៗ',
-            'count' => '',
-
-            'icon' => 'fa-newspaper'
-        ],
-        [
-            'title' => 'ទីន្នន័យ',
-            'count' => '',
-
-            'icon' => 'fa-database'
-        ],
-         [
-            'title' => 'គណនីសរុប',
-            'count' => $userCounts,
-        
-            'icon' => 'fa-users'
-        ],
     ];
     @endphp
 
-    @foreach ($cards as $card)
-    <a href="{{ $card['route'] }}"
-       class="block bg-white rounded-xl p-6 text-center shadow-sm border hover:shadow-lg transition-all duration-200">
-        <div class="flex flex-col items-center gap-3 text-green-700">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+        @foreach ($cards as $card)
+        <a href="{{ $card['route'] }}" class="group bg-[#131d41] rounded-2xl p-6
+          border border-white/10
+          shadow-lg hover:shadow-2xl
+          hover:-translate-y-1 transition-all duration-300">
 
-            <div class="relative bg-green-100 text-green-600 p-4 rounded-full">
-                <i class="fas {{ $card['icon'] }} fa-2x"></i>
+            <!-- Icon -->
+            <div class="flex items-center justify-between">
+                <div class="{{ $card['bg'] }} {{ $card['text'] }} p-4 rounded-xl shadow">
+                    <i class="fas {{ $card['icon'] }} text-2xl"></i>
+                </div>
 
-                {{-- Show LIVE badge only for live lessons --}}
-                @if(
-                    ($card['title'] === 'មេរៀនកំពុងផ្សាយផ្ទាល់' ||
-                     $card['title'] === 'មេរៀនកំពុងផ្សាយផ្ទាល់ពិសេស')
-                    && $card['count'] > 0
-                )
-                    <span class="live-badge">LIVE</span>
-                @endif
+                <span class="text-sm text-white/50 group-hover:text-violet-400 transition">
+                    View →
+                </span>
             </div>
 
-            <div class="text-xl font-semibold kantumruy-pro">{{ $card['title'] }}</div>
-            <div class="text-2xl font-bold">{{ $card['count'] ?? "_" }}</div>
-        </div>
-    </a>
-    @endforeach
+            <!-- Content -->
+            <div class="mt-6 text-left">
+                <h3 class="text-white/70 text-sm font-semibold uppercase tracking-wide">
+                    {{ $card['title'] }}
+                </h3>
+
+                <p class="text-3xl font-extrabold text-white mt-2">
+                    {{ $card['count'] }}
+                </p>
+            </div>
+        </a>
+        @endforeach
+    </div>
+
 
 </div>
-
-</div>
-<style>
-    .live-badge {
-        position: absolute;
-        top: -6px;
-        right: -10px;
-        background: red;
-        color: white;
-        font-size: 10px;
-        font-weight: bold;
-        padding: 2px 4px;
-        border-radius: 4px;
-        animation: pulse 1.2s infinite;
-    }
-
-    @keyframes pulse {
-        0% {
-            opacity: 1;
-        }
-
-        50% {
-            opacity: 0.4;
-        }
-
-        100% {
-            opacity: 1;
-        }
-    }
-</style>

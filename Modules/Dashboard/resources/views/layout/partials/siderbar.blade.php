@@ -63,7 +63,7 @@
                 </a>
             </div>
 
-                        {{-- Noted : Membership --}}
+            {{-- Noted : Membership --}}
             <div
                 class="componet-content w-full h-full hover:hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.membership.index') }}">
@@ -118,27 +118,71 @@
                     </div>
                 </a>
             </div>
-
-
-            {{-- Noted : Product --}}
-            {{--  <div class="componet-content w-full h-full hover:bg-green-600
-           transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
-                <a href="{{ route('admin.product.index') }}">
+            {{-- EA Setting --}}
+            <div class="componet-content w-full h-full hover:bg-green-600
+   transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                <a href="{{ route('admin.eaSettings.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
+                            <!-- Gear icon for EA Setting -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-settings">
+                                <circle cx="12" cy="12" r="3"></circle>
                                 <path
-                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 00 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                                <line x1="12" y1="22.08" x2="12" y2="12" />
+                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 .86 1.65 1.65 0 0 1-3 0 1.65 1.65 0 0 0-1-.86 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-.86-1 1.65 1.65 0 0 1 0-3 1.65 1.65 0 0 0 .86-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-.86 1.65 1.65 0 0 1 3 0 1.65 1.65 0 0 0 1 .86h.01a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 .86 1 1.65 1.65 0 0 1 0 3 1.65 1.65 0 0 0-.86 1z">
+                                </path>
                             </svg>
                         </div>
-                        <div class="component-txt">Product</div>
+                        <div class="component-txt">EA Setting</div>
                     </div>
                 </a>
-            </div>  --}}
+            </div>
+
+            {{-- Album Photo --}}
+            <div class="componet-content w-full h-full hover:bg-green-600
+   transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                <a href="{{ route('admin.album-photos.index') }}">
+                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
+                        <div class="component-icon">
+                            <!-- Photo icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-image">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <path d="M21 15l-5-5L5 21"></path>
+                            </svg>
+                        </div>
+                        <div class="component-txt">Album Photo</div>
+                    </div>
+                </a>
+            </div>
+
+            {{-- Education --}}
+            <div class="componet-content w-full h-full hover:bg-green-600
+   transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                <a href="{{ route('admin.educations.index') }}">
+                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
+                        <div class="component-icon">
+                            <!-- Graduation cap icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-award">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div class="component-txt">Education</div>
+                    </div>
+                </a>
+            </div>
+
+
+
+
+
+
 
 
             <div class="px-5 mt-4 mb-1 text-gray-500 font-semibold text-sm uppercase">Marketplace</div>
