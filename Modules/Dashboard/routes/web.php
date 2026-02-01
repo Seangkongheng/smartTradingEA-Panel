@@ -24,8 +24,9 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::get('/login/store', [AuthController::class, 'login'])->name('performLogin');
 // Routing don't need permission
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
     Route::prefix('admin')->name('admin.')->group(function () {
+         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
         // Home Route
         Route::get('/', [HomeController::class, 'index'])->name('index');
 

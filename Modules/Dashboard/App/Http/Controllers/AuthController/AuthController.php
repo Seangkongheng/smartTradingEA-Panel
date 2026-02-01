@@ -30,22 +30,39 @@ class AuthController extends Controller
     // login function
     public function login(Request $request)
     {
-
+        // Validate input
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
+        // Find user by email
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
-            return back()->withInput()->withErrors(['email' => 'Your email is incorrect, please try again!']);
+            return back()->withInput()->withErrors([
+                'email' => 'Your email is incorrect, please try again!'
+            ]);
         }
 
+        // Check password
         if (!Hash::check($request->password, $user->password)) {
-            return back()->withInput()->withErrors(['password' => 'Your password is incorrect, please try again!!']);
+            return back()->withInput()->withErrors([
+                'password' => 'Your password is incorrect, please try again!!'
+            ]);
         }
+
+        // Check role - prevent login if role is 'user'
+        if ($user->hasRole('user')) {
+            return back()->withInput()->withErrors([
+                'email' => 'You do not have permission to login here!'
+            ]);
+        }
+
+        // Login
         Auth::login($user, $request->filled('remember'));
 
+        // Remember me cookies (optional)
         if ($request->filled('remember')) {
             Cookie::queue('remember_email', $request->email, 60 * 24 * 365 * 10); // 10 years
             Cookie::queue('remember_password', $request->password, 60 * 24 * 365 * 10);
@@ -54,7 +71,7 @@ class AuthController extends Controller
         return redirect()->route('admin.index')->with('message', 'Login successful!');
     }
 
-    
+
 
     // logout function
     public function logout(Request $request): RedirectResponse
