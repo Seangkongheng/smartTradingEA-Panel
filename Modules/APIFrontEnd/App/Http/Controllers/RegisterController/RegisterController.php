@@ -136,7 +136,7 @@ class RegisterController extends Controller
                     'status' => true,
                     'message' => 'Login successful',
                     'user' => $user,
-                    // 'token' => $user->createToken('auth')->plainTextToken, // if using Sanctum
+                    'token' => $user->createToken('auth')->plainTextToken, // if using Sanctum
                 ]);
             }
 
@@ -154,10 +154,15 @@ class RegisterController extends Controller
             Mail::to($user->email)->send(
                 new VerificationCodeMail($url, $user->id)
             );
-            return response()->json([
-                'status' => false,
-                'message' => 'Verification email sent. Please verify to continue.'
-            ], 403);
+
+            // return response()->json([
+            //     'status' => false,
+            //     'message' => 'Verification email sent. Please verify to continue.'
+            // ], 403);
+
+            return response()->json([ 'message' => 'Verification email sent' ]);
+
+
         } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
