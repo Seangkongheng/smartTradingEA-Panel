@@ -4,10 +4,7 @@ namespace Modules\APIFrontEnd\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Exception;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 use Modules\APIFrontEnd\App\Models\Order;
 use Modules\APIFrontEnd\App\Models\OrderItem;
 use Modules\Dashboard\App\Models\MarketplacePlan;
@@ -58,7 +55,7 @@ class OrderController extends Controller
     public function OrderDetail($uuid)
     {
         try {
-            $orderDetail = Order::with('items.marketplacePlan', 'items.marketplace')->where('uuid',$uuid);
+            $orderDetail = Order::with('items.marketplacePlan', 'items.marketplace')->where('uuid',$uuid)->get();
 
             return response()->json([
                 'order-detail' => $orderDetail,
@@ -90,10 +87,5 @@ class OrderController extends Controller
             ], 500);
         }
     }
-
-
-
-
-
 
 }

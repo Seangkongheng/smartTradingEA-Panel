@@ -139,7 +139,7 @@
                         @method('PUT')
                         <select name="status"
                             class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-slate-900 font-medium outline-none">
-                            <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Reject</option>
                             <option value="confirmed" {{ $order->status == 'confirmed' ? 'selected' : '' }}>Confirmed
                             </option>
                         </select>

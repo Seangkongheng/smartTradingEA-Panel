@@ -25,18 +25,22 @@
 
             <td class="px-6 py-4 font-medium"></td>
 
-            <td class="px-6 py-4 font-medium">
-                <div class="relative inline-block w-full">
-                    <select
-                        class="w-full bg-gray-800 text-white text-sm font-medium px-3 py-1 rounded-lg border border-gray-700 hover:border-[#A8E900] focus:outline-none focus:ring-1 focus:ring-[#A8E900] cursor-pointer">
-                        <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="confirmed" {{ $order->status == 'confirmed' ? 'selected' : '' }}>Confirmed
-                        </option>
-                        <option value="paid" {{ $order->status == 'paid' ? 'selected' : '' }}>Paid</option>
-                        <option value="canceled" {{ $order->status == 'canceled' ? 'selected' : '' }}>Canceled</option>
-                    </select>
-                </div>
+            <td class="px-6 py-4">
+                @php
+                $status = $order->status ?? 'N/A';
+                $statusColor = match($status) {
+                'pending' => 'bg-yellow-500 text-white',
+                'completed' => 'bg-green-500 text-white',
+                'cancelled' => 'bg-red-500 text-white',
+                default => 'bg-gray-500 text-white',
+                };
+                @endphp
+
+                <span class="px-3 py-1 rounded-full font-semibold {{ $statusColor }}">
+                    {{ ucfirst($status) }}
+                </span>
             </td>
+
 
 
             <td class="px-6 py-4">
