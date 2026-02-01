@@ -74,7 +74,7 @@ class EASettingController extends Controller
                 foreach ($request->file('file') as $uploadedFile) {
                     $originalName = $uploadedFile->getClientOriginalName();
                     $filename = $uploadedFile->hashName(); // unique filename
-                    $uploadedFile->move(public_path('docuEASettingDocumentsments'), $filename);
+                    $uploadedFile->move(public_path('EASettingDocuments'), $filename);
 
                     $allFiles[] = [
                         'name' => $originalName,

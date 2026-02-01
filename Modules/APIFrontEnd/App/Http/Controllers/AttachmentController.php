@@ -36,6 +36,4 @@ class AttachmentController extends Controller
         return response()->download($path, $file['name']);
     }
 
-
-
 }

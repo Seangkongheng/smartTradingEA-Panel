@@ -92,54 +92,54 @@ class RegisterController extends Controller
     // }
 
 
-public function register(Request $request)
-{
-    // ✅ Let Laravel handle validation automatically
-    $request->validate([
-        'first_name' => 'required|string|max:255',
-        'last_name'  => 'required|string|max:255',
-        'email'      => 'required|email|unique:users,email',
-        'password'   => 'required|min:8|confirmed',
-        'captcha'    => 'required',
-    ]);
+    public function register(Request $request)
+    {
+        // ✅ Let Laravel handle validation automatically
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
+            'captcha' => 'required',
+        ]);
 
-    // ✅ Captcha check
-    if ($request->filled('captcha')) {
-        $response = Http::asForm()->post(
-            'https://challenges.cloudflare.com/turnstile/v0/siteverify',
-            [
-                'secret'   => env('TURNSTILE_SECRET'),
-                'response' => $request->captcha,
-                'remoteip' => $request->ip(),
-            ]
-        );
-        $result = $response->json();
-        if (empty($result['success']) || $result['success'] !== true) {
-            return response()->json([
-                'status'  => false,
-                'message' => 'Captcha verification failed.',
-            ], 422);
+        // ✅ Captcha check
+        if ($request->filled('captcha')) {
+            $response = Http::asForm()->post(
+                'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+                [
+                    'secret' => env('TURNSTILE_SECRET'),
+                    'response' => $request->captcha,
+                    'remoteip' => $request->ip(),
+                ]
+            );
+            $result = $response->json();
+            if (empty($result['success']) || $result['success'] !== true) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Captcha verification failed.',
+                ], 422);
+            }
         }
+
+        // ✅ Create user
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'is_active' => 1,
+            'profile' => null,
+        ]);
+
+        $user->assignRole('user');
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Register successfully',
+            'user' => $user,
+        ], 201);
     }
-
-    // ✅ Create user
-    $user = User::create([
-        'first_name' => $request->first_name,
-        'last_name'  => $request->last_name,
-        'email'      => $request->email,
-        'password'   => Hash::make($request->password),
-        'is_active'  => 1,
-        'profile'    => null,
-    ]);
-
-    $user->assignRole('user');
-
-    return response()->json([
-        'status'  => true,
-        'message' => 'Register successfully',
-        'user'    => $user,
-    ], 201);
-}
 
 
 
