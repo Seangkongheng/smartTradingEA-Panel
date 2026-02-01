@@ -15,7 +15,8 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            background-color: #f4f4f4; /* plain light gray background */
+            background-color: #f4f4f4;
+            /* plain light gray background */
             padding: 20px;
         }
 
@@ -24,7 +25,8 @@
             margin: 40px auto;
             border-radius: 20px;
             overflow: hidden;
-            background-color: #ffffff; /* plain white card */
+            background-color: #ffffff;
+            /* plain white card */
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
@@ -32,7 +34,8 @@
         .email-header {
             text-align: center;
             padding: 40px 30px;
-            background-color: #1F2937; /* solid dark color */
+            background-color: #1F2937;
+            /* solid dark color */
             color: white;
         }
 
@@ -44,29 +47,35 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
         }
 
         .email-header h1 {
             font-size: 28px;
             font-weight: 800;
             margin-top: 20px;
-            /* Optional title gradient accent */
-            background: linear-gradient(to right, #FFD700, #BAFD00, #9EFF00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffffff;
         }
 
         .email-header p {
             font-size: 16px;
             margin-top: 5px;
-            color: #A8E900; /* neon accent */
+            color: #A8E900;
+            /* neon accent */
         }
 
         .email-body {
             padding: 30px;
-            color: #374151; /* dark text for readability */
+            color: #374151;
+            /* dark text for readability */
             font-size: 16px;
         }
 
@@ -81,8 +90,8 @@
             border-radius: 12px;
             font-weight: 600;
             font-size: 16px;
-            background: linear-gradient(to right, #BAFD00, #9EFF00);
-            color: black;
+            background: #1F2937;
+            color: white;
             text-align: center;
             transition: all 0.3s;
         }
@@ -138,7 +147,8 @@
         <div class="email-body">
             <p>Hello,</p>
             <p>
-                Thank you for creating an account with us. To complete your registration and secure your account, please verify your email address by clicking the button below.
+                Thank you for creating an account with us. To complete your registration and secure your account, please
+                verify your email address by clicking the button below.
             </p>
 
             <div style="text-align:center; margin-top:20px;">
