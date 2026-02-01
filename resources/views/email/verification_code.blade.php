@@ -95,6 +95,9 @@
             text-align: center;
             transition: all 0.3s;
         }
+        . .verify-button a{
+            color: white;
+        }
 
         .verify-button:hover {
             transform: scale(1.05);

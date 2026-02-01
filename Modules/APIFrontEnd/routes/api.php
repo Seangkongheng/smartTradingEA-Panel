@@ -12,9 +12,13 @@ use Modules\APIFrontEnd\App\Http\Controllers\SubcriptionController;
 use Modules\Dashboard\App\Models\Attachment;
 
 Route::post('register', [RegisterController::class, 'register']);
-Route::post('user/login', [RegisterController::class, 'login']);
+// Route::post('user/login', [RegisterController::class, 'login']);
+
+Route::post('user/login', [RegisterController::class, 'login'])
+    ->middleware('throttle:5,1'); // 5 attempts per minute
+
 Route::post('/verify-login', [RegisterController::class, 'verifyLogin'])->name('verify');
-Route::get('/logout', action: [RegisterController::class, 'logout'])->name('logout');
+Route::get('/logout', action: [RegisterController::class, 'logout'])->name(name: 'logout');
 Route::middleware('auth:sanctum')->get('/me', [RegisterController::class, 'username']);
 
 // ------------------------------------marketplace-----------------------------

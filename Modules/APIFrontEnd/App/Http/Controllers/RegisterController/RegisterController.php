@@ -94,10 +94,11 @@ class RegisterController extends Controller
     public function login(Request $request)
     {
         try {
+
             $request->validate([
                 'email' => 'required|email',
                 'password' => 'required',
-                'captcha' => 'required',
+                // 'captcha' => 'required',
 
             ]);
 
@@ -129,6 +130,16 @@ class RegisterController extends Controller
                 ], 401);
             }
 
+            // ✅ IF USER IS ALREADY VERIFIED → LOGIN SUCCESS
+            if ($user->is_verify) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Login successful',
+                    'user' => $user,
+                    // 'token' => $user->createToken('auth')->plainTextToken, // if using Sanctum
+                ]);
+            }
+
             // Generate login verification token
             $loginToken = Str::uuid();
 
@@ -143,10 +154,10 @@ class RegisterController extends Controller
             Mail::to($user->email)->send(
                 new VerificationCodeMail($url, $user->id)
             );
-
             return response()->json([
-                'message' => 'Verification email sent'
-            ]);
+                'status' => false,
+                'message' => 'Verification email sent. Please verify to continue.'
+            ], 403);
         } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
@@ -180,7 +191,7 @@ class RegisterController extends Controller
         $user->update([
             'login_verify_token' => null,
             'verification_expires_at' => null,
-            'is_verify'=>1
+            'is_verify' => 1
         ]);
 
         // Now issue access token
