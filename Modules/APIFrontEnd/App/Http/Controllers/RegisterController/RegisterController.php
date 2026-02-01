@@ -100,27 +100,27 @@ class RegisterController extends Controller
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
-            // 'captcha' => 'required',
+            'captcha' => 'required',
         ]);
 
         // // ✅ Captcha check
-        // if ($request->filled('captcha')) {
-        //     $response = Http::asForm()->post(
-        //         'https://challenges.cloudflare.com/turnstile/v0/siteverify',
-        //         [
-        //             'secret' => env('TURNSTILE_SECRET'),
-        //             'response' => $request->captcha,
-        //             'remoteip' => $request->ip(),
-        //         ]
-        //     );
-        //     $result = $response->json();
-        //     if (empty($result['success']) || $result['success'] !== true) {
-        //         return response()->json([
-        //             'status' => false,
-        //             'message' => 'Captcha verification failed.',
-        //         ], 422);
-        //     }
-        // }
+        if ($request->filled('captcha')) {
+            $response = Http::asForm()->post(
+                'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+                [
+                    'secret' => env('TURNSTILE_SECRET'),
+                    'response' => $request->captcha,
+                    'remoteip' => $request->ip(),
+                ]
+            );
+            $result = $response->json();
+            if (empty($result['success']) || $result['success'] !== true) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Captcha verification failed.',
+                ], 422);
+            }
+        }
 
         // ✅ Create user
         $user = User::create([
@@ -151,29 +151,29 @@ class RegisterController extends Controller
             $request->validate([
                 'email' => 'required|email',
                 'password' => 'required',
-                // 'captcha' => 'required',
+                'captcha' => 'required',
 
             ]);
 
-            // if ($request->filled('captcha')) {
-            //     $response = Http::asForm()->post(
-            //         'https://challenges.cloudflare.com/turnstile/v0/siteverify',
-            //         [
-            //             'secret' => env('TURNSTILE_SECRET'),
-            //             'response' => $request->captcha,
-            //             'remoteip' => $request->ip(),
-            //         ]
-            //     );
+            if ($request->filled('captcha')) {
+                $response = Http::asForm()->post(
+                    'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+                    [
+                        'secret' => env('TURNSTILE_SECRET'),
+                        'response' => $request->captcha,
+                        'remoteip' => $request->ip(),
+                    ]
+                );
 
-            //     $result = $response->json();
+                $result = $response->json();
 
-            //     if (empty($result['success']) || $result['success'] !== true) {
-            //         return response()->json([
-            //             'status' => false,
-            //             'message' => 'Captcha verification failed.',
-            //         ], 422);
-            //     }
-            // }
+                if (empty($result['success']) || $result['success'] !== true) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Captcha verification failed.',
+                    ], 422);
+                }
+            }
 
             $user = User::where('email', $request->email)->first();
 
