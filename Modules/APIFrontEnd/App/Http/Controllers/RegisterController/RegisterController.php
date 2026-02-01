@@ -129,6 +129,16 @@ class RegisterController extends Controller
                 ], 401);
             }
 
+
+            if ($user->is_verify) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Login successful',
+                    'user' => $user,
+                    'token' => $user->createToken('auth')->plainTextToken,
+                ]);
+            }
+
             // Generate login verification token
             $loginToken = Str::uuid();
 
@@ -136,6 +146,7 @@ class RegisterController extends Controller
                 'login_verify_token' => $loginToken,
                 'verification_expires_at' => Carbon::now('Asia/Phnom_Penh')->addMinutes(10),
             ]);
+
 
             $url = config('app.frontend_url')
                 . "/verify-login?token={$loginToken}&user={$user->id}";
@@ -180,6 +191,7 @@ class RegisterController extends Controller
         $user->update([
             'login_verify_token' => null,
             'verification_expires_at' => null,
+            'is_verify' => 1
         ]);
 
         // Now issue access token
