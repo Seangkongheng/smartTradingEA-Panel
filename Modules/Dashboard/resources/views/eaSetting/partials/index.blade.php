@@ -21,7 +21,7 @@
             <span class="text-gray-300 mx-2">/</span>
             <span class="text-gray-600">List</span>
         </h1>
-         <a href="{{ route('admin.marketplace.create') }}" class="flex md:hidden items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-white hover:bg-green-50 transition-colors">
+         <a href="{{ route('admin.eaSettings.create') }}" class="flex md:hidden items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-white hover:bg-green-50 transition-colors">
             <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
@@ -55,7 +55,7 @@
         </div>
 
         {{--  Noted : Add Button   --}}
-        <a href="{{ route('admin.marketplace.create') }}" class="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-white hover:bg-green-50 transition-colors">
+        <a href="{{ route('admin.eaSettings.create') }}" class="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-white hover:bg-green-50 transition-colors">
             <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
@@ -64,12 +64,13 @@
     </div>
 </div>
 
+
 {{-- start main --}}
-<div class="main-content mt-5 w-full rounded-xl border border-gray-100 bg-white">
+<div class="main-content mt-5 w-full rounded-3xl p-5 bg-[#131d41] ">
     <div class="main-full-content w-full">
         <div class="table-content w-full">
             <div class="relative overflow-x-auto sm:rounded-lg">
-               @include('dashboard::albumPhoto.partials.tableInformation.productTable')
+                    @include('dashboard::eaSetting.partials.tableInformation.productTable')
             </div>
         </div>
     </div>

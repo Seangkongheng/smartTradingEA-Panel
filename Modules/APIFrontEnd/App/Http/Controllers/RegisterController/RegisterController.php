@@ -28,17 +28,7 @@ class RegisterController extends Controller
         return view('apifrontend::index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('apifrontend::create');
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
 
     public function register(Request $request)
     {

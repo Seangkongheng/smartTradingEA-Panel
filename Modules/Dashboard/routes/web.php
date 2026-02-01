@@ -125,12 +125,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
       Route::prefix('ea-setting')->name('eaSettings.')->group(function () {
         Route::get('/index', [EASettingController::class, 'index'])->name('index');
-        // Route::get('/show/{id}', [EducationController::class, 'show'])->name('show');
-        // Route::post('/store', [EducationController::class, 'store'])->name('store');
-        // Route::get('/create', [EducationController::class, 'create'])->name('create');
-        // Route::delete('/destroy/{id}', [EducationController::class, 'destroy'])->name('destroy');
-        // Route::put('/update/{id}', [EducationController::class, 'update'])->name('update');
-        // Route::get('/edit/{id}', [EducationController::class, 'edit'])->name('edit');
+        Route::post('/store', [EASettingController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [EASettingController::class, 'edit'])->name('edit');
+        Route::get('/create', [EASettingController::class, 'create'])->name('create');
+        Route::get('/search', [EASettingController::class, 'search'])->name('search');
+        Route::delete('/destroy/{id}', [EASettingController::class, 'destroy'])->name('destroy');
+        Route::put('/update/{id}', [EASettingController::class, 'update'])->name('update');
 
     });
 

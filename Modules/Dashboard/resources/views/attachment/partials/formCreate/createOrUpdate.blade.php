@@ -88,9 +88,8 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                     <!-- Left: Drop Zone -->
                                     <div id="file-drop-zone"
                                         class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-green-500 hover:bg-green-50 transition-all duration-200 relative">
-                                        <input type="file" name="file[]" id="fileInput" multiple
-                                            accept=".zip,application/zip,application/x-zip-compressed,application/pdf"
-                                            class="hidden" />
+                                         <input type="file" name="file[]" id="fileInput" multiple
+                                            accept=".zip,application/zip,application/x-zip-compressed" class="hidden" />
 
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-green-500 mb-3"
                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
