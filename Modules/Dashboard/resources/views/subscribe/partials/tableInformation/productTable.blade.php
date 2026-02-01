@@ -15,7 +15,7 @@
         @forelse ( $orders as $index=> $order )
         <tr class="hover:bg-gray-700/40 transition-colors duration-200">
             <td class="px-6 py-4">{{ $index + 1 }}</td>
-            <td class="px-6 py-4 font-medium">{{ $order->user->first_name }} {{ $order->user->last_name }}</td>
+            <td class="px-6 py-4 font-medium">{{ $order->user->first_name?? "" }} {{ $order->user->last_name ?? "" }}</td>
             <td class="px-6 py-4 font-medium">
                 {{ $order->items->first()?->marketplace?->title ?? 'N/A' }}
             </td>
