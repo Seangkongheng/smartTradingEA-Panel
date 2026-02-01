@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Validators\ValidationException;
 use Modules\APIFrontEnd\App\Models\Register;
 use Modules\Dashboard\App\Models\userDetail;
 use Nwidart\Modules\Json;
@@ -30,10 +31,71 @@ class RegisterController extends Controller
 
 
 
+    // public function register(Request $request)
+    // {
+    //     try {
+    //         // ✅ Validate input
+    //         $request->validate([
+    //             'first_name' => 'required|string|max:255',
+    //             'last_name' => 'required|string|max:255',
+    //             'email' => 'required|email|unique:users,email',
+    //             'password' => 'required|min:8|confirmed',
+    //             'captcha' => 'required',
+    //         ]);
+
+    //         if ($request->filled('captcha')) {
+    //             $response = Http::asForm()->post(
+    //                 'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+    //                 [
+    //                     'secret' => env('TURNSTILE_SECRET'),
+    //                     'response' => $request->captcha,
+    //                     'remoteip' => $request->ip(),
+    //                 ]
+    //             );
+
+    //             $result = $response->json();
+
+    //             if (empty($result['success']) || $result['success'] !== true) {
+    //                 return response()->json([
+    //                     'status' => false,
+    //                     'message' => 'Captcha verification failed.',
+    //                 ], 422);
+    //             }
+    //         }
+
+    //         //Noted : Create user
+    //         $user = User::create([
+    //             'first_name' => $request->first_name,
+    //             'last_name' => $request->last_name,
+    //             'email' => $request->email,
+    //             'password' => Hash::make($request->password),
+    //             'is_active' => 1,
+    //             'profile' => null,
+    //         ]);
+
+    //         // Noted : Assign default role
+    //         $user->assignRole('user');
+
+    //         return response()->json([
+    //             'status' => true,
+    //             'message' => 'Register successfully',
+    //             'user' => $user,
+    //         ], 201);
+
+    //     } catch (\Throwable $e) {
+    //         return response()->json([
+    //             'status' => false,
+    //             'error' => $e->getMessage(),
+    //             'line' => $e->getLine(),
+    //         ], 500);
+    //     }
+    // }
+
+
     public function register(Request $request)
     {
         try {
-            // ✅ Validate input
+            // Validate input
             $request->validate([
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
@@ -62,7 +124,7 @@ class RegisterController extends Controller
                 }
             }
 
-            //Noted : Create user
+            // Create user
             $user = User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -72,7 +134,6 @@ class RegisterController extends Controller
                 'profile' => null,
             ]);
 
-            // Noted : Assign default role
             $user->assignRole('user');
 
             return response()->json([
@@ -81,6 +142,11 @@ class RegisterController extends Controller
                 'user' => $user,
             ], 201);
 
+        } catch (ValidationException $e) {
+            return response()->json([
+                'status' => false,
+                'errors' => $e->errors(),
+            ], 422);
         } catch (\Throwable $e) {
             return response()->json([
                 'status' => false,
@@ -89,6 +155,7 @@ class RegisterController extends Controller
             ], 500);
         }
     }
+
 
 
     public function login(Request $request)
@@ -160,7 +227,7 @@ class RegisterController extends Controller
             //     'message' => 'Verification email sent. Please verify to continue.'
             // ], 403);
 
-            return response()->json([ 'message' => 'Verification email sent' ]);
+            return response()->json(['message' => 'Verification email sent']);
 
 
         } catch (Exception $e) {
