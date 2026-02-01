@@ -7,8 +7,8 @@ return [
     'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 
     'allowed_origins' => [
-        'https://seangkongheng.site',
-        'https://panel.seangkongheng.site',
+        'https://smarttradingea.com/',
+        'https://vsadmin.smarttradingea.com/',
     ],
 
 
