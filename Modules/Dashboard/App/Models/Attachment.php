@@ -17,6 +17,10 @@ class Attachment extends Model
 
     protected $table = 'attachments';
     protected $primarykey = 'id';
+    protected $casts = [
+        'is_public' => 'boolean',
+    ];
+
     protected $fillable = [
         'title',
         'description',
