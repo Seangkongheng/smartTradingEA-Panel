@@ -129,7 +129,7 @@
 
         <!-- Header -->
         <div class="email-header">
-            <img src="https://panel.seangkongheng.site/images/SuperTradingEA_logo.png" alt="Logo">
+            <img src="https://vsadmin.smarttradingea.com/images/SuperTradingEA_logo.png" alt="Logo">
             <h1>Verify Your Email</h1>
             <p>SmartTradingEA Control Panel</p>
         </div>
@@ -142,7 +142,7 @@
             </p>
 
             <div style="text-align:center; margin-top:20px;">
-                <a href="{{ $url ?? '#' }}" class="verify-button">Verify Email Address</a>
+                <a href="{{ $url }}" class="verify-button">Verify Email Address</a>
             </div>
 
             <div class="expiry-notice">
