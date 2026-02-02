@@ -141,9 +141,6 @@ class RegisterController extends Controller
         ], 201);
     }
 
-
-
-
     public function login(Request $request)
     {
         try {
