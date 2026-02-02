@@ -3,12 +3,11 @@ $userRole = auth()->user()->roles->pluck('name')->first();
 @endphp
 
 <div class="main-content bg-d w-full">
-    {{-- action="{{ isset($attachmentLessonDetailEdit->id) ? route('', $attachmentLessonDetailEdit->id) : route('') }}"
-    --}}
-    <form action="" method="POST" class="main-full-content  w-full grid lg:grid-cols-12 gap-10"
-        enctype="multipart/form-data">
+
+    <form action="{{ isset($communityEdit->id) ? route('admin.community.update', $communityEdit->id) : route('admin.community.update') }}"
+        method="POST" class="main-full-content  w-full grid lg:grid-cols-12 gap-10" enctype="multipart/form-data">
         @csrf
-        @if (isset($attachmentLessonDetailEdit->id))
+        @if (isset($communityEdit->id))
         @method('PUT')
         @endif
         {{-- Start Content create --}}
@@ -38,7 +37,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                             <div class="lg:col-start-3 lg:col-end-13 w-full">
                                 <input type="text"
-                                    value="{{ old('title', isset($attachmentLessonDetailEdit->id) ? $attachmentLessonDetailEdit->AttachmentLesson->title : '') }}"
+                                    value="{{ old('title', isset($communityEdit->id) ? $communityEdit->title : '') }}"
                                     name="title"
                                     class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none "
                                     placeholder="Enter your title*" required>
@@ -57,7 +56,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             <div class="lg:col-start-3 lg:col-end-13 w-full">
                                 <textarea required placeholder="Enter Description.."
                                     class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none" name=""
-                                    id="">{{ old('title', isset($attachmentLessonDetailEdit->id) ? $attachmentLessonDetailEdit->AttachmentLesson->title : '') }}</textarea>
+                                    id="">{{ old('title', isset($communityEdit->id) ? $communityEdit->title : '') }}</textarea>
                                 @error('title')
                                 <span class="text-red-500">{{ $message }}</span>
                                 @enderror
@@ -77,7 +76,6 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             <!-- Content Column -->
                             <div class="md:col-span-10">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <!-- Left: Drop Zone -->
                                     <div id="file-drop-zone"
                                         class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-green-500 hover:bg-green-50 transition-all duration-200 relative">
                                         <input type="file" name="file[]" id="fileInput" multiple
@@ -103,8 +101,8 @@ $userRole = auth()->user()->roles->pluck('name')->first();
 
                                         {{-- Old Files --}}
                                         @php
-                                        $oldDocuments = !empty($attachmentLessonDetailEdit->file)
-                                        ? json_decode($attachmentLessonDetailEdit->file, true)
+                                        $oldDocuments = !empty($communityEdit->file)
+                                        ? json_decode($communityEdit->file, true)
                                         : [];
                                         @endphp
 
@@ -150,7 +148,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             <div class="md:col-span-9 flex items-center gap-6">
                                 <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="radio" name="is_public" value="1" {{ old('is_public',
-                                        $attachmentLessonDetailEdit->is_public ?? 1)
+                                        $communityEdit->is_public ?? 1)
                                     == 1 ? 'checked' : '' }}
                                     class="text-green-600 focus:ring-green-500">
                                     <span class="text-gray-700">Public</span>
@@ -158,7 +156,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
 
                                 <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="radio" name="is_public" value="0" {{ old('is_public',
-                                        $attachmentLessonDetailEdit->is_public ?? 1)
+                                        $communityEdit->is_public ?? 1)
                                     == 0 ? 'checked' : '' }}
                                     class="text-red-600 focus:ring-red-500">
                                     <span class="text-red-600">Private</span>
@@ -187,7 +185,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                 <button type="submit"
                                     class="inter px-5 py-2 backdrop-blur-lg text-white bg-green-600 rounded-lg items-center gap-1 inline-flex border border-white/15 hover:bg-green-700 transition-all duration-300 ease-in-out">
                                     <span class="kantumruy-pro font-[500]">
-                                        {{ isset($attachmentLessonDetailEdit->id) ? "Update" : "Save" }}
+                                        {{ isset($communityEdit->id) ? "Update" : "Save" }}
                                     </span>
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960"

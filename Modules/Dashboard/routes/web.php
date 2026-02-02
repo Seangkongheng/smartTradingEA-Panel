@@ -8,6 +8,7 @@ use Modules\Dashboard\App\Http\Controllers\RegisterController\RegisterController
 use Modules\Dashboard\App\Http\Controllers\SubscribeController\SubscribeController;
 use Modules\Dashboard\App\Http\Controllers\UserController\UserController;
 use Modules\Dashboard\App\Http\Controllers\AuthController\AuthController;
+use Modules\Dashboard\App\Http\Controllers\CommunityController;
 use Modules\Dashboard\App\Http\Controllers\EASettingController\EASettingController;
 use Modules\Dashboard\App\Http\Controllers\EducationController\EducationController;
 use Modules\Dashboard\App\Http\Controllers\MarketplaceController\MarketplaceController;
@@ -26,7 +27,7 @@ Route::get('/login/store', [AuthController::class, 'login'])->name('performLogin
 Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('admin')->name('admin.')->group(function () {
-         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
         // Home Route
         Route::get('/', [HomeController::class, 'index'])->name('index');
 
@@ -115,15 +116,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::prefix('educations')->name('educations.')->group(function () {
         Route::get('/index', [EducationController::class, 'index'])->name('index');
-        // Route::get('/show/{id}', [EducationController::class, 'show'])->name('show');
-        // Route::post('/store', [EducationController::class, 'store'])->name('store');
-        // Route::get('/create', [EducationController::class, 'create'])->name('create');
-        // Route::delete('/destroy/{id}', [EducationController::class, 'destroy'])->name('destroy');
-        // Route::put('/update/{id}', [EducationController::class, 'update'])->name('update');
-        // Route::get('/edit/{id}', [EducationController::class, 'edit'])->name('edit');
+        Route::get('/show/{id}', [EducationController::class, 'show'])->name('show');
+        Route::post('/store', [EducationController::class, 'store'])->name('store');
+        Route::get('/create', [EducationController::class, 'create'])->name('create');
+        Route::delete('/destroy/{id}', [EducationController::class, 'destroy'])->name('destroy');
+        Route::put('/update/{id}', [EducationController::class, 'update'])->name('update');
+        Route::get('/edit/{id}', [EducationController::class, 'edit'])->name('edit');
 
     });
-      Route::prefix('ea-setting')->name('eaSettings.')->group(function () {
+    Route::prefix('ea-setting')->name('eaSettings.')->group(function () {
         Route::get('/index', [EASettingController::class, 'index'])->name('index');
         Route::post('/store', [EASettingController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [EASettingController::class, 'edit'])->name('edit');
@@ -134,14 +135,26 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     });
 
-        Route::prefix('album-photo')->name('album-photos.')->group(function () {
+       Route::prefix('community')->name('community.')->group(function () {
+        Route::get('/index', [CommunityController::class, 'index'])->name('index');
+        Route::post('/store', [CommunityController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [CommunityController::class, 'edit'])->name('edit');
+        Route::get('/create', [CommunityController::class, 'create'])->name('create');
+        Route::get('/search', [CommunityController::class, 'search'])->name('search');
+        Route::delete('/destroy/{id}', [CommunityController::class, 'destroy'])->name('destroy');
+        Route::put('/update/{id}', [CommunityController::class, 'update'])->name('update');
+
+    });
+
+
+    Route::prefix('album-photo')->name('album-photos.')->group(function () {
         Route::get('/index', [AlbumPhotoController::class, 'index'])->name('index');
-        // Route::get('/show/{id}', [EducationController::class, 'show'])->name('show');
-        // Route::post('/store', [EducationController::class, 'store'])->name('store');
-        // Route::get('/create', [EducationController::class, 'create'])->name('create');
-        // Route::delete('/destroy/{id}', [EducationController::class, 'destroy'])->name('destroy');
-        // Route::put('/update/{id}', [EducationController::class, 'update'])->name('update');
-        // Route::get('/edit/{id}', [EducationController::class, 'edit'])->name('edit');
+        Route::get('/show/{id}', [AlbumPhotoController::class, 'show'])->name('show');
+        Route::post('/store', [AlbumPhotoController::class, 'store'])->name('store');
+        Route::get('/create', [AlbumPhotoController::class, 'create'])->name('create');
+        Route::delete('/destroy/{id}', [AlbumPhotoController::class, 'destroy'])->name('destroy');
+        Route::put('/update/{id}', [AlbumPhotoController::class, 'update'])->name('update');
+        Route::get('/edit/{id}', [AlbumPhotoController::class, 'edit'])->name('edit');
 
     });
     Route::prefix('plan')->name('plan.')->group(function () {

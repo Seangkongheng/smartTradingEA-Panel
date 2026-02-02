@@ -1,1 +1,1 @@
-@include('dashboard::eaSetting.partials.createOrUpdate')
+@include('dashboard::albumPhoto.partials.createOrUpdate')

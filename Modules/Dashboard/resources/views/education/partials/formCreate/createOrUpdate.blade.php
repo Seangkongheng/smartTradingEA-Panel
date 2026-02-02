@@ -3,10 +3,10 @@ $userRole = auth()->user()->roles->pluck('name')->first();
 @endphp
 
 <div class="main-content bg-d w-full">
-     {{--  action="{{ isset($attachmentLessonDetailEdit->id) ? route('', $attachmentLessonDetailEdit->id) : route('') }}"  --}}
-    <form
-        action=""
-        method="POST" class="main-full-content  w-full grid lg:grid-cols-12 gap-10" enctype="multipart/form-data">
+    {{-- action="{{ isset($attachmentLessonDetailEdit->id) ? route('', $attachmentLessonDetailEdit->id) : route('') }}"
+    --}}
+    <form action="" method="POST" class="main-full-content  w-full grid lg:grid-cols-12 gap-10"
+        enctype="multipart/form-data">
         @csrf
         @if (isset($attachmentLessonDetailEdit->id))
         @method('PUT')
@@ -23,7 +23,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                 class="fill-current text-yellow-500 mr-2">
                                 <path
                                     d="m380-340 280-180-280-180v360Zm-60 220v-80H160q-33 0-56.5-23.5T80-280v-480q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v480q0 33-23.5 56.5T800-200H640v80H320ZM160-280h640v-480H160v480Zm0 0v-480 480Z" />
-                            </svg> <span class="kantumruy-pro text-lg"> Attachment Detail </span>
+                            </svg> <span class="kantumruy-pro text-lg">Performance</span>
                         </h1>
                     </div>
 
@@ -48,125 +48,40 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                         </div>
 
-
-
-                        {{-- Thumbnail --}}
-                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
-                            <div class="md:col-span-2 flex items-center h-full">
-                                <label for="thumbnail_image" class="text-lg kantumruy-pro text-right pr-4">
-                                    Thumbnail
-                                    <span class="text-sm text-gray-500 align-baseline">(Optional)</span>
-                                </label>
+                        {{-- Title --}}
+                        <div class="grid lg:grid-cols-12 gap-3  kantumruy-pro ">
+                            <div class="lg:col-start-1 lg:col-end-3 w-full">
+                                <label for="">Description</label>
+                                <span class="text-sm text-red-500 align-baseline">*</span>
                             </div>
-                            <div class="md:col-span-10">
-                                <label for="thumbnail_image"
-                                    class="flex flex-col items-center px-6 py-8 bg-white border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-green-600 hover:bg-gray-50 transition duration-200">
-                                    <input type="file" id="thumbnail_image" name="thumbnail" class="sr-only"
-                                        accept="image/png,image/jpeg,image/jpg">
-
-                                    @if (!empty($attachmentLessonDetailEdit->thumbnail))
-                                    <div id="thumbnail-image-preview" class="mb-4 w-full text-center">
-                                        <img id="thumbnail-preview"
-                                            src="{{ asset($attachmentLessonDetailEdit->thumbnail) }}"
-                                            alt="thumbnail preview"
-                                            class="max-h-48 mx-auto rounded-lg border border-gray-200">
-                                    </div>
-                                    @else
-                                    <div id="thumbnail-upload-icon" class="w-12 h-12 text-gray-400 mb-4">
-                                        <svg class="w-full h-full" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                        </svg>
-                                    </div>
-                                    <div id="thumbnail-upload-text" class="text-center">
-                                        <p class="text-sm text-gray-600">
-                                            <span class="font-semibold text-blue-600">Click to upload</span>
-                                        </p>
-                                        <p class="text-xs text-gray-500 mt-1">PNG, JPG, JPEG up to 5MB</p>
-                                    </div>
-                                    @endif
-
-                                    <span id="thumbnail-file-name" class="mt-4 text-sm text-gray-500"></span>
-                                </label>
-                                @error('thumbnail')
-                                <span class="block mt-1 text-sm text-red-600">{{ $message }}</span>
+                            <div class="lg:col-start-3 lg:col-end-13 w-full">
+                                <textarea required placeholder="Enter Description.."
+                                    class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none" name=""
+                                    id="">{{ old('title', isset($attachmentLessonDetailEdit->id) ? $attachmentLessonDetailEdit->AttachmentLesson->title : '') }}</textarea>
+                                @error('title')
+                                <span class="text-red-500">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
 
-
-                        {{-- Attachment --}}
-                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start mt-6">
-                            <!-- Label Column -->
-                            <div class="md:col-span-2 flex items-center h-full">
-                                <label for="file_document" class="text-lg kantumruy-pro text-right pr-4">
-                                    Attachment
-                                    <span class="text-sm text-gray-500 align-baseline">(Optional)</span>
-                                </label>
+                         {{-- Title --}}
+                        <div class="grid lg:grid-cols-12 gap-3  kantumruy-pro ">
+                            <div class="lg:col-start-1 lg:col-end-3 w-full">
+                                <label for="">Video URL</label>
+                                <span class="text-sm text-red-500 align-baseline">*</span>
                             </div>
-
-                            <!-- Content Column -->
-                            <div class="md:col-span-10">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <!-- Left: Drop Zone -->
-                                    <div id="file-drop-zone"
-                                        class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-green-500 hover:bg-green-50 transition-all duration-200 relative">
-                                        <input type="file" name="file[]" id="fileInput" multiple
-                                            accept="application/pdf,image/png,image/jpeg,image/jpg" class="hidden" />
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-green-500 mb-3"
-                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                        </svg>
-
-                                        <p class="text-sm text-gray-600 mb-3">Drag or drop files to upload</p>
-
-                                        <button type="button" id="chooseFileButton"
-                                            class="bg-green-500 hover:bg-green-600 text-white text-sm px-5 py-2 rounded-lg shadow-sm transition">
-                                            Choose File
-                                        </button>
-                                    </div>
-
-                                    <!-- Right: Upload List -->
-                                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                                        <h3 class="text-gray-700 text-base font-medium mb-4">Uploading</h3>
-
-                                        {{-- Old Files --}}
-                                        @php
-                                        $oldDocuments = !empty($attachmentLessonDetailEdit->file)
-                                        ? json_decode($attachmentLessonDetailEdit->file, true)
-                                        : [];
-                                        @endphp
-
-                                        <div id="file-list" class="space-y-4">
-                                            @foreach ($oldDocuments as $index => $doc)
-                                            <div
-                                                class="flex items-center justify-between bg-white shadow-sm p-3 rounded-lg border border-gray-100 old-file-item">
-                                                <span class="text-sm text-gray-700 truncate">
-                                                    {{ pathinfo($doc['name'], PATHINFO_FILENAME) }}
-                                                </span>
-                                                <button type="button"
-                                                    class="text-red-500 hover:text-red-700 remove-old-file">
-                                                    <i class="fa-solid fa-xmark"></i>
-                                                </button>
-                                                <input type="hidden" name="old_documents[]"
-                                                    value="{{ json_encode($doc) }}">
-                                            </div>
-                                            @endforeach
-                                        </div>
-
-                                        <div class="mt-4">
-                                            <button type="button" id="addMoreFileButton"
-                                                class="flex items-center gap-2 text-green-600 hover:text-green-700 text-sm font-medium">
-                                                <i class="fa-solid fa-plus"></i> Add More
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="lg:col-start-3 lg:col-end-13 w-full">
+                                <input type="text"
+                                    value="{{ old('title', isset($attachmentLessonDetailEdit->id) ? $attachmentLessonDetailEdit->AttachmentLesson->title : '') }}"
+                                    name="title"
+                                    class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none "
+                                    placeholder="Enter your Video URL*" required>
+                                @error('title')
+                                <span class="text-red-500">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
+
 
 
 
@@ -198,33 +113,32 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                         </div>
 
-                        {{--  Action Button  --}}
+                        {{-- Action Button --}}
                         <div class="grid lg:grid-cols-12 gap-3 kantumruy-pro mt-5">
                             <div class="lg:col-start-1 lg:col-end-13 flex items-center justify-end w-full space-x-3">
 
-                                {{--  Cancel Button  --}}
-                                <button type="button"
-                                    onclick="window.history.back()"
+                                {{-- Cancel Button --}}
+                                <button type="button" onclick="window.history.back()"
                                     class="inter px-5 py-2 backdrop-blur-lg text-white bg-gray-500 rounded-lg items-center gap-1 inline-flex border border-white/15 hover:bg-gray-600 transition-all duration-300 ease-in-out">
                                     <span class="kantumruy-pro font-[500]">Cancel</span>
                                     <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
-                                            class="fill-current">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960"
+                                            width="20px" class="fill-current">
                                             <path
                                                 d="M480-480 280-280l-56-56 144-144-144-144 56-56 200 200 200-200 56 56-144 144 144 144-56 56-200-200Z" />
                                         </svg>
                                     </span>
                                 </button>
 
-                                {{--  Save Button  --}}
+                                {{-- Save Button --}}
                                 <button type="submit"
                                     class="inter px-5 py-2 backdrop-blur-lg text-white bg-green-600 rounded-lg items-center gap-1 inline-flex border border-white/15 hover:bg-green-700 transition-all duration-300 ease-in-out">
                                     <span class="kantumruy-pro font-[500]">
                                         {{ isset($attachmentLessonDetailEdit->id) ? "Update" : "Save" }}
                                     </span>
                                     <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
-                                            class="fill-current">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960"
+                                            width="20px" class="fill-current">
                                             <path
                                                 d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z" />
                                         </svg>

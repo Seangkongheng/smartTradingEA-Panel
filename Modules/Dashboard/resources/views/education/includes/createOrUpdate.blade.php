@@ -1,1 +1,1 @@
-@include('dashboard::eaSetting.partials.createOrUpdate')
+@include('dashboard::education.partials.createOrUpdate')

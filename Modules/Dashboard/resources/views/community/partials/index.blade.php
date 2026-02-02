@@ -17,11 +17,11 @@
     <!-- Title Section -->
     <div class="flex-1 flex justify-between w-full md:min-w-[160px]">
         <h1 class="text-xl font-semibold text-gray-800 kantumruy-pro m-0 p-0">
-            <span class="text-green-600">Educations</span></span>
+            <span class="text-green-600">Community</span></span>
             <span class="text-gray-300 mx-2">/</span>
             <span class="text-gray-600">List</span>
         </h1>
-         <a href="{{ route('admin.educations.index') }}" class="flex md:hidden items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-white hover:bg-green-50 transition-colors">
+         <a href="{{ route('admin.community.create') }}" class="flex md:hidden items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-white hover:bg-green-50 transition-colors">
             <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
@@ -55,7 +55,7 @@
         </div>
 
         {{--  Noted : Add Button   --}}
-        <a href="{{ route('admin.educations.create') }}" class="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-white hover:bg-green-50 transition-colors">
+        <a href="{{ route('admin.community.create') }}" class="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-white hover:bg-green-50 transition-colors">
             <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
@@ -69,7 +69,7 @@
     <div class="main-full-content w-full">
         <div class="table-content w-full">
             <div class="relative overflow-x-auto sm:rounded-lg">
-               @include('dashboard::education.partials.tableInformation.productTable')
+               @include('dashboard::community.partials.tableInformation.productTable')
             </div>
         </div>
     </div>

@@ -22,7 +22,7 @@ class EducationController extends Controller
      */
     public function create()
     {
-        return view('dashboard::create');
+        return view('dashboard::education.createOrUpdate');
     }
 
     /**

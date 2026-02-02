@@ -1,20 +1,20 @@
 <?php
 
-namespace Modules\Dashboard\App\Http\Controllers\AlbumPhotoController;
+namespace Modules\Dashboard\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class AlbumPhotoController extends Controller
+class CommunityController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard::albumPhoto.index');
+        return view('dashboard::community.index');
     }
 
     /**
@@ -22,7 +22,7 @@ class AlbumPhotoController extends Controller
      */
     public function create()
     {
-        return view('dashboard::albumPhoto.createOrUpdate');
+        return view('dashboard::community.createOrUpdate');
     }
 
     /**
