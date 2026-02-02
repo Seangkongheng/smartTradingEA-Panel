@@ -147,53 +147,52 @@ class RegisterController extends Controller
     public function login(Request $request)
     {
         try {
-
             $request->validate([
                 'email' => 'required|email',
                 'password' => 'required',
                 'captcha' => 'required',
-
             ]);
 
-            if ($request->filled('captcha')) {
-                $response = Http::asForm()->post(
-                    'https://challenges.cloudflare.com/turnstile/v0/siteverify',
-                    [
-                        'secret' => env('TURNSTILE_SECRET'),
-                        'response' => $request->captcha,
-                        'remoteip' => $request->ip(),
-                    ]
-                );
 
-                $result = $response->json();
+            $response = Http::asForm()->post(
+                'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+                [
+                    'secret' => env('TURNSTILE_SECRET'),
+                    'response' => $request->captcha,
+                    'remoteip' => $request->ip(),
+                ]
+            );
 
-                if (empty($result['success']) || $result['success'] !== true) {
-                    return response()->json([
-                        'status' => false,
-                        'message' => 'Captcha verification failed.',
-                    ], 422);
-                }
+            $result = $response->json();
+
+            if (empty($result['success']) || $result['success'] !== true) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Captcha verification failed.',
+                ], 422);
             }
+
 
             $user = User::where('email', $request->email)->first();
 
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json([
-                    'message' => 'Invalid credentials'
+                    'status' => false,
+                    'message' => 'Invalid email or password.',
                 ], 401);
             }
 
-            // ✅ IF USER IS ALREADY VERIFIED → LOGIN SUCCESS
+
             if ($user->is_verify) {
                 return response()->json([
                     'status' => true,
                     'message' => 'Login successful',
                     'user' => $user,
-                    'access_token' => $user->createToken('auth')->plainTextToken, // if using Sanctum
-                ]);
+                    'access_token' => $user->createToken('auth')->plainTextToken,
+                ], 200);
             }
 
-            // Generate login verification token
+
             $loginToken = Str::uuid();
 
             $user->update([
@@ -201,28 +200,24 @@ class RegisterController extends Controller
                 'verification_expires_at' => Carbon::now('Asia/Phnom_Penh')->addMinutes(10),
             ]);
 
-            $url = config('app.frontend_url')
-                . "/verify-login?token={$loginToken}&user={$user->id}";
+            $url = config('app.frontend_url') .
+                "/verify-login?token={$loginToken}&user={$user->id}";
 
             Mail::to($user->email)->send(
                 new VerificationCodeMail($url, $user->id)
             );
 
-            // return response()->json([
-            //     'status' => false,
-            //     'message' => 'Verification email sent. Please verify to continue.'
-            // ], 403);
-
-            return response()->json(['message' => 'Verification email sent']);
-
-
-        } catch (Exception $e) {
             return response()->json([
-                'error' => $e->getMessage()
-            ]);
+                'status' => 'verify',
+                'message' => 'Verification email sent. Please verify to continue.',
+            ], 403);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Server error. Please try again.',
+            ], 500);
         }
-
-
     }
 
     public function verifyLogin(Request $request)
