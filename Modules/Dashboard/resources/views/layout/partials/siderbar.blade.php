@@ -139,25 +139,7 @@
                 </a>
             </div>
 
-            {{-- Album Photo --}}
-            <div class="componet-content w-full h-full hover:bg-green-600
-   transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
-                <a href="{{ route('admin.album-photos.index') }}">
-                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
-                        <div class="component-icon">
-                            <!-- Photo icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="feather feather-image">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                <path d="M21 15l-5-5L5 21"></path>
-                            </svg>
-                        </div>
-                        <div class="component-txt">Performance Album</div>
-                    </div>
-                </a>
-            </div>
+
 
             {{-- Education --}}
             <div class="componet-content w-full h-full hover:bg-green-600
@@ -195,6 +177,26 @@
                             </svg>
                         </div>
                         <div class="component-txt">Community Album</div>
+                    </div>
+                </a>
+            </div>
+
+             {{-- Album Photo --}}
+            <div class="componet-content w-full h-full hover:bg-green-600
+   transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                <a href="{{ route('admin.album-photos.index') }}">
+                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
+                        <div class="component-icon">
+                            <!-- Photo icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-image">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <path d="M21 15l-5-5L5 21"></path>
+                            </svg>
+                        </div>
+                        <div class="component-txt">Performance Album</div>
                     </div>
                 </a>
             </div>
