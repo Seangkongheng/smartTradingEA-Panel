@@ -48,6 +48,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                         </div>
 
+                        {{--  Noted : Profit  --}}
                         <div class="grid lg:grid-cols-12 gap-3  kantumruy-pro ">
                             <div class="lg:col-start-1 font-bold lg:col-end-3 w-full">
                                 <label for="">Profit</label>
@@ -66,6 +67,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                         </div>
 
 
+                        {{--  Noted Balance  --}}
                         <div class="grid lg:grid-cols-12 gap-3  kantumruy-pro ">
                             <div class="lg:col-start-1 font-bold lg:col-end-3 w-full">
                                 <label for="">Balance</label>
@@ -83,7 +85,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                         </div>
 
-
+                        {{--  Noted Drawdown  --}}
                         <div class="grid lg:grid-cols-12 gap-3  kantumruy-pro ">
                             <div class="lg:col-start-1 font-bold lg:col-end-3 w-full">
                                 <label for="">Drawdown</label>
@@ -101,6 +103,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                         </div>
 
+                        {{--  Noted : Tradding Hours  --}}
                         <div class="grid lg:grid-cols-12 gap-3 kantumruy-pro">
                             <div class="lg:col-start-1 lg:col-end-3 w-full">
                                 <label>Tradding Hours</label>
