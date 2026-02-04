@@ -20,6 +20,10 @@ class EASetting extends Model
         'file',
         'type_file',
         'total_downloads',
+        'profit',
+        'balance',
+        'drawdown',
+        'tradding_hours',
         'is_public',
         'updated_at',
         'created_at'

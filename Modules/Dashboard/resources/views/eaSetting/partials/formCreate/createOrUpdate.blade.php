@@ -23,7 +23,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                 class="fill-current text-yellow-500 mr-2">
                                 <path
                                     d="m380-340 280-180-280-180v360Zm-60 220v-80H160q-33 0-56.5-23.5T80-280v-480q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v480q0 33-23.5 56.5T800-200H640v80H320ZM160-280h640v-480H160v480Zm0 0v-480 480Z" />
-                            </svg> <span class="kantumruy-pro text-lg"> Attachment Detail </span>
+                            </svg> <span class="kantumruy-pro text-lg"> EA Setting Detail </span>
                         </h1>
                     </div>
 
@@ -48,8 +48,76 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                         </div>
 
+                        <div class="grid lg:grid-cols-12 gap-3  kantumruy-pro ">
+                            <div class="lg:col-start-1 font-bold lg:col-end-3 w-full">
+                                <label for="">Profit</label>
+                                <span class="text-sm text-red-500 align-baseline">*</span>
+                            </div>
+                            <div class="lg:col-start-3 lg:col-end-13 w-full">
+                                <input type="number"
+                                    value="{{ old('profit', isset($eaSettingEdit->id) ? $eaSettingEdit->profit : '') }}"
+                                    name="profit"
+                                    class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none "
+                                    placeholder="Enter your profit*" required>
+                                @error('profit')
+                                <span class="text-red-500">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
 
-                        {{-- Feature --}}
+
+                        <div class="grid lg:grid-cols-12 gap-3  kantumruy-pro ">
+                            <div class="lg:col-start-1 font-bold lg:col-end-3 w-full">
+                                <label for="">Balance</label>
+                                <span class="text-sm text-red-500 align-baseline">*</span>
+                            </div>
+                            <div class="lg:col-start-3 lg:col-end-13 w-full">
+                                <input type="number"
+                                    value="{{ old('balance', isset($eaSettingEdit->id) ? $eaSettingEdit->balance : '') }}"
+                                    name="balance"
+                                    class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none "
+                                    placeholder="Enter your banlance*" required>
+                                @error('balance')
+                                <span class="text-red-500">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="grid lg:grid-cols-12 gap-3  kantumruy-pro ">
+                            <div class="lg:col-start-1 font-bold lg:col-end-3 w-full">
+                                <label for="">Drawdown</label>
+                                <span class="text-sm text-red-500 align-baseline">*</span>
+                            </div>
+                            <div class="lg:col-start-3 lg:col-end-13 w-full">
+                                <input type="number"
+                                    value="{{ old('drawdown', isset($eaSettingEdit->id) ? $eaSettingEdit->drawdown : '') }}"
+                                    name="drawdown"
+                                    class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none "
+                                    placeholder="Enter your drawdown*" required>
+                                @error('drawdown')
+                                <span class="text-red-500">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="grid lg:grid-cols-12 gap-3 kantumruy-pro">
+                            <div class="lg:col-start-1 lg:col-end-3 w-full">
+                                <label>Tradding Hours</label>
+                                <span class="text-sm text-red-500">*</span>
+                            </div>
+                            <div class="lg:col-start-3 lg:col-end-13 w-full">
+                                <textarea name="tradding_hours" id="mytextarea"
+                                    class="w-full text-black h-40 p-3 rounded-lg" placeholder="" rows="3"
+                                    style="height: 150px;">{{ old('tradding_hours', isset($eaSettingEdit->id) ? $eaSettingEdit->tradding_hours : '')}}</textarea>
+                                @error('tradding_hours')
+                                <span class="text-red-500">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        {{-- Description --}}
                         <div class="grid lg:grid-cols-12 gap-3 kantumruy-pro">
                             <div class="lg:col-start-1 lg:col-end-3 w-full">
                                 <label>Description</label>
@@ -57,7 +125,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                             <div class="lg:col-start-3 lg:col-end-13 w-full">
                                 <textarea name="description" id="mytextarea"
-                                    class="w-full text-black h-36 p-3 rounded-lg" placeholder="" rows="3"
+                                    class="w-full text-black h-40 p-3 rounded-lg" placeholder="" rows="3"
                                     style="height: 150px;">{{ old('description', isset($eaSettingEdit->id) ? $eaSettingEdit->description : '')}}</textarea>
                             </div>
                         </div>

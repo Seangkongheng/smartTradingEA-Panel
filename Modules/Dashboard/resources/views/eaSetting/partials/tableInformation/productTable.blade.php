@@ -4,6 +4,9 @@
             <th class="px-6 py-4">#</th>
             <th class="px-6 py-4">File</th>
             <th class="px-6 py-4">Title</th>
+            <th class="px-6 py-4">Balance</th>
+            <th class="px-6 py-4">Profit</th>
+            <th class="px-6 py-4">Drawdown</th>
             <th class="px-6 py-4">Status</th>
             <th class="px-6 py-4 text-center">Action</th>
         </tr>
@@ -41,6 +44,21 @@
             {{-- Title --}}
             <td class="px-6 py-4 font-medium text-white">
                 {{ $eaSetting->title ?? '-' }}
+            </td>
+
+            {{-- Title --}}
+            <td class="px-6 py-4 font-medium text-white">
+              %  {{ $eaSetting->profit ?? '-' }}
+            </td>
+
+            {{-- Title --}}
+            <td class="px-6 py-4 font-medium text-white">
+               $ {{ $eaSetting->balance ?? '-' }}
+            </td>
+
+            {{-- Title --}}
+            <td class="px-6 py-4 font-medium text-white">
+              %  {{ $eaSetting->drawdown ?? '-' }}
             </td>
 
 

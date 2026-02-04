@@ -15,7 +15,7 @@ class EASettingController extends Controller
 
     public function index()
     {
-        $eaSettings = EASetting::orderBy('id', 'desc')->get();
+        $eaSettings = EASetting::orderBy('id', 'desc')->paginate(12);
         return view('dashboard::eaSetting.index', compact('eaSettings'));
     }
 
@@ -29,7 +29,6 @@ class EASettingController extends Controller
                 ->orWhere('description', 'like', '%' . $search_string . '%');
 
         });
-
 
         if ($status) {
             if ($status == 1) {
@@ -82,9 +81,15 @@ class EASettingController extends Controller
                     ];
                 }
             }
+
+
             EASetting::create([
                 'title' => $request->title,
                 'description' => $request->description,
+                'profit' => $request->profit,
+                'balance' => $request->balance,
+                'drawdown' => $request->drawdown,
+                'tradding_hours' => $request->tradding_hours,
                 'is_public' => $request->is_public,
                 'file' => !empty($allFiles) ? json_encode($allFiles) : null,
             ]);
@@ -150,6 +155,10 @@ class EASettingController extends Controller
             $eaSetting->update([
                 'title' => $request->title,
                 'description' => $request->description,
+                'profit' => $request->profit,
+                'balance' => $request->balance,
+                'drawdown' => $request->drawdown,
+                'tradding_hours' => $request->tradding_hours,
                 'is_public' => $request->is_public,
                 'file' => !empty($allFiles) ? json_encode($allFiles) : null,
 
