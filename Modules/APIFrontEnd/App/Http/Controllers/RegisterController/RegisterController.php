@@ -207,7 +207,7 @@ class RegisterController extends Controller
             return response()->json([
                 'status' => 'verify',
                 'message' => 'Verification email sent. Please verify to continue.',
-            ], 403);
+            ]);
 
         } catch (\Exception $e) {
             return response()->json([
