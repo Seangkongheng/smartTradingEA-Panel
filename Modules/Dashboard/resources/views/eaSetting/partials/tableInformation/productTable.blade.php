@@ -4,7 +4,6 @@
             <th class="px-6 py-4">#</th>
             <th class="px-6 py-4">File</th>
             <th class="px-6 py-4">Title</th>
-            <th class="px-6 py-4">Total Download</th>
             <th class="px-6 py-4">Status</th>
             <th class="px-6 py-4 text-center">Action</th>
         </tr>
@@ -44,9 +43,6 @@
                 {{ $eaSetting->title ?? '-' }}
             </td>
 
-            <td class="px-6 py-4 font-medium text-white">
-                {{ $eaSetting->total_downloads ?? '0' }}
-            </td>
 
             {{-- Status --}}
             <td class="px-6 py-4">
