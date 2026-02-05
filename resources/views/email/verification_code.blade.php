@@ -78,7 +78,7 @@
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center" style="padding:20px 0;">
-                    <a href="" style="
+                    <a href="{{ $url }}" style="
                       display:inline-block;
                       background-color:#1F2937;
                       color:#ffffff;
