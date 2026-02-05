@@ -3,10 +3,12 @@
 namespace Modules\Dashboard\App\Http\Controllers\SubscribeController;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\APIFrontEnd\App\Models\Order;
+use Modules\APIFrontEnd\App\Models\UserSubcription;
 
 class SubscribeController extends Controller
 {
@@ -15,8 +17,16 @@ class SubscribeController extends Controller
      */
     public function index()
     {
-        $orders = Order::with('items.marketplacePlan', 'items.marketplace')->get();
-        return view('dashboard::subscribe.index',compact('orders'));
+        // $orders = Order::with('items.marketplacePlan', 'items.marketplace')->get();
+        // $subscription = sta
+
+        $subscriptions = UserSubcription::with([
+            'marketplace',
+            'subscriptionPlan'
+        ])
+            ->get();
+
+        return view('dashboard::subscribe.index', compact('subscriptions'));
     }
 
     /**
@@ -24,7 +34,7 @@ class SubscribeController extends Controller
      */
     public function create()
     {
-         return view('dashboard::subscribe.createOrUpdate');
+        return view('dashboard::subscribe.createOrUpdate');
     }
 
     /**
@@ -40,8 +50,8 @@ class SubscribeController extends Controller
      */
     public function show($id)
     {
-        $order = Order::find($id);
-        return view('dashboard::subscribe.show',compact('order'));
+        $subscription = UserSubcription::find($id);
+        return view('dashboard::subscribe.show', compact('subscription'));
     }
 
     /**
@@ -57,7 +67,16 @@ class SubscribeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $subscription = UserSubcription::find($id);
+            $subscription->update([
+                'status' => $request->status
+            ]);
+            return redirect()->route('admin.subscribes.index')->with('message', 'Subscribes Updated');
+        } catch (Exception $e) {
+            return redirect()->route('admin.subscribes.index')->with('error', $e->getMessage());
+        }
+
     }
 
     /**

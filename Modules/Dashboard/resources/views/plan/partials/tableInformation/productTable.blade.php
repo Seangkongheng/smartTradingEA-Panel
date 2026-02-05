@@ -3,7 +3,6 @@
         <tr>
             <th class="px-6 py-4">#</th>
             <th class="px-6 py-4">Name</th>
-             <th class="px-6 py-4">Price</th>
             <th class="px-6 py-4 text-center">Action</th>
         </tr>
     </thead>
@@ -19,10 +18,6 @@
             <td class="px-6 py-4 font-medium text-white">
                 {{ $plan->name ?? '-' }}
             </td>
-             <td class="px-6 py-4 font-medium text-white">
-                {{ $plan->price.' ' .'$' ?? '-' }}
-            </td>
-
 
             {{-- Actions --}}
             <td class="px-6 py-4">

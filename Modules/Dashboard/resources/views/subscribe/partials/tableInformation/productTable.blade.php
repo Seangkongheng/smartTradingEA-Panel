@@ -5,33 +5,34 @@
             <th class="px-6 py-4">Name</th>
             <th class="px-6 py-4">Marketplace</th>
             <th class="px-6 py-4">plan</th>
-            <th class="px-6 py-4">Payment Confirm</th>
+            <th class="px-6 py-4">Confirm Date</th>
             <th class="px-6 py-4">Status</th>
             <th class="px-6 py-4 text-center">Action</th>
         </tr>
     </thead>
 
     <tbody class="divide-y divide-gray-700">
-        @forelse ( $orders as $index=> $order )
+        @forelse ( $subscriptions as $index=> $order )
         <tr class="hover:bg-gray-700/40 transition-colors duration-200">
             <td class="px-6 py-4">{{ $index + 1 }}</td>
             <td class="px-6 py-4 font-medium">{{ $order->user->first_name?? "" }} {{ $order->user->last_name ?? "" }}</td>
             <td class="px-6 py-4 font-medium">
-                {{ $order->items->first()?->marketplace?->title ?? 'N/A' }}
+              Marketplace_Id:   {{ $order->marketplace_id ?? 'N/A' }}
             </td>
             <td class="px-6 py-4 font-medium">
-                {{ $order->items->first()?->marketplacePlan?->name ?? 'N/A' }}
+             subscription_plan_id :    {{ $order->subscription_plan_id ?? 'N/A' }}
+            </td>
+              <td class="px-6 py-4 font-medium">
+               {{ $order->updated_at ?? 'N/A' }}
             </td>
 
-            <td class="px-6 py-4 font-medium"></td>
 
             <td class="px-6 py-4">
                 @php
                 $status = $order->status ?? 'N/A';
                 $statusColor = match($status) {
                 'pending' => 'bg-yellow-500 text-white',
-                'completed' => 'bg-green-500 text-white',
-                'cancelled' => 'bg-red-500 text-white',
+                'confirmed' => 'bg-green-500 text-white',
                 default => 'bg-gray-500 text-white',
                 };
                 @endphp

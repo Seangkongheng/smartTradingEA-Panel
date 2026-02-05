@@ -28,20 +28,16 @@ class PlanController extends Controller
         return view('dashboard::plan.createOrUpdate');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         try {
             $request->validate([
                 'name' => 'required',
-                'price' => 'required'
             ]);
 
             Plan::create([
                 'name' => $request->name,
-                'price' => $request->price
             ]);
             return redirect()->route('admin.plan.index')->with('message', 'Plan Created');
         } catch (Exception $e) {

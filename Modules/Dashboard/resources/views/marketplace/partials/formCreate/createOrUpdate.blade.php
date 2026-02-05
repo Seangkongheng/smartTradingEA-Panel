@@ -70,8 +70,9 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             <div class="lg:col-start-3 lg:col-end-13 w-full">
 
 
-                                 <textarea name="feature" id="mytextarea" class="w-full text-black h-36 p-3 rounded-lg" placeholder=""
-                                        rows="3" style="height: 150px;">{{ old('feature', isset($marketplaceEdit->id) ? $marketplaceEdit->feature : '')}}</textarea>
+                                <textarea name="feature" id="mytextarea" class="w-full text-black h-36 p-3 rounded-lg"
+                                    placeholder="" rows="3"
+                                    style="height: 150px;">{{ old('feature', isset($marketplaceEdit->id) ? $marketplaceEdit->feature : '')}}</textarea>
                             </div>
                         </div>
 
@@ -88,7 +89,6 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                         </div>
 
                         {{-- Subscription Plans --}}
-                        {{-- Subscription Plans --}}
                         <div class="grid lg:grid-cols-12 gap-6 kantumruy-pro">
                             <div class="lg:col-start-1 lg:col-end-3 w-full flex flex-col">
                                 <label class="text-lg font-semibold text-gray-100">
@@ -104,16 +104,17 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                     @php
                                     // Default values
                                     $isChecked = false;
-                                    $planPrice = $plan['price'] ?? '';
+                                    $planPrice = '';
+                                    $paymentLink = '';
 
-                                    // Only run this when editing
+                                    // If editing a marketplace, get plan details
                                     if (isset($marketplaceEdit) && isset($marketplaceEdit->subscriptionPlans)) {
-                                    $selectedPlan = $marketplaceEdit->subscriptionPlans
-                                    ->firstWhere('plan_id', $plan['id']);
-
-                                    if (isset($selectedPlan)) {
+                                    $selectedPlan = $marketplaceEdit->subscriptionPlans->firstWhere('plan_id',
+                                    $plan->id);
+                                    if ($selectedPlan) {
                                     $isChecked = true;
-                                    $planPrice = $selectedPlan->price ?? $planPrice;
+                                    $planPrice = $selectedPlan->price;
+                                    $paymentLink = $selectedPlan->payment_link ?? '';
                                     }
                                     }
                                     @endphp
@@ -121,10 +122,10 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                     <div class="relative group">
                                         {{-- Checkbox --}}
                                         <input type="checkbox" name="plans[{{ $index }}][plan_id]"
-                                            id="plan_{{ $plan['id'] }}" value="{{ $plan['id'] }}" class="peer sr-only"
-                                            {{ $isChecked ? 'checked' : '' }}>
+                                            id="plan_{{ $plan->id }}" value="{{ $plan->id }}" class="peer sr-only" {{
+                                            $isChecked ? 'checked' : '' }}>
 
-                                        <label for="plan_{{ $plan['id'] }}" class="flex flex-col p-5 bg-gray-800 text-gray-100 border-2 border-gray-700 rounded-2xl cursor-pointer
+                                        <label for="plan_{{ $plan->id }}" class="flex flex-col p-5 bg-gray-800 text-gray-100 border-2 border-gray-700 rounded-2xl cursor-pointer
                                transition-all duration-200 hover:border-green-400 hover:shadow-lg
                                peer-checked:border-green-500 peer-checked:bg-green-900/20 peer-checked:shadow-xl">
 
@@ -133,17 +134,17 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                                 <div class="flex-1">
                                                     <h3 class="text-xl font-bold transition-colors
                                            group-hover:text-green-500 peer-checked:text-green-500">
-                                                        {{ $plan['name'] }}
+                                                        {{ $plan->name }}
                                                     </h3>
                                                     <p class="text-sm text-gray-400 mt-1">
-                                                        {{ $plan['desc'] ?? '' }}
+                                                        {{ $plan->desc ?? '' }}
                                                     </p>
                                                 </div>
 
                                                 {{-- Checkbox Icon --}}
                                                 <div class="flex-shrink-0 w-6 h-6 border-2 border-gray-500 rounded-md
-                                       flex items-center justify-center
-                                       peer-checked:bg-green-500 peer-checked:border-green-500 transition">
+                                        flex items-center justify-center
+                                        peer-checked:bg-green-500 peer-checked:border-green-500 transition">
                                                     <svg class="w-4 h-4 text-white hidden peer-checked:block"
                                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -157,13 +158,24 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                                 value="{{ old('plans.'.$index.'.price', $planPrice) }}"
                                                 class="mt-2 px-3 py-2 rounded-xl outline-none bg-gray-100 text-black w-full"
                                                 placeholder="Enter price">
+
+                                            {{-- Payment Link Input --}}
+                                            <input type="text" name="plans[{{ $index }}][payment_link]"
+                                                value="{{ old('plans.'.$index.'.payment_link', $paymentLink) }}"
+                                                class="mt-2 px-3 py-2 rounded-xl outline-none bg-gray-100 text-black w-full"
+                                                placeholder="Enter payment URL / QR link">
+
                                         </label>
                                     </div>
+
                                     @endforeach
 
                                 </div>
                             </div>
                         </div>
+
+
+
 
 
                         {{-- status button --}}

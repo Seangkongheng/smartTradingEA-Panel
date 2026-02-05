@@ -57,15 +57,18 @@ class MarketplaceController extends Controller
                     'is_public' => $request->is_public,
                 ]);
 
-                foreach ($request->plans as $plan) {
-                    if (!isset($plan['plan_id']))
-                        continue;
+                if ($request->has('plans')) {
+                    $syncData = [];
+                    foreach ($request->plans as $plan) {
+                        if (!isset($plan['plan_id']))
+                            continue;
 
-                    MarketplacePlan::create([
-                        'marketplace_id' => $marketplace->id,
-                        'plan_id' => $plan['plan_id'],
-                        'price' => $plan['price'] ?? 0,
-                    ]);
+                        $syncData[$plan['plan_id']] = [
+                            'price' => $plan['price'] ?? 0,
+                            'payment_link' => $plan['payment_link'] ?? null,
+                        ];
+                    }
+                    $marketplace->plans()->sync($syncData);
                 }
 
             });
@@ -98,6 +101,57 @@ class MarketplaceController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    // public function update(Request $request, $id)
+    // {
+    //     try {
+    //         $request->validate([
+    //             'title' => 'required',
+    //             'description' => 'required',
+    //             'feature' => 'required',
+    //             'note' => 'nullable',
+    //             'is_public' => 'required'
+    //         ]);
+
+    //         DB::transaction(function () use ($request, $id) {
+
+    //             // Find the marketplace
+    //             $marketplace = Maketplace::findOrFail($id);
+
+    //             // Update marketplace details
+    //             $marketplace->update([
+    //                 'title' => $request->title,
+    //                 'description' => $request->description,
+    //                 'feature' => $request->feature,
+    //                 'note' => $request->note,
+    //                 'is_public' => $request->is_public,
+    //             ]);
+
+    //             // Delete old plans (or you could sync)
+    //             $marketplace->subscriptionPlans()->delete();
+
+    //             // Attach new plans
+    //             if ($request->has('plans')) {
+    //                 foreach ($request->plans as $plan) {
+    //                     if (!isset($plan['plan_id']))
+    //                         continue;
+
+    //                     MarketplacePlan::create([
+    //                         'marketplace_id' => $marketplace->id,
+    //                         'plan_id' => $plan['plan_id'],
+    //                         'price' => $plan['price'] ?? 0,
+    //                     ]);
+    //                 }
+    //             }
+    //         });
+
+    //         return redirect()->route('admin.marketplace.index')->with('success', 'Marketplace Updated Successfully');
+
+    //     } catch (Exception $e) {
+    //         return redirect()->route('admin.marketplace.index')->with('error', $e->getMessage());
+    //     }
+    // }
+
+
     public function update(Request $request, $id)
     {
         try {
@@ -111,10 +165,10 @@ class MarketplaceController extends Controller
 
             DB::transaction(function () use ($request, $id) {
 
-                // Find the marketplace
+                // Noted : Find marketplace
                 $marketplace = Maketplace::findOrFail($id);
 
-                // Update marketplace details
+                // Noted: Update marketplace info
                 $marketplace->update([
                     'title' => $request->title,
                     'description' => $request->description,
@@ -123,28 +177,35 @@ class MarketplaceController extends Controller
                     'is_public' => $request->is_public,
                 ]);
 
-                // Delete old plans (or you could sync)
-                $marketplace->subscriptionPlans()->delete();
-
-                // Attach new plans
+                // Noted: Sync plans (price + payment link)
                 if ($request->has('plans')) {
+                    $syncData = [];
+
                     foreach ($request->plans as $plan) {
                         if (!isset($plan['plan_id']))
                             continue;
 
-                        MarketplacePlan::create([
-                            'marketplace_id' => $marketplace->id,
-                            'plan_id' => $plan['plan_id'],
+                        $syncData[$plan['plan_id']] = [
                             'price' => $plan['price'] ?? 0,
-                        ]);
+                            'payment_link' => $plan['payment_link'] ?? null,
+                        ];
                     }
+
+                    $marketplace->plans()->sync($syncData);
+                } else {
+                    // If no plans selected, detach all
+                    $marketplace->plans()->detach();
                 }
             });
 
-            return redirect()->route('admin.marketplace.index')->with('success', 'Marketplace Updated Successfully');
+            return redirect()
+                ->route('admin.marketplace.index')
+                ->with('success', 'Marketplace Updated Successfully');
 
         } catch (Exception $e) {
-            return redirect()->route('admin.marketplace.index')->with('error', $e->getMessage());
+            return redirect()
+                ->route('admin.marketplace.index')
+                ->with('error', $e->getMessage());
         }
     }
 

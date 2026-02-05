@@ -14,10 +14,18 @@ class Plan extends Model
     protected $primarykey = 'id';
     protected $fillable = [
         'name',
-        'price',
         'updated_at',
         'created_at'
     ];
 
+    public function marketplaces()
+    {
+        return $this->belongsToMany(
+            Maketplace::class,
+            'marketplace_plans',
+            'plan_id',
+            'marketplace_id'
+        )->withPivot('price');
+    }
 
 }

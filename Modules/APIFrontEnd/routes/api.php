@@ -54,7 +54,8 @@ Route::get('/attachment/download/{id}', [AttachmentController::class, 'download'
 // --------------------------------Order-------------------------------
 // Route::post('/order', action: [OrderController::class, 'store']);
 Route::middleware('auth:sanctum')->post('order', [OrderController::class, 'store']);
-Route::get('/subcription', action: [SubcriptionController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/subcription', [SubcriptionController::class, 'index']);
+
 Route::get('/order-detail/{uuid}', action: [OrderController::class, 'orderDetail']);
 Route::put('/confirm-payment/{uuid}', action: [OrderController::class, 'confirmPayment']);
 

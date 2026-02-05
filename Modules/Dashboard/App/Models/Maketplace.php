@@ -33,10 +33,22 @@ class Maketplace extends Model
         });
     }
 
+
+
     public function subscriptionPlans()
     {
         // Specify foreign key
         return $this->hasMany(MarketplacePlan::class, 'marketplace_id', 'id')->with('plan');
+    }
+
+    public function plans()
+    {
+        return $this->belongsToMany(
+            Plan::class,
+            'marketplace_plans',
+            'marketplace_id',
+            'plan_id'
+        )->withPivot('price','payment_link');
     }
 
 

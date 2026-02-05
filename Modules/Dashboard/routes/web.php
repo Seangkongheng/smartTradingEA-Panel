@@ -203,4 +203,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/update/{id}', [RewardController::class, 'update'])->name('update');
         Route::delete('/destroy/{id}', [RewardController::class, 'destroy'])->name('destroy');
     });
+
+
+// ------------------------------Subscription Update-----------------------------
+  Route::put('/update/{id}', [SubscribeController::class, 'update'])->name('update');
 });
+
+
+
+

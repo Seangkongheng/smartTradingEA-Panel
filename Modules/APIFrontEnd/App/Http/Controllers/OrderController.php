@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Modules\APIFrontEnd\App\Models\Order;
 use Modules\APIFrontEnd\App\Models\OrderItem;
+use Modules\APIFrontEnd\App\Models\UserSubcription;
 use Modules\Dashboard\App\Models\MarketplacePlan;
 
 class OrderController extends Controller
@@ -55,7 +56,7 @@ class OrderController extends Controller
     public function OrderDetail($uuid)
     {
         try {
-            $orderDetail = Order::with('items.marketplacePlan', 'items.marketplace')->where('uuid',$uuid)->get();
+            $orderDetail = Order::with('items.marketplacePlan', 'items.marketplace')->where('uuid', $uuid)->get();
 
             return response()->json([
                 'order-detail' => $orderDetail,
@@ -70,7 +71,7 @@ class OrderController extends Controller
     public function confirmPayment($uuid)
     {
         try {
-            $order = Order::where('uuid',$uuid)->first();
+            $order = Order::where('uuid', $uuid)->first();
 
             if ($order->status !== 'pending') {
                 return response()->json(['message' => 'Invalid order state'], 400);
@@ -79,6 +80,18 @@ class OrderController extends Controller
                 'status' => 'awaiting_verification',
                 'payment_confirmed_at' => now()
             ]);
+
+            // Create a UserSubscription for each order item
+            foreach ($order->items as $item) {
+                UserSubcription::create([
+                    'user_id' => $order->user_id,
+                    'marketplace_id' => $item->marketplace_id,
+                    'subscription_plan_id' => $item->marketplace_plan_id,
+                    'status' => 'pending',
+                    'start_date' => now(),
+                    'end_date' => now()->addMonth(), // or your subscription period
+                ]);
+            }
             return response()->json(['message' => 'Payment confirmed']);
 
         } catch (Exception $e) {

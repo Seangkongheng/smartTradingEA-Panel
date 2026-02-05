@@ -9,15 +9,15 @@
 
             {{-- Order Info --}}
             <div class="space-y-2">
-                <h1 class="text-3xl md:text-4xl font-bold text-slate-900">Order #{{ $order->id }}</h1>
+                <h1 class="text-3xl md:text-4xl font-bold text-slate-900">Order #{{ $subscription->id }}</h1>
                 <p class="text-sm md:text-base text-slate-500">
-                    Placed on <span class="font-medium text-slate-700">{{ $order->created_at->format('F d, Y \a\t H:i')
+                    Placed on <span class="font-medium text-slate-700">{{ $subscription->created_at->format('F d, Y \a\t H:i')
                         }}</span>
                 </p>
                 <p class="text-sm md:text-base text-slate-500">
-                    Customer: <span class="font-medium text-slate-700">{{ $order->user->first_name ?? "Unknow" }} {{
-                        $order->user->last_name ?? "Unknow" }}</span>
-                    (<span class="font-medium text-slate-700">{{ $order->user->email ?? "No Email" }}</span>)
+                    Customer: <span class="font-medium text-slate-700">{{ $subscription->user->first_name ?? "Unknow" }} {{
+                        $subscription->user->last_name ?? "Unknow" }}</span>
+                    (<span class="font-medium text-slate-700">{{ $subscription->user->email ?? "No Email" }}</span>)
                 </p>
             </div>
 
@@ -29,12 +29,12 @@
             'paid' => 'bg-green-100 text-green-800 border-green-200',
             'canceled' => 'bg-red-100 text-red-800 border-red-200'
             ];
-            $statusColor = $statusColors[$order->status] ?? 'bg-gray-100 text-gray-800 border-gray-200';
+            $statusColor = $statusColors[$subscription->status] ?? 'bg-gray-100 text-gray-800 border-gray-200';
             @endphp
             <div class="mt-4 md:mt-0">
                 <span
                     class="inline-block px-6 py-2 rounded-full text-sm font-semibold border-2 {{ $statusColor }} shadow-sm">
-                    {{ ucfirst($order->status) }}
+                    {{ ucfirst($subscription->status) }}
                 </span>
             </div>
         </div>
@@ -65,20 +65,20 @@
                             'pending' => 'bg-yellow-100 text-yellow-700',
                             'failed' => 'bg-red-100 text-red-700'
                             ];
-                            $paymentColor = $paymentStatusColors[$order->payment_status ?? 'pending'] ?? 'bg-gray-100
+                            $paymentColor = $paymentStatusColors[$subscription->payment_status ?? 'pending'] ?? 'bg-gray-100
                             text-gray-700';
                             @endphp
                             <span class="px-3 py-1 rounded-full text-xs font-medium {{ $paymentColor }}">
-                                {{ ucfirst($order->payment_status ?? 'Pending') }}
+                                {{ ucfirst($subscription->payment_status ?? 'Pending') }}
                             </span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-sm text-slate-600">Method</span>
-                            <span class="font-medium text-slate-900">{{ $order->payment_method ?? 'N/A' }}</span>
+                            <span class="font-medium text-slate-900">{{ $subscription->payment_method ?? 'N/A' }}</span>
                         </div>
                         <div class="pt-4 border-t border-slate-200 flex justify-between items-center">
                             <span class="font-semibold text-slate-900">Total Amount</span>
-                            <span class="text-2xl font-bold text-blue-600">${{ number_format($order->total ?? 0, 2)
+                            <span class="text-2xl font-bold text-blue-600">${{ number_format($subscription->total ?? 0, 2)
                                 }}</span>
                         </div>
                     </div>
@@ -100,8 +100,8 @@
                         </svg>
                         Order Items
                     </h2>
-                    <div class="space-y-4">
-                        @forelse($order->items as $item)
+                    {{--  <div class="space-y-4">
+                        @forelse($subscription->items as $item)
                         <div
                             class="flex items-center gap-4 p-4 rounded-lg bg-slate-50 border border-slate-200 hover:border-purple-300 transition">
                             <div
@@ -121,7 +121,7 @@
                             <p class="font-medium">No items in this order</p>
                         </div>
                         @endforelse
-                    </div>
+                    </div>  --}}
                 </div>
 
                 {{-- Update Status --}}
@@ -134,13 +134,13 @@
                         </svg>
                         Update Order Status
                     </h2>
-                    <form action="" method="POST" class="space-y-4">
+                    <form action="{{ route('admin.update',$subscription->id) }}" method="POST" class="space-y-4">
                         @csrf
                         @method('PUT')
                         <select name="status"
                             class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 text-slate-900 font-medium outline-none">
-                            <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Reject</option>
-                            <option value="confirmed" {{ $order->status == 'confirmed' ? 'selected' : '' }}>Confirmed
+                            <option value="pending" {{ $subscription->status == 'pending' ? 'selected' : '' }}>Reject</option>
+                            <option value="confirmed" {{ $subscription->status == 'confirmed' ? 'selected' : '' }}>Confirmed
                             </option>
                         </select>
                         <button type="submit"

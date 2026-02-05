@@ -17,7 +17,8 @@ class MarketplacePlan extends Model
     protected $fillable = [
         'marketplace_id',
         'plan_id',
-        'price'
+        'price',
+        'payment_link',
     ];
 
     public function plan()

@@ -7,15 +7,24 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\APIFrontEnd\App\Models\Order;
+use Modules\APIFrontEnd\App\Models\UserSubcription;
 
 class SubcriptionController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $order = Order::with('items.marketplacePlan', 'items.marketplace')->where('user_id', 30)->get();
+        $user = $request->user();
+
+        $subscriptions = UserSubcription::with([
+            'marketplace',
+            'subscriptionPlan' // Make sure these relations exist
+        ])
+        ->where('user_id', $user->id)
+        ->get();
+
         return response()->json([
-            'order' => $order
+            'subcriptions' => $subscriptions
         ]);
     }
 

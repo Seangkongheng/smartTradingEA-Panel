@@ -46,7 +46,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                         </div>
 
                          {{-- price --}}
-                        <div class="grid lg:grid-cols-12 gap-3 kantumruy-pro">
+                        {{--  <div class="grid lg:grid-cols-12 gap-3 kantumruy-pro">
                             <div class="lg:col-start-1 lg:col-end-3 w-full">
                                 <label>Price</label>
                                 <span class="text-sm text-red-500">*</span>
@@ -55,7 +55,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                 <input type="number" name="price"  value="{{ old('price', isset($planEdit->id) ? $planEdit->price : '') }}" placeholder="Enter price*"
                                     class="px-6 py-3.5 text-black bg-gray-100 w-full rounded-xl outline-none">
                             </div>
-                        </div>
+                        </div>  --}}
 
                         {{-- Action Buttons --}}
                         <div class="grid lg:grid-cols-12 gap-3 kantumruy-pro mt-5">
