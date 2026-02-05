@@ -1,179 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Verification</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f4;
-            /* plain light gray background */
-            padding: 20px;
-        }
-
-        .email-container {
-            max-width: 600px;
-            margin: 40px auto;
-            border-radius: 20px;
-            overflow: hidden;
-            background-color: #ffffff;
-            /* plain white card */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Solid dark header */
-        .email-header {
-            text-align: center;
-            padding: 40px 30px;
-            background-color: #1F2937;
-            /* solid dark color */
-            color: white;
-        }
-
-        .email-header img {
-            width: 90px;
-            margin: 0 auto;
-            display: block;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
-        }
-
-        .email-header h1 {
-            font-size: 28px;
-            font-weight: 800;
-            margin-top: 20px;
-            color: #ffffff;
-        }
-
-        .email-header p {
-            font-size: 16px;
-            margin-top: 5px;
-            color: #A8E900;
-            /* neon accent */
-        }
-
-        .email-body {
-            padding: 30px;
-            color: #374151;
-            /* dark text for readability */
-            font-size: 16px;
-        }
-
-        .email-body p {
-            margin-bottom: 20px;
-        }
-
-        .verify-button {
-            display: inline-block;
-            text-decoration: none;
-            padding: 14px 40px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 16px;
-            background: #1F2937;
-            color: white;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        . .verify-button a{
-            color: white;
-        }
-
-        .verify-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(186, 253, 0, 0.6);
-        }
-
-        .expiry-notice {
-            background: #FEF3C7;
-            border-left: 4px solid #F59E0B;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 6px;
-            color: #92400E;
-            font-size: 14px;
-        }
-
-        .email-footer {
-            background: #ffffff;
-            padding: 30px;
-            text-align: center;
-            border-top: 1px solid #E5E7EB;
-            color: #6B7280;
-            font-size: 14px;
-        }
-
-        .email-footer a {
-            color: #4F46E5;
-            text-decoration: none;
-            margin: 0 8px;
-            transition: all 0.2s;
-        }
-
-        .email-footer a:hover {
-            color: #BAFD00;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Email Verification</title>
 </head>
 
-<body>
-    <div class="email-container">
+<body style="
+  margin:0;
+  padding:0;
+  background-color:#f4f4f4;
+  font-family:Arial, Helvetica, sans-serif;
+">
 
-        <!-- Header -->
-        <div class="email-header">
-            <img src="https://vsadmin.smarttradingea.com/images/SuperTradingEA_logo.png" alt="Logo">
-            <h1>Verify Your Email</h1>
-            <p>SmartTrading By V.S Client Portal</p>
-        </div>
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding:20px;">
+    <tr>
+      <td align="center">
 
-        <!-- Body -->
-        <div class="email-body">
-            <p>Hello,</p>
-            <p>
-                Thank you for creating an account with us. To complete your registration and secure your account, please
-                verify your email address by clicking the button below.
-            </p>
+        <!-- Container -->
+        <table width="600" cellpadding="0" cellspacing="0" style="
+          background-color:#ffffff;
+          border-radius:12px;
+          overflow:hidden;
+        ">
 
-            <div style="text-align:center; margin-top:20px;">
-                <a href="{{ $url }}" class="verify-button">Verify Email Address</a>
-            </div>
+          <!-- Header -->
+          <tr>
+            <td align="center" style="
+              background-color:#1F2937;
+              padding:40px 30px;
+              color:#ffffff;
+            ">
+              <img
+                src="https://vsadmin.smarttradingea.com/images/SuperTradingEA_logo.png"
+                alt="Logo"
+                width="90"
+                style="display:block; margin-bottom:20px;"
+              >
 
-            <div class="expiry-notice">
+              <h1 style="
+                margin:0;
+                font-size:26px;
+                font-weight:bold;
+                color:#ffffff;
+              ">
+                Verify Your Email
+              </h1>
+
+              <p style="
+                margin:8px 0 0;
+                font-size:15px;
+                color:#A8E900;
+              ">
+                SmartTrading By V.S Client Portal
+              </p>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="
+              padding:30px;
+              color:#374151;
+              font-size:16px;
+              line-height:1.6;
+            ">
+              <p style="margin:0 0 16px;">
+                Hello,
+              </p>
+
+              <p style="margin:0 0 24px;">
+                Thank you for creating an account with us.
+                To complete your registration and secure your account, please verify
+                your email address by clicking the button below.
+              </p>
+
+              <!-- Button -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center" style="padding:20px 0;">
+                    <a href="" style="
+                      display:inline-block;
+                      background-color:#1F2937;
+                      color:#ffffff;
+                      text-decoration:none;
+                      padding:14px 40px;
+                      font-size:16px;
+                      font-weight:bold;
+                      border-radius:8px;
+                    ">
+                      Verify Email Address
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Expiry Notice -->
+              <div style="
+                background-color:#FEF3C7;
+                border-left:4px solid #F59E0B;
+                padding:15px;
+                margin-top:20px;
+                font-size:14px;
+                color:#92400E;
+              ">
                 ⏱️ This verification link will expire in 10 minutes for security reasons.
-            </div>
-        </div>
+              </div>
 
-        <!-- Footer -->
-        <div class="email-footer">
-            <p>This is an automated message, please do not reply to this email.</p>
-            <p>© {{ now()->year }} SmartTradingEA. All rights reserved.</p>
-            <p>
-                <a target="_blank" href="https://smarttradingea.com/terms-conditions">Terms & Conditions</a> |
-                <a target="_blank" href="https://smarttradingea.com/disclaimer">Disclaimer</a>
-            </p>
-        </div>
+            </td>
+          </tr>
 
-    </div>
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="
+              padding:25px;
+              font-size:13px;
+              color:#6B7280;
+              border-top:1px solid #E5E7EB;
+            ">
+              <p style="margin:0 0 8px;">
+                This is an automated message, please do not reply to this email.
+              </p>
+
+              <p style="margin:0 0 8px;">
+                © {{ now()->year }} SmartTradingEA. All rights reserved.
+              </p>
+
+              <p style="margin:0;">
+                <a href="https://smarttradingea.com/terms-conditions"
+                   target="_blank"
+                   style="color:#4F46E5; text-decoration:none;">
+                  Terms & Conditions
+                </a>
+                |
+                <a href="https://smarttradingea.com/disclaimer"
+                   target="_blank"
+                   style="color:#4F46E5; text-decoration:none;">
+                  Disclaimer
+                </a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+        <!-- End Container -->
+
+      </td>
+    </tr>
+  </table>
+
 </body>
-
 </html>

@@ -16,9 +16,9 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
-// Route::get('/test-mail',function(){
-//     return view('email.verification_code');
-// });
+Route::get('/test-mail',function(){
+    return view('email.verification_code');
+});
 
 Route::fallback(function () {
     return view('dashboard::components.404');
