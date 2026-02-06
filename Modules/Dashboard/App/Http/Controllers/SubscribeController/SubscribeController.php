@@ -17,12 +17,12 @@ class SubscribeController extends Controller
      */
     public function index()
     {
-        // $orders = Order::with('items.marketplacePlan', 'items.marketplace')->get();
-        // $subscription = sta
+
 
         $subscriptions = UserSubcription::with([
-            'marketplace',
-            'subscriptionPlan'
+           'marketplace',
+            'subscriptionPlan',
+            'marketplace.plans'
         ])
             ->get();
 

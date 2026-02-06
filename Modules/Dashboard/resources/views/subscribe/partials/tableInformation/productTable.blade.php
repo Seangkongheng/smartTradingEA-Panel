@@ -5,6 +5,7 @@
             <th class="px-6 py-4">Name</th>
             <th class="px-6 py-4">Marketplace</th>
             <th class="px-6 py-4">plan</th>
+            <th class="px-6 py-4">Price</th>
             <th class="px-6 py-4">Confirm Date</th>
             <th class="px-6 py-4">Status</th>
             <th class="px-6 py-4 text-center">Action</th>
@@ -15,15 +16,18 @@
         @forelse ( $subscriptions as $index=> $order )
         <tr class="hover:bg-gray-700/40 transition-colors duration-200">
             <td class="px-6 py-4">{{ $index + 1 }}</td>
-            <td class="px-6 py-4 font-medium">{{ $order->user->first_name?? "" }} {{ $order->user->last_name ?? "" }}</td>
-            <td class="px-6 py-4 font-medium">
-              Marketplace_Id:   {{ $order->marketplace_id ?? 'N/A' }}
+            <td class="px-6 py-4 font-medium">{{ $order->user->first_name?? "" }} {{ $order->user->last_name ?? "" }}
+            </td>
+            <td class="px-6 py-4 font-medium">{{ $order->marketplace->title ?? 'N/A' }}
             </td>
             <td class="px-6 py-4 font-medium">
-             subscription_plan_id :    {{ $order->subscription_plan_id ?? 'N/A' }}
+                {{ $order->subscriptionPlan->name ?? 'N/A' }}
             </td>
-              <td class="px-6 py-4 font-medium">
-               {{ $order->updated_at ?? 'N/A' }}
+            <td class="px-6 py-4 font-medium">
+                $ {{ $order->total_price ?? '0' }}
+            </td>
+            <td class="px-6 py-4 font-medium">
+                {{ $order->updated_at ?? 'N/A' }}
             </td>
 
 
@@ -41,7 +45,6 @@
                     {{ ucfirst($status) }}
                 </span>
             </td>
-
 
 
             <td class="px-6 py-4">

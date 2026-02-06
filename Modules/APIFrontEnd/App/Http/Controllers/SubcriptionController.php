@@ -18,10 +18,12 @@ class SubcriptionController extends Controller
 
         $subscriptions = UserSubcription::with([
             'marketplace',
-            'subscriptionPlan' // Make sure these relations exist
+            'subscriptionPlan',
+            'marketplace.plans'          
         ])
-        ->where('user_id', $user->id)
-        ->get();
+            ->where('user_id', $user->id)
+            ->get();
+
 
         return response()->json([
             'subcriptions' => $subscriptions

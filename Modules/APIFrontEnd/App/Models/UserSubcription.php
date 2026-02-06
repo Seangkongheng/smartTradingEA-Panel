@@ -21,6 +21,7 @@ class UserSubcription extends Model
         'marketplace_id',
         'subscription_plan_id',
         'status',
+        'total_price',
         'start_date',
         'end_date',
         'created_at',

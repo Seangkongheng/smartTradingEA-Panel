@@ -71,34 +71,37 @@ class OrderController extends Controller
     public function confirmPayment($uuid)
     {
         try {
-            $order = Order::where('uuid', $uuid)->first();
+            $order = Order::with('items.marketplacePlan')->where('uuid', $uuid)->first();
 
             if ($order->status !== 'pending') {
                 return response()->json(['message' => 'Invalid order state'], 400);
             }
+
             $order->update([
                 'status' => 'awaiting_verification',
                 'payment_confirmed_at' => now()
             ]);
 
-            // Create a UserSubscription for each order item
             foreach ($order->items as $item) {
                 UserSubcription::create([
                     'user_id' => $order->user_id,
                     'marketplace_id' => $item->marketplace_id,
-                    'subscription_plan_id' => $item->marketplace_plan_id,
+                    'subscription_plan_id' => $item->marketplacePlan->plan_id,
+                    'total_price' => $item->total_price,
                     'status' => 'pending',
                     'start_date' => now(),
-                    'end_date' => now()->addMonth(), // or your subscription period
+                    'end_date' => now()->addMonth(),
                 ]);
             }
-            return response()->json(['message' => 'Payment confirmed']);
 
+
+            return response()->json(['message' => 'Payment confirmed']);
         } catch (Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
             ], 500);
         }
     }
+
 
 }
