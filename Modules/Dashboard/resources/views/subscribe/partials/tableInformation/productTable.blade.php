@@ -7,6 +7,7 @@
             <th class="px-6 py-4">plan</th>
             <th class="px-6 py-4">Price</th>
             <th class="px-6 py-4">Confirm Date</th>
+              <th class="px-6 py-4">Expires Date</th>
             <th class="px-6 py-4">Status</th>
             <th class="px-6 py-4 text-center">Action</th>
         </tr>
@@ -28,6 +29,9 @@
             </td>
             <td class="px-6 py-4 font-medium">
                 {{ $order->updated_at ?? 'N/A' }}
+            </td>
+            <td class="text-red-600">
+                Not implemented yet
             </td>
 
 

@@ -101,23 +101,7 @@
                 </a>
             </div>
 
-            {{-- Noted : Attachment --}}
-            <div class="componet-content w-full h-full hover:bg-green-600
-           transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
-                <a href="{{ route('admin.attachment.index') }}">
-                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
-                        <div class="component-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path
-                                    d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.19 9.19a2 2 0 01-2.83-2.83l8.48-8.48" />
-                            </svg>
-                        </div>
-                        <div class="component-txt">Attachment</div>
-                    </div>
-                </a>
-            </div>
+
             {{-- EA Setting --}}
             <div class="componet-content w-full h-full hover:bg-green-600
    transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
@@ -140,7 +124,7 @@
             </div>
 
 
-
+            <div class="px-5 mt-4 mb-1 text-gray-500 font-semibold text-sm uppercase">General Pages</div>
             {{-- Education --}}
             <div class="componet-content w-full h-full hover:bg-green-600
    transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
@@ -181,9 +165,27 @@
                 </a>
             </div>
 
-             {{-- Album Photo --}}
+            {{-- Noted : Attachment --}}
             <div class="componet-content w-full h-full hover:bg-green-600
-   transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+           transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                <a href="{{ route('admin.attachment.index') }}">
+                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
+                        <div class="component-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.19 9.19a2 2 0 01-2.83-2.83l8.48-8.48" />
+                            </svg>
+                        </div>
+                        <div class="component-txt">Attachment</div>
+                    </div>
+                </a>
+            </div>
+
+            {{-- Album Photo --}}
+            <div
+                class="componet-content w-full h-full hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.album-photos.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -223,27 +225,6 @@
             </div>
 
 
-            {{-- Noted : Product --}}
-            <div class="componet-content w-full h-full hover:bg-green-600
-     transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
-                <a href="{{ route('admin.plan.index') }}">
-                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
-
-                        <!-- ICON (REPLACED HERE) -->
-                        <div class="component-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M12 1v22" />
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6" />
-                            </svg>
-                        </div>
-
-                        <div class="component-txt">Marketplace Plan</div>
-                    </div>
-                </a>
-            </div>
-
 
             {{-- Noted : Subscription --}}
             <div
@@ -260,6 +241,27 @@
                         <div class="component-txt">
                             Subscription
                         </div>
+                    </div>
+                </a>
+            </div>
+
+
+            {{-- Noted : Marketplace plan --}}
+            <div
+                class="componet-content w-full h-full hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                <a href="{{ route('admin.plan.index') }}">
+                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
+
+                        <div class="component-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 1v22" />
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                        </div>
+
+                        <div class="component-txt">Marketplace Plan</div>
                     </div>
                 </a>
             </div>
