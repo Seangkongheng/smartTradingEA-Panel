@@ -5,6 +5,8 @@ namespace Modules\Dashboard\App\Http\Controllers\MembershipController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Modules\APIFrontEnd\App\Models\Membership;
+use Modules\APIFrontEnd\App\Models\MembershipAccount;
 use Illuminate\Http\Response;
 
 class MembershipController extends Controller
@@ -14,7 +16,8 @@ class MembershipController extends Controller
      */
     public function index()
     {
-        return view('dashboard::membership.index');
+        $memberships = Membership::with('accounts')->get();
+        return view('dashboard::membership.index', compact('memberships'));
     }
 
     /**

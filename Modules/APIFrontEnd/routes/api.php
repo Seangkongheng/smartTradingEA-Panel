@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Modules\APIFrontEnd\App\Http\Controllers\AttachmentController;
+use Modules\APIFrontEnd\App\Http\Controllers\MembershipController;
 use Modules\APIFrontEnd\App\Http\Controllers\EASettingController;
 use Modules\APIFrontEnd\App\Http\Controllers\MarketplaceController;
 use Modules\APIFrontEnd\App\Http\Controllers\OrderController;
@@ -62,6 +63,10 @@ Route::put('/confirm-payment/{uuid}', action: [OrderController::class, 'confirmP
 // --------------------------ea setting---------------------------------
 Route::get('/ea-setting', action: [EASettingController::class, 'index']);
 
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/membership/store', action: [MembershipController::class, 'store']);
+});
 
 
 
