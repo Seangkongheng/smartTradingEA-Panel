@@ -13,21 +13,6 @@
         </tr>
     </thead>
 
-    @php
-    use Carbon\Carbon;
-
-    $expiresDate = null;
-
-    if ($order->confirmation_date && $order->subscriptionPlan?->plan_type) {
-        $confirmedAt = Carbon::parse($order->confirmation_date);
-
-        $expiresDate = match ($order->subscriptionPlan->plan_type) {
-            'monthly' => $confirmedAt->addMonth(),
-            'yearly'  => $confirmedAt->addYear(),
-            default   => null,
-        };
-    }
-@endphp
 
 
 
