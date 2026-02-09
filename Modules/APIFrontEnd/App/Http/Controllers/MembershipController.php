@@ -39,7 +39,6 @@ class MembershipController extends Controller
         try {
 
             $request->validate([
-                'user_id' => 'required|integer',
                 'exness_email' => 'required|email',
                 'tradingview_username' => 'required|string',
                 'account_numbers' => 'required|array|min:1|max:10',
@@ -47,8 +46,17 @@ class MembershipController extends Controller
                 'note' => 'nullable|string|max:255',
             ]);
             $user = $request->user();
+
+            // Noted Stop if membership already exists
+            if (Membership::where('user_id', $user->id)->exists()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You already have a membership request.',
+                ], 409);
+            }
+
             $membership = Membership::create([
-                'user_id' => $request->id,
+                'user_id' => $user->id,
                 'exness_email' => $request->exness_email,
                 'tradingview_username' => $request->tradingview_username,
                 'note' => $request->note,
