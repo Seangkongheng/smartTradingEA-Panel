@@ -5,6 +5,7 @@ namespace Modules\APIFrontEnd\App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Modules\APIFrontEnd\App\Models\Order;
 use Modules\APIFrontEnd\App\Models\OrderItem;
 use Modules\APIFrontEnd\App\Models\UserSubcription;
@@ -12,14 +13,13 @@ use Modules\Dashboard\App\Models\MarketplacePlan;
 
 class OrderController extends Controller
 {
-
     public function store(Request $request)
     {
         try {
             $request->validate([
                 'marketplace_id' => 'required|exists:marketplaces,id',
                 'marketplace_plan_id' => 'required|exists:marketplace_plans,id',
-                'bank_account_name' => ['required', 'string', 'regex:/^[a-zA-Z\s]+$/']
+                'bank_account_name' => ['required', 'string', 'regex:/^[a-zA-Z\s]+$/'],
             ]);
             $user = $request->user();
 
@@ -48,7 +48,7 @@ class OrderController extends Controller
 
         } catch (Exception $e) {
             return response()->json([
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -63,7 +63,7 @@ class OrderController extends Controller
             ]);
         } catch (Exception $e) {
             return response()->json([
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -74,34 +74,35 @@ class OrderController extends Controller
             $order = Order::with('items.marketplacePlan')->where('uuid', $uuid)->first();
 
             if ($order->status !== 'pending') {
-                return response()->json(['message' => 'Invalid order state'], 400);
+                return response()->json(['message' => 'Order is not in pending state', 'order' => $order], 400);
             }
 
             $order->update([
                 'status' => 'awaiting_verification',
-                'payment_confirmed_at' => now()
+                'payment_confirmed_at' => now(),
+                '',
             ]);
 
             foreach ($order->items as $item) {
                 UserSubcription::create([
                     'user_id' => $order->user_id,
+                    'order_id' => $order->id,
                     'marketplace_id' => $item->marketplace_id,
                     'subscription_plan_id' => $item->marketplacePlan->plan_id,
-                    'total_price' => $item->total_price,
+                    'total_price' => $order->total_price,
+                    'subscription_date'=>Carbon::now('Asia/Phnom_Penh'),
                     'status' => 'pending',
-                    'start_date' => now(),
-                    'end_date' => now()->addMonth(),
                 ]);
             }
 
-
             return response()->json(['message' => 'Payment confirmed']);
         } catch (Exception $e) {
+            $order = Order::with('items.marketplacePlan')->where('uuid', $uuid)->first();
+
             return response()->json([
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
+                'order' => $order,
             ], 500);
         }
     }
-
-
 }

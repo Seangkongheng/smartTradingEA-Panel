@@ -19,11 +19,12 @@ class UserSubcription extends Model
     protected $fillable = [
         'user_id',
         'marketplace_id',
+        'order_id',
         'subscription_plan_id',
         'status',
         'total_price',
-        'start_date',
-        'end_date',
+        'subscription_date',
+        'confirmation_date',
         'created_at',
         'updated_at',
     ];

@@ -4,11 +4,10 @@ namespace Modules\Dashboard\App\Http\Controllers\SubscribeController;
 
 use App\Http\Controllers\Controller;
 use Exception;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Modules\APIFrontEnd\App\Models\Order;
 use Modules\APIFrontEnd\App\Models\UserSubcription;
+use Carbon\Carbon;
 
 class SubscribeController extends Controller
 {
@@ -18,11 +17,10 @@ class SubscribeController extends Controller
     public function index()
     {
 
-
         $subscriptions = UserSubcription::with([
-           'marketplace',
+            'marketplace',
             'subscriptionPlan',
-            'marketplace.plans'
+            'marketplace.plans',
         ])
             ->get();
 
@@ -51,6 +49,7 @@ class SubscribeController extends Controller
     public function show($id)
     {
         $subscription = UserSubcription::find($id);
+
         return view('dashboard::subscribe.show', compact('subscription'));
     }
 
@@ -69,9 +68,17 @@ class SubscribeController extends Controller
     {
         try {
             $subscription = UserSubcription::find($id);
+            $order = Order::find($subscription->order_id);
             $subscription->update([
-                'status' => $request->status
+                'status' => $request->status,
+                'confirmation_date' => Carbon::now('Asia/Phnom_Penh'),
             ]);
+
+            $order->update([
+                'status' => $request->status,
+
+            ]);
+
             return redirect()->route('admin.subscribes.index')->with('message', 'Subscribes Updated');
         } catch (Exception $e) {
             return redirect()->route('admin.subscribes.index')->with('error', $e->getMessage());
