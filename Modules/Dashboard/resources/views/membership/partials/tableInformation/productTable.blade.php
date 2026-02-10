@@ -4,14 +4,11 @@
             <th class="px-6 py-4">#</th>
             <th class="px-6 py-4">Full Name</th>
             <th class="px-6 py-4">Exness Email</th>
-            <th class="px-6 py-4">Tradingview Username</th>
             <th class="px-6 py-4">Submit Date</th>
-            <th class="px-6 py-4">Account Numbers</th>
             <th class="px-6 py-4">Status</th>
             <th class="px-6 py-4 text-center">Action</th>
         </tr>
     </thead>
-
     <tbody class="divide-y divide-gray-700">
         @forelse($memberships as $index => $membership)
             <tr class="hover:bg-gray-700/40 transition-colors duration-200">
@@ -19,25 +16,18 @@
                 <td class="px-6 py-4 font-medium">{{ $membership->user->first_name ?? 'N/A' }}
                     {{ $membership->user->last_name ?? 'N/A' }}</td>
                 <td class="px-6 py-4">{{ $membership->exness_email ?? 'N/A' }}</td>
-                <td class="px-6 py-4">{{ $membership->tradingview_username ?? 'N/A' }}</td>
                 <td class="px-6 py-4">{{ $membership->created_at->format('M d, Y') }}</td>
-
                 <td class="px-6 py-4">
-                    @if ($membership->accounts->isNotEmpty())
-                        <ul class="list-disc list-inside">
-                            @foreach ($membership->accounts as $account)
-                                <li>{{ $account->account_number }}</li>
-                            @endforeach
-                        </ul>
-                    @else
-                        N/A
-                    @endif
+                    <span
+                        class="px-3 py-1 rounded-full font-bold {{ $membership->status == 'pending' ? 'bg-yellow-100 text-yellow-700' : ($membership->status == 'confirmed' ? 'bg-blue-100 text-blue-800' : 'bg-red-400 text-red-800') }}">
+                        {{ ucfirst($membership->status) }}</span>
+                </td>
 
-                <td class="px-6 py-4">{{ $membership->status ?? 'N/A' }}</td>
                 <td class="px-6 py-4">
                     <div class="flex justify-center gap-2">
                         {{-- View --}}
-                        <a href="" class="p-2 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20">
+                        <a href="{{ route('admin.membership.show', $membership->id) }}"
+                            class="p-2 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -46,16 +36,9 @@
                             </svg>
                         </a>
 
-                        {{-- Edit --}}
-                        <a href="" class="p-2 rounded-lg bg-green-500/10 text-green-400 hover:bg-green-500/20">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M15.232 5.232l3.536 3.536M9 11l6.232-6.232a2.5 2.5 0 113.536 3.536L12.536 14.5H9V11z" />
-                            </svg>
-                        </a>
-
-
-                        <form action="" method="POST" onsubmit="return confirm('Are you sure?')">
+                        {{-- Noted : Delete Button --}}
+                        <form action="{{ route('admin.membership.destroy', $membership->id) }}" method="POST"
+                            onsubmit="return confirm('Are you sure?')">
                             @csrf
                             @method('DELETE')
                             <button class="p-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20">
@@ -70,10 +53,10 @@
             </tr>
         @empty
             <tr>
-                <td colspan="6" class="py-10">
+                <td colspan="9" class="py-10">
                     <div class="flex flex-col items-center justify-center">
                         <img src="{{ asset('images/empty-data.png') }}" class="mb-3 max-w-[120px]" alt="No data">
-                        <p class="text-gray-400 text-center">No marketplaces available yet.</p>
+                        <p class="text-gray-400 text-center">No memberships available yet.</p>
                     </div>
                 </td>
             </tr>

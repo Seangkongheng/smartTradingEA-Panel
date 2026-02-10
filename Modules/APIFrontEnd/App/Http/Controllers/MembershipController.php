@@ -40,7 +40,7 @@ class MembershipController extends Controller
 
             $request->validate([
                 'exness_email' => 'required|email',
-                'tradingview_username' => 'required|string',
+                'tradingview_username' => 'nullable|string',
                 'account_numbers' => 'required|array|min:1|max:10',
                 'account_numbers.*' => 'required|string',
                 'note' => 'nullable|string|max:255',
@@ -68,7 +68,7 @@ class MembershipController extends Controller
                 MembershipAccount::create([
                     'membership_id' => $membership->id,
                     'account_number' => $accountNumber,
-                    'status' => 1,
+                    'status' => 'pending',
                 ]);
             }
 
@@ -90,12 +90,15 @@ class MembershipController extends Controller
         }
     }
 
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
+    public function getMembership(Request $request)
     {
-        return view('apifrontend::show');
+        $user = $request->user();
+        $membership = Membership::with('accounts')->where('user_id', $user->id)->first();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $membership,
+        ]);
     }
 
     /**

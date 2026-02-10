@@ -3,23 +3,23 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Dashboard\App\Http\Controllers\AlbumPhotoController\AlbumPhotoController;
 use Modules\Dashboard\App\Http\Controllers\AttachmentController\AttachmentController;
-use Modules\Dashboard\App\Http\Controllers\HomeController\HomeController;
-use Modules\Dashboard\App\Http\Controllers\RegisterController\RegisterController;
-use Modules\Dashboard\App\Http\Controllers\SubscribeController\SubscribeController;
-use Modules\Dashboard\App\Http\Controllers\UserController\UserController;
 use Modules\Dashboard\App\Http\Controllers\AuthController\AuthController;
 use Modules\Dashboard\App\Http\Controllers\CommunityController;
 use Modules\Dashboard\App\Http\Controllers\EASettingController\EASettingController;
 use Modules\Dashboard\App\Http\Controllers\EducationController\EducationController;
+use Modules\Dashboard\App\Http\Controllers\HomeController\HomeController;
 use Modules\Dashboard\App\Http\Controllers\MarketplaceController\MarketplaceController;
 use Modules\Dashboard\App\Http\Controllers\MeetingController\MeetingController;
 use Modules\Dashboard\App\Http\Controllers\MembershipController\MembershipController;
 use Modules\Dashboard\App\Http\Controllers\PlanController;
 use Modules\Dashboard\App\Http\Controllers\ProductController\ProductController;
+use Modules\Dashboard\App\Http\Controllers\RegisterController\RegisterController;
 use Modules\Dashboard\App\Http\Controllers\RewardController\RewardController;
 use Modules\Dashboard\App\Http\Controllers\SettingController\SettingController;
+use Modules\Dashboard\App\Http\Controllers\SubscribeController\SubscribeController;
 use Modules\Dashboard\App\Http\Controllers\UserController\PermissionController;
 use Modules\Dashboard\App\Http\Controllers\UserController\RoleController;
+use Modules\Dashboard\App\Http\Controllers\UserController\UserController;
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::get('/login/store', [AuthController::class, 'login'])->name('performLogin');
@@ -59,7 +59,6 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
-
 // Routing  need permission
 
 Route::group(['middleware' => ['auth']], function () {
@@ -86,7 +85,6 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
 });
-
 
 Route::prefix('admin')->name('admin.')->group(function () {
     // User Routes
@@ -135,7 +133,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     });
 
-       Route::prefix('community')->name('community.')->group(function () {
+    Route::prefix('community')->name('community.')->group(function () {
         Route::get('/index', [CommunityController::class, 'index'])->name('index');
         Route::post('/store', [CommunityController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [CommunityController::class, 'edit'])->name('edit');
@@ -145,7 +143,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/update/{id}', [CommunityController::class, 'update'])->name('update');
 
     });
-
 
     Route::prefix('album-photo')->name('album-photos.')->group(function () {
         Route::get('/index', [AlbumPhotoController::class, 'index'])->name('index');
@@ -174,7 +171,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
     Route::prefix('membership')->name('membership.')->group(function () {
         Route::get('/index', [MembershipController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [MembershipController::class, 'show'])->name('show');
         Route::get('/create', [MembershipController::class, 'create'])->name('create');
+        Route::put('/update/{id}', [MembershipController::class, 'update'])->name('update');
+        Route::delete('/destroy/{id}', [MembershipController::class, 'destroy'])->name('destroy');
+        Route::put('/update-account-status/{id}', [MembershipController::class, 'updateAcountStatus'])->name('update-account-status');
+
     });
 
     Route::prefix('meeting')->name('meeting.')->group(function () {
@@ -204,11 +206,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/destroy/{id}', [RewardController::class, 'destroy'])->name('destroy');
     });
 
-
-// ------------------------------Subscription Update-----------------------------
-  Route::put('/update/{id}', [SubscribeController::class, 'update'])->name('update');
+    // ------------------------------Subscription Update-----------------------------
+    Route::put('/update/{id}', [SubscribeController::class, 'update'])->name('update');
 });
-
-
-
-

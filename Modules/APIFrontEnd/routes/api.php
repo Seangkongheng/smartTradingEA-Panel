@@ -1,12 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Modules\APIFrontEnd\App\Http\Controllers\AttachmentController;
-use Modules\APIFrontEnd\App\Http\Controllers\MembershipController;
 use Modules\APIFrontEnd\App\Http\Controllers\EASettingController;
 use Modules\APIFrontEnd\App\Http\Controllers\MarketplaceController;
+use Modules\APIFrontEnd\App\Http\Controllers\MembershipController;
 use Modules\APIFrontEnd\App\Http\Controllers\OrderController;
 use Modules\APIFrontEnd\App\Http\Controllers\RegisterController\RegisterController;
 use Modules\APIFrontEnd\App\Http\Controllers\SubcriptionController;
@@ -31,7 +30,7 @@ Route::get('attachment/download/{id}/{fileIndex}', function ($id, $fileIndex) {
 
     $files = json_decode($attachment->file, true);
 
-    if (!isset($files[$fileIndex])) {
+    if (! isset($files[$fileIndex])) {
         abort(404);
     }
 
@@ -42,15 +41,14 @@ Route::get('attachment/download/{id}/{fileIndex}', function ($id, $fileIndex) {
     $attachment->save();
 
     $path = public_path($file['path']);
+
     return Response::download($path, $file['name']);
 });
-
 
 // -------------------------------- Attachemnt-------------------------------
 Route::get('/attachment', action: [AttachmentController::class, 'index']);
 // routes/api.php
 Route::get('/attachment/download/{id}', [AttachmentController::class, 'download']);
-
 
 // --------------------------------Order-------------------------------
 // Route::post('/order', action: [OrderController::class, 'store']);
@@ -63,11 +61,7 @@ Route::put('/confirm-payment/{uuid}', action: [OrderController::class, 'confirmP
 // --------------------------ea setting---------------------------------
 Route::get('/ea-setting', action: [EASettingController::class, 'index']);
 
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/membership/store', action: [MembershipController::class, 'store']);
+    Route::get('/membership/get-membership', action: [MembershipController::class, 'getMembership']);
 });
-
-
-
-

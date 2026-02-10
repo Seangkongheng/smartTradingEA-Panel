@@ -3,11 +3,10 @@
 namespace Modules\Dashboard\App\Http\Controllers\MembershipController;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Modules\APIFrontEnd\App\Models\Membership;
 use Modules\APIFrontEnd\App\Models\MembershipAccount;
-use Illuminate\Http\Response;
 
 class MembershipController extends Controller
 {
@@ -17,6 +16,7 @@ class MembershipController extends Controller
     public function index()
     {
         $memberships = Membership::with('accounts')->get();
+
         return view('dashboard::membership.index', compact('memberships'));
     }
 
@@ -25,7 +25,7 @@ class MembershipController extends Controller
      */
     public function create()
     {
-       return view('dashboard::membership.createOrUpdate');
+        return view('dashboard::membership.createOrUpdate');
     }
 
     /**
@@ -41,30 +41,95 @@ class MembershipController extends Controller
      */
     public function show($id)
     {
-        return view('dashboard::show');
+
+        $membership = Membership::with('accounts')->find($id);
+
+        return view('dashboard::membership.show', compact('membership'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        return view('dashboard::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'status' => 'required|in:pending,confirmed,canceled',
+            'license_key' => $request->status === 'confirmed'
+                ? 'required|string|max:255'
+                : 'nullable',
+        ]);
+
+        try {
+            $membership = Membership::findOrFail($id);
+
+            $data = [
+                'status' => $request->status,
+            ];
+
+            // CONFIRMED
+            if ($request->status === 'confirmed') {
+                $data['license_key'] = $request->license_key;
+                $data['approved_by'] = auth()->user()->name ?? null;
+                $data['approved_at'] = Carbon::now('Asia/Phnom_Penh');
+
+                // clear reject fields
+                $data['rejected_by'] = null;
+                $data['rejected_at'] = null;
+            }
+
+            // REJECTED
+            if ($request->status === 'canceled') {
+                $data['rejected_by'] = auth()->user()->name ?? null;
+                $data['rejected_at'] = Carbon::now('Asia/Phnom_Penh');
+
+                // clear approve fields
+                $data['approved_by'] = null;
+                $data['approved_at'] = null;
+                $data['license_key'] = null;
+            }
+
+            // PENDING
+            if ($request->status === 'pending') {
+                $data['approved_by'] = null;
+                $data['approved_at'] = null;
+                $data['rejected_by'] = null;
+                $data['rejected_at'] = null;
+                $data['license_key'] = null;
+            }
+
+            $membership->update($data);
+
+            return redirect()
+                ->route('admin.membership.show', $membership->id)
+                ->with('success', 'Membership status updated successfully.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'An error occurred: '.$e->getMessage());
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    public function updateAcountStatus(Request $request, $accountId)
+    {
+
+        try {
+            $account = MembershipAccount::findOrFail($accountId);
+            $account->update(['status' => $request->status]);
+
+            return redirect()
+                ->route('admin.membership.show', $account->membership_id)
+                ->with('success', 'Account status updated successfully.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'An error occurred: '.$e->getMessage());
+        }
+    }
+
     public function destroy($id)
     {
-        //
+        try {
+            $membership = Membership::findOrFail($id);
+            $membership->accounts()->delete();
+            $membership->delete();
+
+            return redirect()->route('admin.membership.index')->with('success', 'Membership deleted successfully.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'An error occurred: '.$e->getMessage());
+        }
+
     }
 }
