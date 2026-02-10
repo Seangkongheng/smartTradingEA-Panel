@@ -7,6 +7,7 @@ use Modules\APIFrontEnd\App\Http\Controllers\EASettingController;
 use Modules\APIFrontEnd\App\Http\Controllers\MarketplaceController;
 use Modules\APIFrontEnd\App\Http\Controllers\MembershipController;
 use Modules\APIFrontEnd\App\Http\Controllers\OrderController;
+use Modules\APIFrontEnd\App\Http\Controllers\EducationController;
 use Modules\APIFrontEnd\App\Http\Controllers\RegisterController\RegisterController;
 use Modules\APIFrontEnd\App\Http\Controllers\SubcriptionController;
 use Modules\Dashboard\App\Models\Attachment;
@@ -60,6 +61,9 @@ Route::put('/confirm-payment/{uuid}', action: [OrderController::class, 'confirmP
 
 // --------------------------ea setting---------------------------------
 Route::get('/ea-setting', action: [EASettingController::class, 'index']);
+Route::get('/education-categories', action: [EducationController::class, 'getCategory']);
+Route::get('/education/videos/{categoryId}', [EducationController::class, 'getVideosByCategory']);
+
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/membership/store', action: [MembershipController::class, 'store']);
