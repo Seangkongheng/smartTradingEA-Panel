@@ -126,8 +126,7 @@
 
             <div class="px-5 mt-4 mb-1 text-gray-500 font-semibold text-sm uppercase">General Pages</div>
             {{-- Education --}}
-            <div class="componet-content w-full h-full hover:bg-green-600
-   transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+            <div class="componet-content w-full h-full hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
                 <a href="{{ route('admin.educations.index') }}">
                     <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
                         <div class="component-icon">
@@ -140,6 +139,22 @@
                             </svg>
                         </div>
                         <div class="component-txt">Education</div>
+                    </div>
+                </a>
+            </div>
+             <div class="componet-content w-full h-full hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                <a href="{{ route('admin.education-categories.index') }}">
+                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
+                        <div class="component-icon">
+                            <!-- Graduation cap icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-award">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div class="component-txt">Education Category</div>
                     </div>
                 </a>
             </div>

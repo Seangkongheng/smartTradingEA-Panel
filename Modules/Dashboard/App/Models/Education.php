@@ -10,13 +10,23 @@ class Education extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     */
-    protected $fillable = [];
-    
-    protected static function newFactory(): EducationFactory
+    protected $table = 'educations';
+
+    protected $primarykey = 'id';
+
+    protected $fillable = [
+        'title',
+        'description',
+        'education_category_id',
+        'link',
+        'is_public',
+        'updated_at',
+        'created_at',
+    ];
+
+
+    public function category()
     {
-        //return EducationFactory::new();
+        return $this->belongsTo( \Modules\Dashboard\App\Models\EducationCategory::class, 'education_category_id');
     }
 }

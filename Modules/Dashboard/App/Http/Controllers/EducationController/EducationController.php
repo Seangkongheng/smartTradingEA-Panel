@@ -3,9 +3,7 @@
 namespace Modules\Dashboard\App\Http\Controllers\EducationController;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class EducationController extends Controller
 {
@@ -14,7 +12,9 @@ class EducationController extends Controller
      */
     public function index()
     {
-        return view('dashboard::education.index');
+        $educations = \Modules\Dashboard\App\Models\Education::with('category')->get();
+
+        return view('dashboard::education.index', compact('educations'));
     }
 
     /**
@@ -22,7 +22,10 @@ class EducationController extends Controller
      */
     public function create()
     {
-        return view('dashboard::education.createOrUpdate');
+        $categories = \Modules\Dashboard\App\Models\EducationCategory::all();
+
+        return view('dashboard::education.createOrUpdate', compact('categories'));
+
     }
 
     /**
@@ -30,7 +33,27 @@ class EducationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+
+            $request->validate([
+                'title' => 'required|string|max:255',
+                'description' => 'required|string',
+                'education_category_id' => 'required|exists:education_categories,id',
+                'link' => 'nullable|url',
+            ]);
+
+            \Modules\Dashboard\App\Models\Education::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'education_category_id' => $request->education_category_id,
+                'link' => $request->link,
+            ]);
+
+            return redirect()->route('admin.educations.index')->with('success', 'Education created successfully.');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while creating the education: '.$e->getMessage());
+        }
     }
 
     /**
@@ -46,7 +69,11 @@ class EducationController extends Controller
      */
     public function edit($id)
     {
-        return view('dashboard::edit');
+        $categories = \Modules\Dashboard\App\Models\EducationCategory::all();
+        $educationEdit = \Modules\Dashboard\App\Models\Education::findOrFail($id);
+
+        return view('dashboard::education.createOrUpdate', compact('educationEdit', 'categories'));
+
     }
 
     /**
@@ -54,7 +81,28 @@ class EducationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $education = \Modules\Dashboard\App\Models\Education::findOrFail($id);
+
+            $request->validate([
+                'title' => 'required|string|max:255',
+                'description' => 'required|string',
+                'education_category_id' => 'required|exists:education_categories,id',
+                'link' => 'nullable|url',
+            ]);
+
+            $education->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'education_category_id' => $request->education_category_id,
+                'link' => $request->link,
+            ]);
+
+            return redirect()->route('admin.educations.index')->with('success', 'Education updated successfully.');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while updating the education: '.$e->getMessage());
+        }
     }
 
     /**
@@ -62,6 +110,13 @@ class EducationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $education = \Modules\Dashboard\App\Models\Education::findOrFail($id);
+            $education->delete();
+
+            return redirect()->route('admin.educations.index')->with('success', 'Education deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.educations.index')->with('error', 'An error occurred while deleting the education: '.$e->getMessage());
+        }
     }
 }

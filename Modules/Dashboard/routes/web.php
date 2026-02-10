@@ -5,6 +5,7 @@ use Modules\Dashboard\App\Http\Controllers\AlbumPhotoController\AlbumPhotoContro
 use Modules\Dashboard\App\Http\Controllers\AttachmentController\AttachmentController;
 use Modules\Dashboard\App\Http\Controllers\AuthController\AuthController;
 use Modules\Dashboard\App\Http\Controllers\CommunityController;
+use Modules\Dashboard\App\Http\Controllers\EducationCategoryController;
 use Modules\Dashboard\App\Http\Controllers\EASettingController\EASettingController;
 use Modules\Dashboard\App\Http\Controllers\EducationController\EducationController;
 use Modules\Dashboard\App\Http\Controllers\HomeController\HomeController;
@@ -120,6 +121,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/destroy/{id}', [EducationController::class, 'destroy'])->name('destroy');
         Route::put('/update/{id}', [EducationController::class, 'update'])->name('update');
         Route::get('/edit/{id}', [EducationController::class, 'edit'])->name('edit');
+
+    });
+
+        Route::prefix('education-categories')->name('education-categories.')->group(function () {
+        Route::get('/index', [EducationCategoryController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [EducationCategoryController::class, 'show'])->name('show');
+        Route::post('/store', [EducationCategoryController::class, 'store'])->name('store');
+        Route::get('/create', [EducationCategoryController::class, 'create'])->name('create');
+        Route::delete('/destroy/{id}', [EducationCategoryController::class, 'destroy'])->name('destroy');
+        Route::put('/update/{id}', [EducationCategoryController::class, 'update'])->name('update');
+        Route::get('/edit/{id}', [EducationCategoryController::class, 'edit'])->name('edit');
 
     });
     Route::prefix('ea-setting')->name('eaSettings.')->group(function () {
