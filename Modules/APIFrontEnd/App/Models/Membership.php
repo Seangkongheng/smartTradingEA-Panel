@@ -21,6 +21,7 @@ class Membership extends Model
         'tradingview_username',
         'tradingview_status',
         'status',
+        'note',
         'license_key',
         'submitted_at',
         'approved_by',
