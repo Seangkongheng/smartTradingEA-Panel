@@ -6,7 +6,7 @@
                 <img src="{{ asset('images/SuperTradingEA_logo.png') }}" alt="Smart Trading EA Logo"
                     class="w-10 h-10 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105">
                 <h1 class="text-lg font-bold text-white tracking-wide group-hover:text-violet-700">
-                    Smart Trading EA
+                  SmartTrading By V.S
                 </h1>
             </a>
 
