@@ -5,12 +5,12 @@
         <h1 class=" text-balance lg:text-lg xl:text-xl font-semibold text-gray-800 kantumruy-pro">
             <span class="text-white font-bold">Reward</span>
             <span class="text-gray-300 mx-1 lg:mx-2">/</span>
-            <span class="text-gray-600">{{ isset($schoolEdit->id) ? 'Update Reward' : 'Create Reward ' }}</span>
+            <span class="text-gray-600">{{ isset($rewardEdit->id) ? 'Update Reward' : 'Create Reward ' }}</span>
         </h1>
     </div>
 
     <div class="flex items-center gap-3">
-        <a href="{{ route('admin.school.index') }}"
+        <a href="{{ route('admin.rewards.index') }}"
             class="flex items-center gap-1 lg:gap-2 kantumruy-pro text-gray-600 hover:text-green-600 transition-colors group">
             <span class="p-2 rounded-lg bg-gray-100 group-hover:bg-green-100 transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

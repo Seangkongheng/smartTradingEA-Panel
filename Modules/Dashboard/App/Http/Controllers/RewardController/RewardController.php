@@ -3,7 +3,9 @@
 namespace Modules\Dashboard\App\Http\Controllers\RewardController;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Modules\Dashboard\App\Models\Reward;
 
 class RewardController extends Controller
 {
@@ -12,7 +14,9 @@ class RewardController extends Controller
      */
     public function index()
     {
-        return view('dashboard::reward.index');
+        $rewards = Reward::with('users')->get();
+
+        return view('dashboard::reward.index', compact('rewards'));
     }
 
     /**
@@ -20,7 +24,9 @@ class RewardController extends Controller
      */
     public function create()
     {
-        return view('dashboard::create');
+        $users = User::role('user')->get();
+
+        return view('dashboard::reward.createOrUpdate', compact('users'));
     }
 
     /**
@@ -28,7 +34,22 @@ class RewardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'is_public' => 'required|boolean',
+            'users' => 'nullable|array',
+        ]);
+
+        $reward = Reward::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'is_public' => $request->is_public,
+        ]);
+
+        $reward->users()->sync($request->users ?? []);
+
+        return redirect()->route('admin.rewards.index')->with('success', 'Reward created successfully.');
     }
 
     /**
@@ -36,7 +57,9 @@ class RewardController extends Controller
      */
     public function show($id)
     {
-        return view('dashboard::show');
+        $reward = Reward::with('users')->findOrFail($id);
+
+        return view('dashboard::reward.show', compact('reward'));
     }
 
     /**
@@ -44,22 +67,43 @@ class RewardController extends Controller
      */
     public function edit($id)
     {
-        return view('dashboard::edit');
+        $rewardEdit = Reward::with('users')->findOrFail($id);
+        $users = User::role('user')->get();
+
+        $selectedUsers = $rewardEdit->users->pluck('id')->toArray();
+
+        return view('dashboard::reward.createOrUpdate', compact('rewardEdit', 'users', 'selectedUsers'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
-        //
+        $reward = Reward::findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'is_public' => 'required|boolean',
+            'users' => 'nullable|array',
+        ]);
+
+        $reward->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'is_public' => $request->is_public,
+        ]);
+
+        $reward->users()->sync($request->users ?? []);
+
+        return redirect()->route('admin.rewards.index')->with('success', 'Reward updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
-        //
+        $reward = Reward::findOrFail($id);
+
+        $reward->users()->detach();
+        $reward->delete();
+
+        return back()->with('success', 'Reward deleted successfully.');
     }
 }

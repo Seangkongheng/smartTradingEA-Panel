@@ -223,8 +223,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 
     // User Routes
-    Route::prefix('reward')->name('reward.')->group(function () {
+    Route::prefix('reward')->name('rewards.')->group(function () {
         Route::get('/index', [RewardController::class, 'index'])->name('index');
+        Route::get('/edit/{id}', [RewardController::class, 'edit'])->name('edit');
+        Route::post('/store', [RewardController::class, 'store'])->name('store');
         Route::get('/create', [RewardController::class, 'create'])->name('create');
         Route::get('/show/{id}', [RewardController::class, 'show'])->name('show');
         Route::put('/update/{id}', [RewardController::class, 'update'])->name('update');

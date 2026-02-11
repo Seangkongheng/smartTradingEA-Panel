@@ -5,18 +5,26 @@ namespace Modules\Dashboard\App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Dashboard\Database\factories\RewardFactory;
+use App\Models\User;
 
 class Reward extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     */
-    protected $fillable = [];
-    
-    protected static function newFactory(): RewardFactory
+    protected $table = 'rewards';
+
+    protected $primarykey = 'id';
+
+    protected $fillable = [
+        'title',
+        'description',
+        'is_public',
+        'updated_at',
+        'created_at',
+    ];
+
+    public function users()
     {
-        //return RewardFactory::new();
+        return $this->belongsToMany(User::class, 'reward_users');
     }
 }
