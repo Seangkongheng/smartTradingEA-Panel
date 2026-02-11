@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Dashboard\App\Http\Controllers\AlbumPhotoController\AlbumPhotoController;
+use Modules\Dashboard\App\Http\Controllers\AlbumPhotoController\ResulCategoryController;
 use Modules\Dashboard\App\Http\Controllers\AttachmentController\AttachmentController;
 use Modules\Dashboard\App\Http\Controllers\AuthController\AuthController;
 use Modules\Dashboard\App\Http\Controllers\CommunityController;
@@ -124,7 +125,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     });
 
-        Route::prefix('education-categories')->name('education-categories.')->group(function () {
+    Route::prefix('education-categories')->name('education-categories.')->group(function () {
         Route::get('/index', [EducationCategoryController::class, 'index'])->name('index');
         Route::get('/show/{id}', [EducationCategoryController::class, 'show'])->name('show');
         Route::post('/store', [EducationCategoryController::class, 'store'])->name('store');
@@ -153,6 +154,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/search', [CommunityController::class, 'search'])->name('search');
         Route::delete('/destroy/{id}', [CommunityController::class, 'destroy'])->name('destroy');
         Route::put('/update/{id}', [CommunityController::class, 'update'])->name('update');
+
+    });
+
+    Route::prefix('result-category')->name('result-categories.')->group(function () {
+        Route::get('/index', [ResulCategoryController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [ResulCategoryController::class, 'show'])->name('show');
+        Route::post('/store', [ResulCategoryController::class, 'store'])->name('store');
+        Route::get('/create', [ResulCategoryController::class, 'create'])->name('create');
+        Route::delete('/destroy/{id}', [ResulCategoryController::class, 'destroy'])->name('destroy');
+        Route::put('/update/{id}', [ResulCategoryController::class, 'update'])->name('update');
+        Route::get('/edit/{id}', [ResulCategoryController::class, 'edit'])->name('edit');
 
     });
 
