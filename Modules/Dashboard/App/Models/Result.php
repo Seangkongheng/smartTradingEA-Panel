@@ -9,14 +9,23 @@ use Modules\Dashboard\Database\factories\ResultFactory;
 class Result extends Model
 {
     use HasFactory;
+    protected $table = 'result_photos';
+    protected $primarykey = 'id';
+    protected $fillable = [
+        'title',
+        'description',
+        'file',
+        'is_public',
+        'result_category_id',
+        'is_public',
+        'updated_at',
+        'created_at'
+    ];
 
-    /**
-     * The attributes that are mass assignable.
-     */
-    protected $fillable = [];
-    
-    protected static function newFactory(): ResultFactory
+    public function category()
     {
-        //return ResultFactory::new();
+        return $this->belongsTo(ResultCategory::class, 'result_category_id');
     }
+
+
 }

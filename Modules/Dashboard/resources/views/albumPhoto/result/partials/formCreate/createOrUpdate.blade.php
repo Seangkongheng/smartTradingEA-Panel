@@ -3,12 +3,10 @@ $userRole = auth()->user()->roles->pluck('name')->first();
 @endphp
 
 <div class="main-content bg-d w-full">
-    {{-- action="{{ isset($attachmentLessonDetailEdit->id) ? route('', $attachmentLessonDetailEdit->id) : route('') }}"
-    --}}
-    <form action="" method="POST" class="main-full-content  w-full grid lg:grid-cols-12 gap-10"
+    <form action="{{ isset($resultEdit->id) ? route('admin.result-photos.update', $resultEdit->id) : route('admin.result-photos.store') }}" method="POST" class="main-full-content  w-full grid lg:grid-cols-12 gap-10"
         enctype="multipart/form-data">
         @csrf
-        @if (isset($attachmentLessonDetailEdit->id))
+        @if (isset($resultEdit->id))
         @method('PUT')
         @endif
         {{-- Start Content create --}}
@@ -23,7 +21,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                 class="fill-current text-yellow-500 mr-2">
                                 <path
                                     d="m380-340 280-180-280-180v360Zm-60 220v-80H160q-33 0-56.5-23.5T80-280v-480q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v480q0 33-23.5 56.5T800-200H640v80H320ZM160-280h640v-480H160v480Zm0 0v-480 480Z" />
-                            </svg> <span class="kantumruy-pro text-lg">Performance</span>
+                            </svg> <span class="kantumruy-pro text-lg">Result Photo</span>
                         </h1>
                     </div>
 
@@ -38,7 +36,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                             <div class="lg:col-start-3 lg:col-end-13 w-full">
                                 <input type="text"
-                                    value="{{ old('title', isset($attachmentLessonDetailEdit->id) ? $attachmentLessonDetailEdit->AttachmentLesson->title : '') }}"
+                                    value="{{ old('title', isset($resultEdit->id) ? $resultEdit->title : '') }}"
                                     name="title"
                                     class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none "
                                     placeholder="Enter your title*" required>
@@ -56,9 +54,33 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                             <div class="lg:col-start-3 lg:col-end-13 w-full">
                                 <textarea required placeholder="Enter Description.."
-                                    class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none" name=""
-                                    id="">{{ old('title', isset($attachmentLessonDetailEdit->id) ? $attachmentLessonDetailEdit->AttachmentLesson->title : '') }}</textarea>
-                                @error('title')
+                                    class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none" name="description"
+                                    id="">{{ old('description', isset($resultEdit->id) ? $resultEdit->description : '') }}</textarea>
+                                @error('description')
+                                <span class="text-red-500">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+                         <div class="grid lg:grid-cols-12 gap-3  kantumruy-pro ">
+                            <div class="lg:col-start-1 lg:col-end-3 w-full">
+                                <label for="">Category</label>
+                                <span class="text-sm text-red-500 align-baseline">*</span>
+                            </div>
+                            <div class="lg:col-start-3 lg:col-end-13 w-full">
+                                <select name="result_category_id" id="education_category_id"
+                                    class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none">
+                                    <option value="">Select Category</option>
+                                    @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('result_category_id',
+                                        isset($resultEdit->result_category_id) ?
+                                        $resultEdit->result_category_id : '') == $category->id ? 'selected' : ''
+                                        }}>
+                                        {{ $category->name }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @error('result_category_id')
                                 <span class="text-red-500">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -103,8 +125,8 @@ $userRole = auth()->user()->roles->pluck('name')->first();
 
                                         {{-- Old Files --}}
                                         @php
-                                        $oldDocuments = !empty($attachmentLessonDetailEdit->file)
-                                        ? json_decode($attachmentLessonDetailEdit->file, true)
+                                        $oldDocuments = !empty($resultEdit->file)
+                                        ? json_decode($resultEdit->file, true)
                                         : [];
                                         @endphp
 
@@ -150,7 +172,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             <div class="md:col-span-9 flex items-center gap-6">
                                 <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="radio" name="is_public" value="1" {{ old('is_public',
-                                        $attachmentLessonDetailEdit->is_public ?? 1)
+                                        $resultEdit->is_public ?? 1)
                                     == 1 ? 'checked' : '' }}
                                     class="text-green-600 focus:ring-green-500">
                                     <span class="text-gray-700">Public</span>
@@ -158,7 +180,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
 
                                 <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="radio" name="is_public" value="0" {{ old('is_public',
-                                        $attachmentLessonDetailEdit->is_public ?? 1)
+                                        $resultEdit->is_public ?? 1)
                                     == 0 ? 'checked' : '' }}
                                     class="text-red-600 focus:ring-red-500">
                                     <span class="text-red-600">Private</span>
@@ -187,7 +209,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                 <button type="submit"
                                     class="inter px-5 py-2 backdrop-blur-lg text-white bg-green-600 rounded-lg items-center gap-1 inline-flex border border-white/15 hover:bg-green-700 transition-all duration-300 ease-in-out">
                                     <span class="kantumruy-pro font-[500]">
-                                        {{ isset($attachmentLessonDetailEdit->id) ? "Update" : "Save" }}
+                                        {{ isset($resultEdit->id) ? "Update" : "Save" }}
                                     </span>
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960"

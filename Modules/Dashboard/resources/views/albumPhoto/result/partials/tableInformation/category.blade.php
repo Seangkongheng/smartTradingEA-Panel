@@ -9,24 +9,16 @@
 
     <tbody class="divide-y divide-gray-700">
         @forelse ($categories as $i => $category)
-
-
         <tr class="hover:bg-gray-800/40 transition">
 
             <td class="px-6 py-4 font-medium">{{ $i + 1 }}</td>
-
-
-
             <td class="px-6 py-4 font-medium text-white">
                 {{ $category->name ?? '-' }}
             </td>
-
-
             <td class="px-6 py-4">
                 <div class="flex justify-center gap-2">
 
-
-                    <a href="{{ route('admin.education-categories.edit', $category->id) }}"
+                    <a href="{{ route('admin.result-categories.edit', $category->id) }}"
                         class="p-2 rounded-lg bg-green-500/10 text-green-400 hover:bg-green-500/20">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -35,7 +27,7 @@
                     </a>
 
 
-                    <form action="{{ route('admin.education-categories.destroy', $category->id) }}" method="POST"
+                    <form action="{{ route('admin.result-categories.destroy', $category->id) }}" method="POST"
                         onsubmit="return confirm('Are you sure?')">
                         @csrf
                         @method('DELETE')

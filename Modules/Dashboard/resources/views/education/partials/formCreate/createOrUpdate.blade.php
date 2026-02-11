@@ -3,7 +3,8 @@ $userRole = auth()->user()->roles->pluck('name')->first();
 @endphp
 
 <div class="main-content bg-d w-full">
-    <form action={{ isset($educationEdit->id) ? route('admin.educations.update', $educationEdit->id) : route('admin.educations.store') }} method="POST" class="main-full-content  w-full grid lg:grid-cols-12 gap-10"
+    <form action={{ isset($educationEdit->id) ? route('admin.educations.update', $educationEdit->id) :
+        route('admin.educations.store') }} method="POST" class="main-full-content w-full grid lg:grid-cols-12 gap-10"
         enctype="multipart/form-data">
         @csrf
         @if (isset($educationEdit->id))
@@ -53,8 +54,9 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                 <span class="text-sm text-red-500 align-baseline">*</span>
                             </div>
                             <div class="lg:col-start-3 lg:col-end-13 w-full">
-                                <textarea id="mytextarea"  placeholder="Enter Description.."
-                                    class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none" name="description"
+                                <textarea id="mytextarea" placeholder="Enter Description.."
+                                    class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none"
+                                    name="description"
                                     id="">{{ old('description', isset($educationEdit->id) ? $educationEdit->description : '') }}</textarea>
                                 @error('description')
                                 <span class="text-red-500">{{ $message }}</span>
@@ -62,7 +64,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                         </div>
 
-                         {{-- Title --}}
+                        {{-- Title --}}
                         <div class="grid lg:grid-cols-12 gap-3  kantumruy-pro ">
                             <div class="lg:col-start-1 lg:col-end-3 w-full">
                                 <label for="">Video URL</label>
@@ -80,20 +82,25 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                         </div>
 
-                         <div class="grid lg:grid-cols-12 gap-3  kantumruy-pro ">
+                        {{-- Noted : Select category --}}
+                        <div class="grid lg:grid-cols-12 gap-3  kantumruy-pro ">
                             <div class="lg:col-start-1 lg:col-end-3 w-full">
-                                <label for="">Video URL</label>
+                                <label for="">Category</label>
                                 <span class="text-sm text-red-500 align-baseline">*</span>
                             </div>
                             <div class="lg:col-start-3 lg:col-end-13 w-full">
-                            <select name="education_category_id" id="education_category_id" class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none">
-                                <option value="">Select Category</option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" {{ old('education_category_id', isset($educationEdit->education_category_id) ? $educationEdit->education_category_id : '') == $category->id ? 'selected' : '' }}>
+                                <select name="education_category_id" id="education_category_id"
+                                    class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none">
+                                    <option value="">Select Category</option>
+                                    @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('education_category_id',
+                                        isset($educationEdit->education_category_id) ?
+                                        $educationEdit->education_category_id : '') == $category->id ? 'selected' : ''
+                                        }}>
                                         {{ $category->name }}
                                     </option>
-                                @endforeach
-                            </select>
+                                    @endforeach
+                                </select>
                                 @error('education_category_id')
                                 <span class="text-red-500">{{ $message }}</span>
                                 @enderror

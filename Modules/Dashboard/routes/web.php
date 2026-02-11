@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Dashboard\App\Http\Controllers\AlbumPhotoController\AlbumPhotoController;
 use Modules\Dashboard\App\Http\Controllers\AlbumPhotoController\ResulCategoryController;
+use Modules\Dashboard\App\Http\Controllers\AlbumPhotoController\ResulController;
 use Modules\Dashboard\App\Http\Controllers\AttachmentController\AttachmentController;
 use Modules\Dashboard\App\Http\Controllers\AuthController\AuthController;
 use Modules\Dashboard\App\Http\Controllers\CommunityController;
@@ -168,14 +169,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     });
 
-    Route::prefix('album-photo')->name('album-photos.')->group(function () {
-        Route::get('/index', [AlbumPhotoController::class, 'index'])->name('index');
-        Route::get('/show/{id}', [AlbumPhotoController::class, 'show'])->name('show');
-        Route::post('/store', [AlbumPhotoController::class, 'store'])->name('store');
-        Route::get('/create', [AlbumPhotoController::class, 'create'])->name('create');
-        Route::delete('/destroy/{id}', [AlbumPhotoController::class, 'destroy'])->name('destroy');
-        Route::put('/update/{id}', [AlbumPhotoController::class, 'update'])->name('update');
-        Route::get('/edit/{id}', [AlbumPhotoController::class, 'edit'])->name('edit');
+    Route::prefix('result-photo')->name('result-photos.')->group(function () {
+        Route::get('/index', [ResulController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [ResulController::class, 'show'])->name('show');
+        Route::post('/store', [ResulController::class, 'store'])->name('store');
+        Route::get('/create', [ResulController::class, 'create'])->name('create');
+        Route::delete('/destroy/{id}', [ResulController::class, 'destroy'])->name('destroy');
+        Route::put('/update/{id}', [ResulController::class, 'update'])->name('update');
+        Route::get('/edit/{id}', [ResulController::class, 'edit'])->name('edit');
 
     });
     Route::prefix('plan')->name('plan.')->group(function () {

@@ -4,7 +4,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
 
 <div class="main-content bg-d w-full">
 
-    <form action="{{ isset($categoryEdit->id) ? route('admin.education-categories.update', $categoryEdit->id) : route('admin.education-categories.store') }}" method="POST" class="main-full-content  w-full grid lg:grid-cols-12 gap-10"
+    <form action="{{ isset($categoryEdit->id) ? route('admin.result-categories.update', $categoryEdit->id) : route('admin.result-categories.store') }}" method="POST" class="main-full-content  w-full grid lg:grid-cols-12 gap-10"
         enctype="multipart/form-data">
         @csrf
         @if (isset($categoryEdit->id))

@@ -1,1 +1,1 @@
-@include('dashboard::albumPhoto.partials.index')
+@include('dashboard::albumPhoto.result.partials.index')

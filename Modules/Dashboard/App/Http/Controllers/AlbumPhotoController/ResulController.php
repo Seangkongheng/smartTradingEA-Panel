@@ -7,17 +7,18 @@ use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Dashboard\App\Models\Result;
 use Modules\Dashboard\App\Models\ResultCategory;
 
 class ResulController extends Controller
 {
-      /**
+    /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = ResultCategory::all();
-        return view('dashboard::education.category', compact('categories'));
+        $results = Result::all();
+        return view('dashboard::albumPhoto.result.index', compact('results'));
     }
 
     /**
@@ -25,7 +26,8 @@ class ResulController extends Controller
      */
     public function create()
     {
-        return view('dashboard::education.createOrUpdateCategory');
+        $categories = ResultCategory::all();
+        return view('dashboard::albumPhoto.result.createOrUpdate', compact('categories'));
     }
 
     /**
@@ -33,18 +35,40 @@ class ResulController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        try{
-            $request->validate([
-                'name' => 'required|string|max:255',
+        try {
+
+             $request->validate([
+                'title' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'result_category_id' => 'required|exists:result_categories,id',
+                'file.*' => 'nullable|max:102400',
             ]);
 
-            ResultCategory::create([
-                'name' => $request->name,
+            $allFiles = [];
+            if ($request->hasFile('file')) {
+                foreach ($request->file('file') as $uploadedFile) {
+                    $originalName = $uploadedFile->getClientOriginalName();
+                    $filename = $uploadedFile->hashName();
+                    $uploadedFile->move(public_path('resultPhotos'), $filename);
+
+                    $allFiles[] = [
+                        'name' => $originalName,
+                        'path' => 'resultPhotos/' . $filename,
+                    ];
+                }
+            }
+
+            Result::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'result_category_id' => $request->result_category_id,
+                'file' => !empty($allFiles) ? json_encode($allFiles) : null,
+                'is_public' => $request->is_public,
             ]);
 
-            return redirect()->route('admin.education-categories.index')->with('success', 'Education category created successfully.');
-        }catch(\Exception $e){
-            return redirect()->back()->with('error', 'An error occurred while creating the education category: ' . $e->getMessage());
+            return redirect()->route('admin.result-photos.index')->with('success', 'Result created successfully.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while creating the result: ' . $e->getMessage());
         }
     }
 
@@ -61,8 +85,8 @@ class ResulController extends Controller
      */
     public function edit($id)
     {
-        $categoryEdit = ResultCategory::findOrFail($id);
-        return view('dashboard::education.createOrUpdateCategory', compact('categoryEdit'));
+        $resultEdit = Result::findOrFail($id);
+        return view('dashboard::albumPhoto.result.createOrUpdate', compact('resultEdit'));
     }
 
     /**
@@ -70,7 +94,7 @@ class ResulController extends Controller
      */
     public function update(Request $request, $id): RedirectResponse
     {
-        try{
+        try {
             $request->validate([
                 'name' => 'required|string|max:255',
             ]);
@@ -81,7 +105,7 @@ class ResulController extends Controller
             ]);
 
             return redirect()->route('admin.result-categories.index')->with('success', 'Result category updated successfully.');
-        }catch(\Exception $e){
+        } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred while updating the education category: ' . $e->getMessage());
         }
     }
@@ -91,12 +115,12 @@ class ResulController extends Controller
      */
     public function destroy($id)
     {
-        try{
-            $category = \Modules\Dashboard\App\Models\EducationCategory::findOrFail($id);
+        try {
+            $category = Result::findOrFail($id);
             $category->delete();
 
             return redirect()->route('admin.result-categories.index')->with('success', 'Result category deleted successfully.');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred while deleting the result category: ' . $e->getMessage());
         }
     }

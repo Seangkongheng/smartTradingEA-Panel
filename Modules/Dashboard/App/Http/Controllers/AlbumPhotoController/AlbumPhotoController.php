@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Dashboard\App\Models\ResultCategory;
 
 class AlbumPhotoController extends Controller
 {
@@ -14,7 +15,7 @@ class AlbumPhotoController extends Controller
      */
     public function index()
     {
-        return view('dashboard::albumPhoto.index');
+        return view('dashboard::albumPhoto.result.index');
     }
 
     /**
@@ -22,7 +23,8 @@ class AlbumPhotoController extends Controller
      */
     public function create()
     {
-        return view('dashboard::albumPhoto.createOrUpdate');
+        $categories = ResultCategory::all();
+        return view('dashboard::albumPhoto.result.createOrUpdate', compact('categories'));
     }
 
     /**

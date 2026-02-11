@@ -1,4 +1,4 @@
 @extends('dashboard::layout.master')
 @section('content')
-    @include('dashboard::albumPhoto.includes.createOrUpdate')
+    @include('dashboard::albumPhoto.result.includes.createOrUpdate')
 @endsection

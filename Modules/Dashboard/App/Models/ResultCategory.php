@@ -10,13 +10,13 @@ class ResultCategory extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     */
-    protected $fillable = [];
-    
-    protected static function newFactory(): ResultCategoryFactory
-    {
-        //return ResultCategoryFactory::new();
-    }
+    protected $table = 'result_categories';
+
+    protected $primarykey = 'id';
+
+    protected $fillable = [
+        'name',
+        'updated_at',
+        'created_at',
+    ];
 }
