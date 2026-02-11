@@ -22,7 +22,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                 class="fill-current text-yellow-500 mr-2">
                                 <path
                                     d="m380-340 280-180-280-180v360Zm-60 220v-80H160q-33 0-56.5-23.5T80-280v-480q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v480q0 33-23.5 56.5T800-200H640v80H320ZM160-280h640v-480H160v480Zm0 0v-480 480Z" />
-                            </svg> <span class="kantumruy-pro text-lg">Performance</span>
+                            </svg> <span class="kantumruy-pro text-lg">Result Category</span>
                         </h1>
                     </div>
 

@@ -51,7 +51,7 @@
             <td class="px-6 py-4">
                 <div class="flex space-x-2">
                     <!-- View -->
-                    <a href="" class="p-2 text-blue-600 hover:text-blue-700 transition-colors">
+                    <a href="" onclick="alert('Not yet')" class="p-2 text-blue-600 hover:text-blue-700 transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -61,7 +61,7 @@
                     </a>
 
 
-                    <a href="" class="p-2 text-green-600 hover:text-green-700 transition-colors">
+                    <a href="{{ route('admin.result-photos.edit',$result->id) }}" class="p-2 text-green-600 hover:text-green-700 transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -86,7 +86,7 @@
         </tr>
         @empty
         <tr>
-            <td colspan="5" class="py-10 text-center">
+            <td colspan="6" class="py-10 text-center">
                 <img src="{{ asset('images/empty-data.png') }}" class="mx-auto mb-3 max-w-[120px]">
                 <p class="text-gray-400">No Data</p>
             </td>

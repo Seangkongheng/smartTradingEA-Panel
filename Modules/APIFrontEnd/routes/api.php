@@ -9,6 +9,7 @@ use Modules\APIFrontEnd\App\Http\Controllers\MembershipController;
 use Modules\APIFrontEnd\App\Http\Controllers\OrderController;
 use Modules\APIFrontEnd\App\Http\Controllers\EducationController;
 use Modules\APIFrontEnd\App\Http\Controllers\RegisterController\RegisterController;
+use Modules\APIFrontEnd\App\Http\Controllers\ResultCategoryController;
 use Modules\APIFrontEnd\App\Http\Controllers\SubcriptionController;
 use Modules\Dashboard\App\Models\Attachment;
 
@@ -69,3 +70,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/membership/store', action: [MembershipController::class, 'store']);
     Route::get('/membership/get-membership', action: [MembershipController::class, 'getMembership']);
 });
+
+Route::get('/result-photo', action: [ResultCategoryController::class, 'index']);
+Route::get('/result-photo-categories', action: [ResultCategoryController::class, 'getCategory']);
+Route::get('/result-photo/{categoryId}', [ResultCategoryController::class, 'getPhotoByCategory']);
+

@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
 use Modules\Dashboard\App\Models\Result;
 use Modules\Dashboard\App\Models\ResultCategory;
 
@@ -37,7 +38,7 @@ class ResulController extends Controller
     {
         try {
 
-             $request->validate([
+            $request->validate([
                 'title' => 'required|string|max:255',
                 'description' => 'nullable|string',
                 'result_category_id' => 'required|exists:result_categories,id',
@@ -85,8 +86,9 @@ class ResulController extends Controller
      */
     public function edit($id)
     {
+          $categories = ResultCategory::all();
         $resultEdit = Result::findOrFail($id);
-        return view('dashboard::albumPhoto.result.createOrUpdate', compact('resultEdit'));
+        return view('dashboard::albumPhoto.result.createOrUpdate', compact('resultEdit', 'categories'));
     }
 
     /**
@@ -96,17 +98,41 @@ class ResulController extends Controller
     {
         try {
             $request->validate([
-                'name' => 'required|string|max:255',
+                'title' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'result_category_id' => 'required|exists:result_categories,id',
+                'file.*' => 'nullable|max:102400',
             ]);
+            $result = Result::findOrFail($id);
 
-            $category = ResultCategory::findOrFail($id);
-            $category->update([
-                'name' => $request->name,
+            $oldDocuments = $request->input('old_documents', []);
+            $oldDocuments = array_map(fn($v) => json_decode($v, true), $oldDocuments);
+            $newFile = [];
+            if ($request->hasFile('file')) {
+                foreach ($request->file('file') as $uploadedFile) {
+                    $originalName = $uploadedFile->getClientOriginalName();
+                    $filename = $uploadedFile->hashName();
+                    $uploadedFile->move(public_path('resultPhotos'), $filename);
+
+                    $newFile[] = [
+                        'name' => $originalName,
+                        'path' => 'resultPhotos/' . $filename,
+                    ];
+                }
+            }
+            // Merge old and new file
+            $allFiles = array_merge($oldDocuments, $newFile);
+            $result->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'is_public' => $request->is_public,
+                'file' => !empty($allFiles) ? json_encode($allFiles) : null,
+
             ]);
-
-            return redirect()->route('admin.result-categories.index')->with('success', 'Result category updated successfully.');
+            return redirect()->route('admin.result-photos.index')
+                ->with('message', 'Result Updated.');
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred while updating the education category: ' . $e->getMessage());
+            return dd($e->getMessage());
         }
     }
 
@@ -116,12 +142,22 @@ class ResulController extends Controller
     public function destroy($id)
     {
         try {
-            $category = Result::findOrFail($id);
-            $category->delete();
+            $result = Result::findOrFail($id);
+            if (!empty($result->file)) {
+                $files = json_decode($result->file, true);
+                foreach ($files as $f) {
+                    if (File::exists(public_path($f['path']))) {
+                        File::delete(public_path($f['path']));
+                    }
+                }
+            }
 
-            return redirect()->route('admin.result-categories.index')->with('success', 'Result category deleted successfully.');
+            $result->delete();
+            return redirect()->route('admin.result-photos.index')->with('message', 'Result Deleted!');
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred while deleting the result category: ' . $e->getMessage());
+            return redirect()->route('admin.result-photos.index')->with('error', $e->getMessage());
         }
+
+
     }
 }
