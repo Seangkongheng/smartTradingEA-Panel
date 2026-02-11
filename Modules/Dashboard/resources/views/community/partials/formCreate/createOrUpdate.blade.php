@@ -4,7 +4,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
 
 <div class="main-content bg-d w-full">
 
-    <form action="{{ isset($communityEdit->id) ? route('admin.community.update', $communityEdit->id) : route('admin.community.update') }}"
+    <form action="{{ isset($communityEdit->id) ? route('admin.community.update', $communityEdit->id) : route('admin.community.store') }}"
         method="POST" class="main-full-content  w-full grid lg:grid-cols-12 gap-10" enctype="multipart/form-data">
         @csrf
         @if (isset($communityEdit->id))
@@ -22,7 +22,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                                 class="fill-current text-yellow-500 mr-2">
                                 <path
                                     d="m380-340 280-180-280-180v360Zm-60 220v-80H160q-33 0-56.5-23.5T80-280v-480q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v480q0 33-23.5 56.5T800-200H640v80H320ZM160-280h640v-480H160v480Zm0 0v-480 480Z" />
-                            </svg> <span class="kantumruy-pro text-lg">Performance</span>
+                            </svg> <span class="kantumruy-pro text-lg">Community Photos</span>
                         </h1>
                     </div>
 
@@ -55,9 +55,9 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                             <div class="lg:col-start-3 lg:col-end-13 w-full">
                                 <textarea required placeholder="Enter Description.."
-                                    class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none" name=""
-                                    id="">{{ old('title', isset($communityEdit->id) ? $communityEdit->title : '') }}</textarea>
-                                @error('title')
+                                    class="px-6 py-3.5 text-black bg-gray-100  w-full rounded-xl outline-none" name="description"
+                                    id="">{{ old('description', isset($communityEdit->id) ? $communityEdit->description : '') }}</textarea>
+                                @error('description')
                                 <span class="text-red-500">{{ $message }}</span>
                                 @enderror
                             </div>

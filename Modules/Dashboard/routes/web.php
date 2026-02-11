@@ -1,14 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Dashboard\App\Http\Controllers\AlbumPhotoController\AlbumPhotoController;
 use Modules\Dashboard\App\Http\Controllers\AlbumPhotoController\ResulCategoryController;
 use Modules\Dashboard\App\Http\Controllers\AlbumPhotoController\ResulController;
 use Modules\Dashboard\App\Http\Controllers\AttachmentController\AttachmentController;
 use Modules\Dashboard\App\Http\Controllers\AuthController\AuthController;
 use Modules\Dashboard\App\Http\Controllers\CommunityController;
-use Modules\Dashboard\App\Http\Controllers\EducationCategoryController;
 use Modules\Dashboard\App\Http\Controllers\EASettingController\EASettingController;
+use Modules\Dashboard\App\Http\Controllers\EducationCategoryController;
 use Modules\Dashboard\App\Http\Controllers\EducationController\EducationController;
 use Modules\Dashboard\App\Http\Controllers\HomeController\HomeController;
 use Modules\Dashboard\App\Http\Controllers\MarketplaceController\MarketplaceController;
@@ -149,6 +148,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::prefix('community')->name('community.')->group(function () {
         Route::get('/index', [CommunityController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [CommunityController::class, 'show'])->name('show');
         Route::post('/store', [CommunityController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [CommunityController::class, 'edit'])->name('edit');
         Route::get('/create', [CommunityController::class, 'create'])->name('create');

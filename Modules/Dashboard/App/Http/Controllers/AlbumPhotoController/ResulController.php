@@ -78,7 +78,8 @@ class ResulController extends Controller
      */
     public function show($id)
     {
-        return view('dashboard::show');
+        $result = Result::findOrFail($id);
+        return view('dashboard::albumPhoto.result.show', compact('result'));
     }
 
     /**

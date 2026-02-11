@@ -10,7 +10,7 @@
     </div>
 
     <div class="flex items-center gap-3">
-        <a href="{{ route('admin.album-photos.index') }}"
+        <a href="{{ route('admin.community.index') }}"
             class="flex items-center gap-1 lg:gap-2 kantumruy-pro text-gray-600 hover:text-green-600 transition-colors group">
             <span class="p-2 rounded-lg bg-gray-100 group-hover:bg-green-100 transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

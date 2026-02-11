@@ -51,7 +51,7 @@
             <td class="px-6 py-4">
                 <div class="flex space-x-2">
                     <!-- View -->
-                    <a href="" onclick="alert('Not yet')" class="p-2 text-blue-600 hover:text-blue-700 transition-colors">
+                    <a href="{{ route("admin.result-photos.show",$result->id) }}" class="p-2 text-blue-600 hover:text-blue-700 transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

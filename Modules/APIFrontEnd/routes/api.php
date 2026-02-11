@@ -7,6 +7,7 @@ use Modules\APIFrontEnd\App\Http\Controllers\EASettingController;
 use Modules\APIFrontEnd\App\Http\Controllers\MarketplaceController;
 use Modules\APIFrontEnd\App\Http\Controllers\MembershipController;
 use Modules\APIFrontEnd\App\Http\Controllers\OrderController;
+use Modules\APIFrontEnd\App\Http\Controllers\CommunityController;
 use Modules\APIFrontEnd\App\Http\Controllers\EducationController;
 use Modules\APIFrontEnd\App\Http\Controllers\RegisterController\RegisterController;
 use Modules\APIFrontEnd\App\Http\Controllers\ResultCategoryController;
@@ -74,4 +75,5 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('/result-photo', action: [ResultCategoryController::class, 'index']);
 Route::get('/result-photo-categories', action: [ResultCategoryController::class, 'getCategory']);
 Route::get('/result-photo/{categoryId}', [ResultCategoryController::class, 'getPhotoByCategory']);
+Route::get('/community-photo', action: [CommunityController::class, 'index']);
 
