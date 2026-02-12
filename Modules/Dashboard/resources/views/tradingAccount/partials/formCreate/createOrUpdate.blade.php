@@ -76,7 +76,7 @@
                     <label class="text-white">Total Profit<span class="text-red-500">*</span></label>
                 </div>
                 <div class="md:col-span-9">
-                    <input type="number" required placeholder="Enter total profit.." name="total_profit"
+                    <input type="text" required placeholder="Enter total profit.." name="total_profit"
                         value="{{ old('total_profit', $tradingAccountEdit->total_profit ?? '') }}"
                         class="w-full px-4 py-3 rounded-lg text-black" required>
                 </div>
