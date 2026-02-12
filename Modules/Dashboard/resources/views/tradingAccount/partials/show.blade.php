@@ -31,7 +31,7 @@
     <div class="main-full-content w-full">
         <div class="table-content w-full">
             <div class="relative overflow-x-auto sm:rounded-lg">
-               @include('dashboard::tradingAccount.partials.tableInformation.show')
+               @include('dashboard::reward.partials.tableInformation.show')
             </div>
         </div>
     </div>

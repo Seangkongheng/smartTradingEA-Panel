@@ -81,6 +81,20 @@
                 </a>
             </div>
 
+              <!-- Reward -->
+            <div class="componet-content w-full hover:bg-green-600 transition-all duration-300 ease-in-out hover:text-white cursor-pointer px-5 rounded-xl">
+                <a href="{{ route('admin.trading-accounts.index') }}">
+                    <div class="flex items-center w-full min-h-12 gap-2 text-lg kantumruy-pro">
+                        <div class="component-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" class="fill-current">
+                                <path d="m233-120 65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Zm0 203 157 95-42-178 138-120-182-16-71-168-71 168-182 16 138 120-42 178 157-95Z" />
+                            </svg>
+                        </div>
+                        <div class="component-txt">Trading Account</div>
+                    </div>
+                </a>
+            </div>
+
             <!-- EA & Trading Section -->
             <div class="px-5 mt-4 mb-1 text-gray-500 font-semibold text-sm uppercase">EA & Trading</div>
 

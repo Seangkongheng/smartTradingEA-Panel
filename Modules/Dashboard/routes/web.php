@@ -14,6 +14,7 @@ use Modules\Dashboard\App\Http\Controllers\MarketplaceController\MarketplaceCont
 use Modules\Dashboard\App\Http\Controllers\MeetingController\MeetingController;
 use Modules\Dashboard\App\Http\Controllers\MembershipController\MembershipController;
 use Modules\Dashboard\App\Http\Controllers\PlanController;
+use Modules\Dashboard\App\Http\Controllers\TradingAccountController;
 use Modules\Dashboard\App\Http\Controllers\ProductController\ProductController;
 use Modules\Dashboard\App\Http\Controllers\RegisterController\RegisterController;
 use Modules\Dashboard\App\Http\Controllers\RewardController\RewardController;
@@ -187,6 +188,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/destroy/{id}', [PlanController::class, 'destroy'])->name('destroy');
         Route::put('/update/{id}', [PlanController::class, 'update'])->name('update');
     });
+
+
+     Route::prefix('trading-account')->name('trading-accounts.')->group(function () {
+        Route::get('/index', [TradingAccountController::class, 'index'])->name('index');
+        Route::post('/store', [TradingAccountController::class, 'store'])->name('store');
+        Route::get('/create', [TradingAccountController::class, 'create'])->name('create');
+        Route::get('/edit/{id}', [TradingAccountController::class, 'edit'])->name('edit');
+        Route::delete('/destroy/{id}', [TradingAccountController::class, 'destroy'])->name('destroy');
+        Route::put('/update/{id}', [TradingAccountController::class, 'update'])->name('update');
+    });
+
     Route::prefix('register')->name('register.')->group(function () {
         Route::get('/index', [RegisterController::class, 'index'])->name('index');
         Route::get('/create', [RegisterController::class, 'create'])->name('create');
