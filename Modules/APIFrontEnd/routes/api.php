@@ -73,6 +73,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/membership/store', action: [MembershipController::class, 'store']);
     Route::get('/membership/get-membership', action: [MembershipController::class, 'getMembership']);
     Route::get('/my-reward', action: [RewardController::class, 'index']);
+    Route::put('/membership/{id}/update', action: [MembershipController::class, 'update']);
+
+
 });
 
 Route::get('/result-photo', action: [ResultCategoryController::class, 'index']);

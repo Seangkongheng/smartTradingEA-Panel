@@ -4,7 +4,7 @@ namespace Modules\APIFrontEnd\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Modules\APIFrontEnd\App\Models\UserSubcription;
+use Illuminate\Support\Facades\DB;
 
 class SubcriptionController extends Controller
 {
@@ -12,11 +12,18 @@ class SubcriptionController extends Controller
     {
         $user = $request->user();
 
-        $subscriptions = UserSubcription::with([
-            'marketplace',
-            'subscriptionPlan',
-        ])
-            ->where('user_id', $user->id)
+        $subscriptions = DB::table('user_subscriptions as us')
+            ->leftJoin('plans as p', 'us.subscription_plan_id', '=', 'p.id')
+            ->leftJoin('marketplaces as m', 'us.marketplace_id', '=', 'm.id')
+            ->where('us.user_id', $user->id)
+            ->select(
+                'us.*',
+                'p.id as plan_id',
+                'p.name as plan_name',
+                'm.title as marketplace_title',
+                'm.description as marketplace_description',
+                'm.feature as marketplace_feature'
+            )
             ->get();
 
         return response()->json([

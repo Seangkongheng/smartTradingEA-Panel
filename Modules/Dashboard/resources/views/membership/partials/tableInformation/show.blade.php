@@ -241,7 +241,7 @@
                             <label class="block text-sm font-medium text-slate-700 mb-1">
                                 License Key
                             </label>
-                            <input required type="text" name="license_key"
+                            <input  type="text" name="license_key"
                                 value="{{ old('license_key', $membership->license_key) }}"
                                 placeholder="Enter license key"
                                 class="w-full px-4 py-3 rounded-xl border-2 border-slate-200
