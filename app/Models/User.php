@@ -6,21 +6,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Modules\Dashboard\App\Models\Reward;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-
-
     protected $fillable = [
         'username',
         'first_name',
@@ -34,8 +31,6 @@ class User extends Authenticatable
         'is_verify',
         'is_active',
     ];
-
-
 
     /**
      * The attributes that should be hidden for serialization.
@@ -57,9 +52,12 @@ class User extends Authenticatable
     ];
 
     public function rewards()
-{
-    return $this->belongsToMany(Reward::class, 'reward_users');
-}
-
-
+    {
+        return $this->belongsToMany(
+            \Modules\Dashboard\App\Models\Reward::class,
+            'reward_users',
+            'user_id',
+            'reward_id'
+        );
+    }
 }

@@ -1,0 +1,31 @@
+{
+    "name": "nwidart/rewardcontroller",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\RewardController\\": "",
+            "Modules\\RewardController\\App\\": "app/",
+            "Modules\\RewardController\\Database\\Factories\\": "database/factories/",
+            "Modules\\RewardController\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\RewardController\\Tests\\": "tests/"
+        }
+    }
+}

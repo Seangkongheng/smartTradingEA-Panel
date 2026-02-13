@@ -23,8 +23,14 @@ class Reward extends Model
         'created_at',
     ];
 
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'reward_users');
-    }
+   public function users()
+{
+    return $this->belongsToMany(
+        \App\Models\User::class,
+        'reward_users',
+        'reward_id',
+        'user_id'
+    );
+}
+
 }

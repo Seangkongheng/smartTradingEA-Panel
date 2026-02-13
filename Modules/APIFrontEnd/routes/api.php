@@ -3,14 +3,15 @@
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Modules\APIFrontEnd\App\Http\Controllers\AttachmentController;
+use Modules\APIFrontEnd\App\Http\Controllers\CommunityController;
 use Modules\APIFrontEnd\App\Http\Controllers\EASettingController;
+use Modules\APIFrontEnd\App\Http\Controllers\EducationController;
 use Modules\APIFrontEnd\App\Http\Controllers\MarketplaceController;
 use Modules\APIFrontEnd\App\Http\Controllers\MembershipController;
 use Modules\APIFrontEnd\App\Http\Controllers\OrderController;
-use Modules\APIFrontEnd\App\Http\Controllers\CommunityController;
-use Modules\APIFrontEnd\App\Http\Controllers\EducationController;
 use Modules\APIFrontEnd\App\Http\Controllers\RegisterController\RegisterController;
 use Modules\APIFrontEnd\App\Http\Controllers\ResultCategoryController;
+use Modules\APIFrontEnd\App\Http\Controllers\RewardController;
 use Modules\APIFrontEnd\App\Http\Controllers\SubcriptionController;
 use Modules\APIFrontEnd\App\Http\Controllers\TradingAccountController;
 use Modules\APIFrontEnd\App\Http\Controllers\VIPToolController;
@@ -68,10 +69,10 @@ Route::get('/ea-setting', action: [EASettingController::class, 'index']);
 Route::get('/education-categories', action: [EducationController::class, 'getCategory']);
 Route::get('/education/videos/{categoryId}', [EducationController::class, 'getVideosByCategory']);
 
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/membership/store', action: [MembershipController::class, 'store']);
     Route::get('/membership/get-membership', action: [MembershipController::class, 'getMembership']);
+    Route::get('/my-reward', action: [RewardController::class, 'index']);
 });
 
 Route::get('/result-photo', action: [ResultCategoryController::class, 'index']);
@@ -80,4 +81,3 @@ Route::get('/result-photo/{categoryId}', [ResultCategoryController::class, 'getP
 Route::get('/community-photo', action: [CommunityController::class, 'index']);
 Route::get('/trading-account', action: [TradingAccountController::class, 'index']);
 Route::get('/vip-tool', action: [VIPToolController::class, 'index']);
-
