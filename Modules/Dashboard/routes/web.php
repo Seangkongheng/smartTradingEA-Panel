@@ -23,6 +23,7 @@ use Modules\Dashboard\App\Http\Controllers\SubscribeController\SubscribeControll
 use Modules\Dashboard\App\Http\Controllers\UserController\PermissionController;
 use Modules\Dashboard\App\Http\Controllers\UserController\RoleController;
 use Modules\Dashboard\App\Http\Controllers\UserController\UserController;
+use Modules\Dashboard\App\Http\Controllers\VIPToolController;
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::get('/login/store', [AuthController::class, 'login'])->name('performLogin');
@@ -123,7 +124,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/destroy/{id}', [EducationController::class, 'destroy'])->name('destroy');
         Route::put('/update/{id}', [EducationController::class, 'update'])->name('update');
         Route::get('/edit/{id}', [EducationController::class, 'edit'])->name('edit');
+    });
 
+        Route::prefix('vip-tool')->name('vip-tools.')->group(function () {
+        Route::get('/index', [VIPToolController::class, 'index'])->name('index');
+        Route::get('/show/{id}', [VIPToolController::class, 'show'])->name('show');
+        Route::post('/store', [VIPToolController::class, 'store'])->name('store');
+        Route::get('/create', [VIPToolController::class, 'create'])->name('create');
+        Route::delete('/destroy/{id}', [VIPToolController::class, 'destroy'])->name('destroy');
+        Route::put('/update/{id}', [VIPToolController::class, 'update'])->name('update');
+        Route::get('/edit/{id}', [VIPToolController::class, 'edit'])->name('edit');
     });
 
     Route::prefix('education-categories')->name('education-categories.')->group(function () {

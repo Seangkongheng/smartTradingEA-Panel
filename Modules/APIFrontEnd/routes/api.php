@@ -13,6 +13,7 @@ use Modules\APIFrontEnd\App\Http\Controllers\RegisterController\RegisterControll
 use Modules\APIFrontEnd\App\Http\Controllers\ResultCategoryController;
 use Modules\APIFrontEnd\App\Http\Controllers\SubcriptionController;
 use Modules\APIFrontEnd\App\Http\Controllers\TradingAccountController;
+use Modules\APIFrontEnd\App\Http\Controllers\VIPToolController;
 use Modules\Dashboard\App\Models\Attachment;
 
 Route::post('register', [RegisterController::class, 'register']);
@@ -78,4 +79,5 @@ Route::get('/result-photo-categories', action: [ResultCategoryController::class,
 Route::get('/result-photo/{categoryId}', [ResultCategoryController::class, 'getPhotoByCategory']);
 Route::get('/community-photo', action: [CommunityController::class, 'index']);
 Route::get('/trading-account', action: [TradingAccountController::class, 'index']);
+Route::get('/vip-tool', action: [VIPToolController::class, 'index']);
 

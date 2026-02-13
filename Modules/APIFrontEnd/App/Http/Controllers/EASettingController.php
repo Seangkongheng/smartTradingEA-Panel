@@ -15,11 +15,10 @@ class EASettingController extends Controller
      */
     public function index()
     {
-        $eaSettings = EASetting::orderBy('id', 'desc')
-            ->get();
+        $eaSettings = EASetting::orderBy('id', 'desc') ->get();
         return response()->json([
             'eaSettings' => $eaSettings
-        ]);
+        ],202);
     }
 
 
