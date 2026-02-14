@@ -11,6 +11,7 @@ use Modules\APIFrontEnd\App\Http\Controllers\CommunityController;
 use Modules\APIFrontEnd\App\Http\Controllers\EducationController;
 use Modules\APIFrontEnd\App\Http\Controllers\RegisterController\RegisterController;
 use Modules\APIFrontEnd\App\Http\Controllers\ResultCategoryController;
+use Modules\APIFrontEnd\App\Http\Controllers\RewardController;
 use Modules\APIFrontEnd\App\Http\Controllers\SubcriptionController;
 use Modules\APIFrontEnd\App\Http\Controllers\TradingAccountController;
 use Modules\APIFrontEnd\App\Http\Controllers\VIPToolController;
@@ -72,6 +73,7 @@ Route::get('/education/videos/{categoryId}', [EducationController::class, 'getVi
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/membership/store', action: [MembershipController::class, 'store']);
     Route::get('/membership/get-membership', action: [MembershipController::class, 'getMembership']);
+     Route::get('/my-reward', action: [RewardController::class, 'index']);
 });
 
 Route::get('/result-photo', action: [ResultCategoryController::class, 'index']);

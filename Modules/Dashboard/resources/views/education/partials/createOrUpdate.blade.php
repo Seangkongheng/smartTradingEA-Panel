@@ -21,7 +21,7 @@
         </a>
     </div>
 </div>
-    @include('dashboard::vipTool.partials.formCreate.createOrUpdate')
+    @include('dashboard::education.partials.formCreate.createOrUpdate')
 </div>
 
 <script>
