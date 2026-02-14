@@ -34,7 +34,7 @@
         <div class="flex-1 md:min-w-[160px]">
             <form action="" method="POST">
                 <div class="relative">
-                    <input type="text" id="search" name="search" placeholder="Search here..." class="w-full kantumruy-pro pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 bg-gray-50  focus:ring-1 focus:ring-green-400 focus:border-green-400 focus:outline-none placeholder-gray-400 text-gray-700 focus:border-none transition-all">
+                    <input type="text" id="search" name="search" placeholder="Search email here..." class="w-full kantumruy-pro pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 bg-gray-50  focus:ring-1 focus:ring-green-400 focus:border-green-400 focus:outline-none placeholder-gray-400 text-gray-700 focus:border-none transition-all">
                     <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
@@ -85,7 +85,7 @@
         let search_string = $(this).val();
         let status = $('#status').val();
         $.ajax({
-            url: "{{ route('admin.user.search') }}",
+            url: "{{ route('admin.register.search') }}",
             method: 'GET',
             data: { search_string: search_string },
             success: function (res) {
@@ -99,7 +99,7 @@
         let status = $(this).val();
 
         $.ajax({
-            url: "{{ route('admin.user.search') }}",
+             url: "{{ route('admin.register.search') }}",
             method: 'GET',
             data: { status: status },
             success: function (res) {

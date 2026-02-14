@@ -113,8 +113,8 @@
 
                         <select name="status"
                             class="w-full px-4 py-3  text-black rounded-xl border-2 border-slate-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none">
-                            <option value="pending" {{ $subscription->status == 'pending' ? 'selected' : '' }}>
-                                Reject
+                            <option value="rejected" {{ $subscription->status == 'rejected' ? 'selected' : '' }}>
+                                Rejected
                             </option>
                             <option value="confirmed" {{ $subscription->status == 'confirmed' ? 'selected' : '' }}>
                                 Confirmed

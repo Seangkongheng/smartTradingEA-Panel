@@ -2,7 +2,7 @@
     <thead class="bg-gray-800/60 text-gray-200 uppercase">
         <tr>
             <th class="px-6 py-4">#</th>
-            <th class="px-6 py-4">Name</th>
+            <th class="px-6 py-4">Email</th>
             <th class="px-6 py-4">Marketplace</th>
             <th class="px-6 py-4">plan</th>
             <th class="px-6 py-4">Price</th>
@@ -12,16 +12,12 @@
             <th class="px-6 py-4 text-center">Action</th>
         </tr>
     </thead>
-
-
-
-
     <tbody class="divide-y divide-gray-700">
         @forelse ($subscriptions as $index=> $order)
             <tr class="hover:bg-gray-700/40 transition-colors duration-200">
                 <td class="px-6 py-4">{{ $index + 1 }}</td>
-                <td class="px-6 py-4 font-medium">{{ $order->user->first_name ?? '' }}
-                    {{ $order->user->last_name ?? '' }}
+                <td class="px-6 py-4 font-medium">
+                    {{ $order->user->email ?? '' }}
                 </td>
                 <td class="px-6 py-4 font-medium">{{ $order->marketplace->title ?? 'N/A' }}
                 </td>
@@ -45,6 +41,7 @@
                         $statusColor = match ($status) {
                             'pending' => 'bg-yellow-500 text-white',
                             'confirmed' => 'bg-green-500 text-white',
+                            'rejected'=>'bg-red-500 text-white',
                             default => 'bg-gray-500 text-white',
                         };
                     @endphp
@@ -67,6 +64,19 @@
                                     d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
                         </a>
+
+                         {{-- Noted : Delete Button --}}
+                        <form action="{{ route('admin.subscribes.destroy', $order->id) }}" method="POST"
+                            onsubmit="return confirm('Are you sure?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="p-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M4 7h16" />
+                                </svg>
+                            </button>
+                        </form>
                     </div>
                 </td>
             </tr>

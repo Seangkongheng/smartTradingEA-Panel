@@ -14,12 +14,12 @@ use Modules\Dashboard\App\Http\Controllers\MarketplaceController\MarketplaceCont
 use Modules\Dashboard\App\Http\Controllers\MeetingController\MeetingController;
 use Modules\Dashboard\App\Http\Controllers\MembershipController\MembershipController;
 use Modules\Dashboard\App\Http\Controllers\PlanController;
-use Modules\Dashboard\App\Http\Controllers\TradingAccountController;
 use Modules\Dashboard\App\Http\Controllers\ProductController\ProductController;
 use Modules\Dashboard\App\Http\Controllers\RegisterController\RegisterController;
 use Modules\Dashboard\App\Http\Controllers\RewardController\RewardController;
 use Modules\Dashboard\App\Http\Controllers\SettingController\SettingController;
 use Modules\Dashboard\App\Http\Controllers\SubscribeController\SubscribeController;
+use Modules\Dashboard\App\Http\Controllers\TradingAccountController;
 use Modules\Dashboard\App\Http\Controllers\UserController\PermissionController;
 use Modules\Dashboard\App\Http\Controllers\UserController\RoleController;
 use Modules\Dashboard\App\Http\Controllers\UserController\UserController;
@@ -126,7 +126,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/edit/{id}', [EducationController::class, 'edit'])->name('edit');
     });
 
-        Route::prefix('vip-tool')->name('vip-tools.')->group(function () {
+    Route::prefix('vip-tool')->name('vip-tools.')->group(function () {
         Route::get('/index', [VIPToolController::class, 'index'])->name('index');
         Route::get('/show/{id}', [VIPToolController::class, 'show'])->name('show');
         Route::post('/store', [VIPToolController::class, 'store'])->name('store');
@@ -199,8 +199,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/update/{id}', [PlanController::class, 'update'])->name('update');
     });
 
-
-     Route::prefix('trading-account')->name('trading-accounts.')->group(function () {
+    Route::prefix('trading-account')->name('trading-accounts.')->group(function () {
         Route::get('/index', [TradingAccountController::class, 'index'])->name('index');
         Route::post('/store', [TradingAccountController::class, 'store'])->name('store');
         Route::get('/create', [TradingAccountController::class, 'create'])->name('create');
@@ -214,6 +213,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', [RegisterController::class, 'create'])->name('create');
         Route::get('/show/{id}', [RegisterController::class, 'show'])->name('show');
         Route::delete('/destroy/{id}', [RegisterController::class, 'destroy'])->name('destroy');
+        Route::get('/search', [RegisterController::class, 'searchUser'])->name('search');
 
     });
     Route::prefix('membership')->name('membership.')->group(function () {
@@ -221,6 +221,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/show/{id}', [MembershipController::class, 'show'])->name('show');
         Route::get('/create', [MembershipController::class, 'create'])->name('create');
         Route::put('/update/{id}', [MembershipController::class, 'update'])->name('update');
+        Route::get('/search', [MembershipController::class, 'search'])->name('search');
         Route::delete('/destroy/{id}', [MembershipController::class, 'destroy'])->name('destroy');
         Route::put('/update-account-status/{id}', [MembershipController::class, 'updateAcountStatus'])->name('update-account-status');
 
@@ -233,6 +234,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('subscribe')->name('subscribes.')->group(function () {
         Route::get('/index', [SubscribeController::class, 'index'])->name('index');
         Route::get('/show/{id}', [SubscribeController::class, 'show'])->name('show');
+        Route::delete('/destroy/{id}', [SubscribeController::class, 'destroy'])->name('destroy');
+        Route::get('/search', [SubscribeController::class, 'search'])->name('search');
     });
 
     // User Routes

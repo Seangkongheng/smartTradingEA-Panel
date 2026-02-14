@@ -2,7 +2,7 @@
     <thead class="bg-gray-800/60 text-gray-200 uppercase">
         <tr>
             <th class="px-6 py-4">#</th>
-            <th class="px-6 py-4">Full Name</th>
+            <th class="px-6 py-4">Email</th>
             <th class="px-6 py-4">Exness Email</th>
             <th class="px-6 py-4">Submit Date</th>
             <th class="px-6 py-4">Status</th>
@@ -13,8 +13,8 @@
         @forelse($memberships as $index => $membership)
             <tr class="hover:bg-gray-700/40 transition-colors duration-200">
                 <td class="px-6 py-4">{{ $index + 1 }}</td>
-                <td class="px-6 py-4 font-medium">{{ $membership->user->first_name ?? 'N/A' }}
-                    {{ $membership->user->last_name ?? 'N/A' }}</td>
+                <td class="px-6 py-4 font-medium">
+                    {{ $membership->user->email ?? 'N/A' }}</td>
                 <td class="px-6 py-4">{{ $membership->exness_email ?? 'N/A' }}</td>
                 <td class="px-6 py-4">{{ $membership->created_at->format('M d, Y') }}</td>
                 <td class="px-6 py-4">

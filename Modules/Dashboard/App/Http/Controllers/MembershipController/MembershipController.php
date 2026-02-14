@@ -10,9 +10,6 @@ use Modules\APIFrontEnd\App\Models\MembershipAccount;
 
 class MembershipController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $memberships = Membership::with('accounts')->get();
@@ -20,20 +17,9 @@ class MembershipController extends Controller
         return view('dashboard::membership.index', compact('memberships'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('dashboard::membership.createOrUpdate');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -47,10 +33,40 @@ class MembershipController extends Controller
         return view('dashboard::membership.show', compact('membership'));
     }
 
+    public function search(Request $request)
+    {
+        $search_string = $request->search_string;
+        $status = $request->status;
+
+        $memberships = Membership::whereHas('user', function ($query) use ($search_string) {
+            $query->where('email', 'like', '%'.$search_string.'%')
+                ->orWhere('first_name', 'like', '%'.$search_string.'%');
+        });
+
+        // Apply status filter if provided
+        if ($status == 1) {
+            $memberships->where('status', 'pending');
+        } elseif ($status == 2) {
+            $memberships->where('status', 'confirmed');
+        } elseif ($status == 3) {
+            $memberships->where('status', 'rejected');
+        }
+
+        $memberships = $memberships->orderBy('id', 'desc')->paginate(10);
+
+        if ($memberships->count() >= 1) {
+            return view('dashboard::membership.partials.tableInformation.productTable', compact('memberships'))->render();
+        } else {
+            return response()->json([
+                'status' => 'Nothing found',
+            ]);
+        }
+    }
+
     public function update(Request $request, $id)
     {
         $request->validate([
-          
+
             'license_key' => $request->status === 'confirmed'
                 ? 'required|string|max:255'
                 : 'nullable',

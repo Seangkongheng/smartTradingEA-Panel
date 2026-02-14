@@ -23,6 +23,36 @@ class SubscribeController extends Controller
         return view('dashboard::subscribe.index', compact('subscriptions'));
     }
 
+    public function search(Request $request)
+    {
+        $search_string = $request->search_string;
+        $status = $request->status;
+
+        $subscriptions = UserSubcription::whereHas('user', function ($query) use ($search_string) {
+            $query->where('email', 'like', '%'.$search_string.'%')
+                ->orWhere('first_name', 'like', '%'.$search_string.'%');
+        })->with('marketplace',
+            'subscriptionPlan',
+            'marketplace.plans', );
+
+        // Apply status filter if provided
+        if ($status == 1) {
+            $subscriptions->where('status', 'confirmed');
+        } elseif ($status == 2) {
+            $subscriptions->where('status', 'rejected');
+        }
+
+        $subscriptions = $subscriptions->orderBy('id', 'desc')->paginate(10);
+
+        if ($subscriptions->count() >= 1) {
+            return view('dashboard::subscribe.partials.tableInformation.productTable', compact('subscriptions'))->render();
+        } else {
+            return response()->json([
+                'status' => 'Nothing found',
+            ]);
+        }
+    }
+
     public function show($id)
     {
         $subscription = UserSubcription::find($id);
@@ -79,6 +109,17 @@ class SubscribeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $subscription = UserSubcription::find($id);
+            $subscription->delete();
+
+            return redirect()
+                ->route('admin.subscribes.index')
+                ->with('message', 'Subscription Deleted');
+        } catch (Exception $e) {
+            return redirect()
+                ->route('admin.subscribes.index')
+                ->with('error', $e->getMessage());
+        }
     }
 }
