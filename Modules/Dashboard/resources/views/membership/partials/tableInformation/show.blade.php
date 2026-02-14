@@ -8,7 +8,7 @@
                 'pending' => 'bg-yellow-100 text-yellow-800',
                 'confirmed' => 'bg-blue-100 text-blue-800',
                 'paid' => 'bg-green-100 text-green-800',
-                'canceled' => 'bg-red-100 text-red-800',
+                'rejected' => 'bg-red-100 text-red-800',
             ];
         @endphp
 
@@ -231,7 +231,7 @@
                             <option value="confirmed" {{ $membership->status == 'confirmed' ? 'selected' : '' }}>
                                 Confirmed
                             </option>
-                            <option value="canceled" {{ $membership->status == 'canceled' ? 'selected' : '' }}>
+                            <option value="rejected" {{ $membership->status == 'rejected' ? 'selected' : '' }}>
                                 Rejected
                             </option>
                         </select>

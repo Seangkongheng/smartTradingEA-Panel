@@ -99,7 +99,7 @@ class MembershipController extends Controller
             $membership = Membership::with('accounts')->findOrFail($id);
 
             // Only allow update if rejected
-            if ($membership->status !== 'canceled') {
+            if ($membership->status !== 'rejected') {
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Only rejected membership can be edited.',

@@ -50,7 +50,7 @@ class MembershipController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:pending,confirmed,canceled',
+          
             'license_key' => $request->status === 'confirmed'
                 ? 'required|string|max:255'
                 : 'nullable',
@@ -75,7 +75,7 @@ class MembershipController extends Controller
             }
 
             // REJECTED
-            if ($request->status === 'canceled') {
+            if ($request->status === 'rejected') {
                 $data['rejected_by'] = auth()->user()->name ?? null;
                 $data['rejected_at'] = Carbon::now('Asia/Phnom_Penh');
 
