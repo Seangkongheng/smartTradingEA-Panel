@@ -36,7 +36,7 @@ Route::get('attachment/download/{id}/{fileIndex}', function ($id, $fileIndex) {
 
     $files = json_decode($attachment->file, true);
 
-    if (! isset($files[$fileIndex])) {
+    if (!isset($files[$fileIndex])) {
         abort(404);
     }
 
@@ -73,7 +73,7 @@ Route::get('/education/videos/{categoryId}', [EducationController::class, 'getVi
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/membership/store', action: [MembershipController::class, 'store']);
     Route::get('/membership/get-membership', action: [MembershipController::class, 'getMembership']);
-     Route::get('/my-reward', action: [RewardController::class, 'index']);
+    Route::get('/my-reward', action: [RewardController::class, 'index']);
 });
 
 Route::get('/result-photo', action: [ResultCategoryController::class, 'index']);
