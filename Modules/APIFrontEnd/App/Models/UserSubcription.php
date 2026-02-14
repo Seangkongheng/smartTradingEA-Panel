@@ -3,9 +3,8 @@
 namespace Modules\APIFrontEnd\App\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\APIFrontEnd\Database\factories\UserSubcriptionFactory;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Dashboard\App\Models\Maketplace;
 use Modules\Dashboard\App\Models\Plan;
 
@@ -13,9 +12,10 @@ class UserSubcription extends Model
 {
     use HasFactory;
 
-
     protected $table = 'user_subscriptions';
-    protected $primarykey = 'id';
+
+    protected $primaryKey = 'id'; // ✅ FIXED
+
     protected $fillable = [
         'user_id',
         'marketplace_id',
@@ -25,6 +25,7 @@ class UserSubcription extends Model
         'total_price',
         'subscription_date',
         'confirmation_date',
+        'expire_date',
         'created_at',
         'updated_at',
     ];
@@ -38,9 +39,9 @@ class UserSubcription extends Model
     {
         return $this->belongsTo(Plan::class, 'subscription_plan_id');
     }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
 }

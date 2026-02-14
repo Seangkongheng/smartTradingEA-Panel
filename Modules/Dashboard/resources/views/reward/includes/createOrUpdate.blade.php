@@ -1,1 +1,1 @@
-@include('dashboard::tradingAccount.partials.createOrUpdate')
+@include('dashboard::reward.partials.createOrUpdate')

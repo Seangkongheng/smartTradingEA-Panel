@@ -90,6 +90,68 @@ class MembershipController extends Controller
         }
     }
 
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            $membership = Membership::with('accounts')->findOrFail($id);
+
+            // Only allow update if rejected
+            if ($membership->status !== 'canceled') {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Only rejected membership can be edited.',
+                ], 403);
+            }
+
+            // Update main membership fields
+            $membership->update([
+                'exness_email' => $request->exness_email,
+                'tradingview_username' => $request->tradingview_username,
+                'note' => $request->note,
+                'status' => 'pending', // reset status to pending after edit
+                'submitted_at' => now(),
+            ]);
+
+            // Update accounts
+            // Delete accounts that were removed
+            $existingIds = $membership->accounts->pluck('id')->toArray();
+            $newIds = array_filter(array_column($request->accounts, 'id'));
+            $toDelete = array_diff($existingIds, $newIds);
+            MembershipAccount::whereIn('id', $toDelete)->delete();
+
+            // Update or create accounts
+            foreach ($request->accounts as $acc) {
+                if (! empty($acc['id'])) {
+                    MembershipAccount::find($acc['id'])->update(['account_number' => $acc['account_number']]);
+                } else {
+                    MembershipAccount::create([
+                        'membership_id' => $membership->id,
+                        'account_number' => $acc['account_number'],
+                        'status' => 'pending',
+                    ]);
+                }
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Membership updated successfully',
+                'data' => $membership->load('accounts'),
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
     public function getMembership(Request $request)
     {
         $user = $request->user();
@@ -99,29 +161,5 @@ class MembershipController extends Controller
             'status' => 'success',
             'data' => $membership,
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        return view('apifrontend::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

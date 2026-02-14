@@ -11,7 +11,7 @@ class Plan extends Model
     use HasFactory;
 
     protected $table = 'plans';
-    protected $primarykey = 'id';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'updated_at',

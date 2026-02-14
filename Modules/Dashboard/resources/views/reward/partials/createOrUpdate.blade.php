@@ -21,7 +21,7 @@
         </a>
     </div>
 </div>
-    @include('dashboard::tradingAccount.partials.formCreate.createOrUpdate')
+    @include('dashboard::reward.partials.formCreate.createOrUpdate')
 </div>
 
 <script>

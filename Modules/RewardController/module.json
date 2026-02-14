@@ -1,0 +1,11 @@
+{
+    "name": "RewardController",
+    "alias": "rewardcontroller",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\RewardController\\App\\Providers\\RewardControllerServiceProvider"
+    ],
+    "files": []
+}

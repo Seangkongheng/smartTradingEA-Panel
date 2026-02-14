@@ -32,10 +32,10 @@
                     $ {{ $order->total_price ?? '0' }}
                 </td>
                 <td class="px-6 py-4 font-medium">
-                    {{ $order->confirmation_date ?? 'N/A' }}
+                    {{ $order->confirmation_date ?? '--' }}
                 </td>
                 <td class="text-red-600">
-                    Not implemented yet
+                    {{ $order->expire_date ?? '--' }}
                 </td>
 
 
