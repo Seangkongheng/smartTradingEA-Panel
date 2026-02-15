@@ -12,25 +12,8 @@ use Modules\APIFrontEnd\App\Models\MembershipAccount;
 
 class MembershipController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return view('apifrontend::index');
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('apifrontend::create');
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
 
@@ -111,7 +94,7 @@ class MembershipController extends Controller
                 'exness_email' => $request->exness_email,
                 'tradingview_username' => $request->tradingview_username,
                 'note' => $request->note,
-                'status' => 'pending', // reset status to pending after edit
+                'status' => 'pending',
                 'submitted_at' => now(),
             ]);
 

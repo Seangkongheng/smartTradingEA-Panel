@@ -96,7 +96,7 @@
 
                 <div class="flex justify-between text-sm">
                     <span class="text-slate-500">Approved By</span>
-                    <span class="{{ $badge }}">{{ $membership->approved_by ?? 'N/A' }}</span>
+                    <span class="{{ $badge }}">{{ $membership->approveBy->first_name ?? 'N/A' }} {{ $membership->approveBy->last_name ?? 'N/A' }}</span>
                 </div>
 
                 <div class="flex justify-between text-sm">
@@ -106,7 +106,7 @@
 
                 <div class="flex justify-between text-sm">
                     <span class="text-slate-500">Rejected By</span>
-                    <span class="{{ $badge }}">{{ $membership->rejected_by ?? 'N/A' }}</span>
+                    <span class="{{ $badge }}">{{ $membership->rejectBy->first_name ?? 'N/A' }} {{ $membership->rejectBy->last_name ?? 'N/A' }}</span>
                 </div>
 
                 <div class="flex justify-between text-sm">
@@ -124,48 +124,108 @@
 
                     <div class="space-y-4">
 
+                        <div class="mb-4 flex gap-2">
+                            <button type="button" id="checkAllBtn"
+                                class="px-4 py-2 text-sm font-semibold rounded-lg bg-blue-600 text-white hover:scale-105 transition">
+                                Check All
+                            </button>
+                            <button type="button" id="uncheckAllBtn"
+                                class="px-4 py-2 text-sm font-semibold rounded-lg bg-gray-600 text-white hover:scale-105 transition">
+                                Uncheck All
+                            </button>
+                            <select id="bulkStatus"
+                                class="px-3 py-2 text-black rounded-lg border border-slate-300 text-sm focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none">
+                                <option value="">Select Status</option>
+                                <option value="active">Active</option>
+                                <option value="rejected">Rejected</option>
+                                <option value="suspended">Suspended</option>
+                            </select>
+                            <button type="button" id="bulkUpdateBtn"
+                                class="px-4 py-2 text-sm font-semibold rounded-lg bg-orange-600 text-white hover:scale-105 transition">
+                                Bulk Update
+                            </button>
+                        </div>
+
                         @forelse ($membership->accounts as $index => $account)
-                            <form action="{{ route('admin.membership.update-account-status', $account->id) }}" method="POST"
+                            <form class=""
+                                action="{{ route('admin.membership.update-account-status', $account->id) }}"
+                                method="POST" class="account-form"
                                 class="flex items-center justify-between gap-4 p-4 rounded-xl bg-slate-50 border">
                                 @csrf
                                 @method('PUT')
 
+                                <div class="flex justify-between items-center">
 
-                                <div>
-                                    <p class="text-sm text-gray-500">Account Number</p>
-                                    <p class="font-medium text-gray-800">
-                                        #{{ $index + 1 }} <span
-                                            class="font-bold text-orange-400">{{ $account->account_number ?? 'N/A' }}</span>
-                                    </p>
+
+                                    <div class="flex gap-2 items-center">
+                                        <input type="checkbox" class="account-checkbox" value="{{ $account->id }}"     data-account-id="{{ $account->id }}">
+                                        <p class="text-sm text-gray-500">Account Number</p>
+                                        <p class="font-medium text-gray-800">
+                                            #{{ $index + 1 }} <span
+                                                class="font-bold text-orange-400">{{ $account->account_number ?? 'N/A' }}</span>
+                                        </p>
+                                    </div>
+
+                                    <div class="flex gap-2">
+                                        <select name="status"
+                                            class="px-3 py-2 text-black rounded-lg border border-slate-300 text-sm focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none">
+                                            <option value="pending"
+                                                {{ $account->status === 'pending' ? 'selected' : '' }}>
+                                                Pending
+                                            </option>
+                                            <option value="active"
+                                                {{ $account->status === 'active' ? 'selected' : '' }}>
+                                                Active
+                                            </option>
+                                            <option value="suspended"
+                                                {{ $account->status === 'suspended' ? 'selected' : '' }}>
+                                                Suspended
+                                            </option>
+                                        </select>
+
+                                        <button type="submit"
+                                            class="px-4 py-2 text-sm font-semibold rounded-lg bg-green-600 text-white hover:scale-105 transition">
+                                            Update
+                                        </button>
+                                    </div>
                                 </div>
 
-                                <div>
-                                    {{-- MIDDLE: STATUS SELECT --}}
-                                    <select name="status"
-                                        class="px-3 py-2 text-black rounded-lg border border-slate-300 text-sm    focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none">
-                                        <option value="pending" {{ $account->status === 'pending' ? 'selected' : '' }}>
-                                            Pending
-                                        </option>
-                                        <option value="active" {{ $account->status === 'active' ? 'selected' : '' }}>
-                                            Active
-                                        </option>
-                                        <option value="suspended"
-                                            {{ $account->status === 'suspended' ? 'selected' : '' }}>
-                                            Suspended
-                                        </option>
-                                    </select>
-
-                                    {{-- RIGHT: SUBMIT BUTTON --}}
-                                    <button type="submit"
-                                        class="px-4 py-2 text-sm font-semibold rounded-lg    bg-green-600 text-white   hover:scale-105 transition">
-                                        Update
-                                    </button>
-                                </div>
 
                             </form>
                         @empty
                             <p class="text-sm text-gray-500">No accounts found.</p>
                         @endforelse
+
+                        <script>
+                            document.getElementById('checkAllBtn').addEventListener('click', () => {
+                                document.querySelectorAll('.account-checkbox').forEach(cb => cb.checked = true);
+                            });
+
+                            document.getElementById('uncheckAllBtn').addEventListener('click', () => {
+                                document.querySelectorAll('.account-checkbox').forEach(cb => cb.checked = false);
+                            });
+
+                            document.getElementById('bulkUpdateBtn').addEventListener('click', async () => {
+                                const checkedBoxes = document.querySelectorAll('.account-checkbox:checked');
+                                const status = document.getElementById('bulkStatus').value;
+
+                                if (!checkedBoxes.length || !status) {
+                                    alert('Please select accounts and a status');
+                                    return;
+                                }
+
+                                for (const checkbox of checkedBoxes) {
+                                    const form = checkbox.closest('.account-form');
+                                    form.querySelector('select[name="status"]').value = status;
+                                    await fetch(form.action, {
+                                        method: 'POST',
+                                        body: new FormData(form)
+                                    });
+                                }
+
+                                location.reload();
+                            });
+                        </script>
 
                     </div>
                 </div>
@@ -223,8 +283,7 @@
 
                         {{-- STATUS --}}
                         <select name="status" id="membershipStatus"
-                            class="w-full px-4 py-3 text-black rounded-xl border-2 border-slate-200
-            focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none">
+                            class="w-full px-4 py-3 text-black rounded-xl border-2 border-slate-200  focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none">
                             <option value="pending" {{ $membership->status == 'pending' ? 'selected' : '' }}>
                                 Pending
                             </option>
@@ -241,16 +300,14 @@
                             <label class="block text-sm font-medium text-slate-700 mb-1">
                                 License Key
                             </label>
-                            <input  type="text" name="license_key"
+                            <input type="text" name="license_key"
                                 value="{{ old('license_key', $membership->license_key) }}"
                                 placeholder="Enter license key"
-                                class="w-full px-4 py-3 rounded-xl border-2 border-slate-200
-                focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none">
+                                class="w-full px-4 py-3 rounded-xl border-2 border-slate-200   focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none">
                         </div>
 
                         <button type="submit"
-                            class="w-full bg-green-600
-            text-white py-3 rounded-xl font-semibold hover:scale-[1.02] transition">
+                            class="w-full bg-green-600   text-white py-3 rounded-xl font-semibold hover:scale-[1.02] transition">
                             Update Membership
                         </button>
                     </form>

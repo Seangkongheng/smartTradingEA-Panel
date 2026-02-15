@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Dashboard\App\Models\Maketplace;
 use Modules\Dashboard\App\Models\Plan;
+use Modules\APIFrontEnd\App\Models\Order;
 
 class UserSubcription extends Model
 {
@@ -43,5 +44,10 @@ class UserSubcription extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function order()
+    {
+        return $this->belongsto(Order::class, 'order_id');
     }
 }

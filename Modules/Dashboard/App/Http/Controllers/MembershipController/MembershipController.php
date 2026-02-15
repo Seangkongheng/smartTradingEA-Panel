@@ -74,6 +74,7 @@ class MembershipController extends Controller
 
         try {
             $membership = Membership::findOrFail($id);
+            $user_id = Auth()->user()->id;
 
             $data = [
                 'status' => $request->status,
@@ -82,7 +83,7 @@ class MembershipController extends Controller
             // CONFIRMED
             if ($request->status === 'confirmed') {
                 $data['license_key'] = $request->license_key;
-                $data['approved_by'] = auth()->user()->name ?? null;
+                $data['approved_by'] = $user_id;
                 $data['approved_at'] = Carbon::now('Asia/Phnom_Penh');
 
                 // clear reject fields
@@ -92,13 +93,12 @@ class MembershipController extends Controller
 
             // REJECTED
             if ($request->status === 'rejected') {
-                $data['rejected_by'] = auth()->user()->name ?? null;
+                $data['rejected_by'] = $user_id;
                 $data['rejected_at'] = Carbon::now('Asia/Phnom_Penh');
 
                 // clear approve fields
                 $data['approved_by'] = null;
                 $data['approved_at'] = null;
-                $data['license_key'] = null;
             }
 
             // PENDING
@@ -107,7 +107,6 @@ class MembershipController extends Controller
                 $data['approved_at'] = null;
                 $data['rejected_by'] = null;
                 $data['rejected_at'] = null;
-                $data['license_key'] = null;
             }
 
             $membership->update($data);

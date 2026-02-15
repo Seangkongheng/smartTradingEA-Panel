@@ -2,18 +2,19 @@
 
 namespace Modules\APIFrontEnd\App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Modules\APIFrontEnd\Database\factories\MembershipFactory;
-use Modules\APIFrontEnd\App\Models\MembershipAccount;
 
 class Membership extends Model
 {
     use HasFactory;
 
     protected $table = 'memberships';
+
     protected $primaryKey = 'id';
+
     protected $fillable = [
         'user_id',
         'exness_email',
@@ -31,16 +32,28 @@ class Membership extends Model
         'created_at',
         'updated_at',
     ];
+
     public function accounts()
     {
         return $this->hasMany(MembershipAccount::class);
     }
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-     protected static function newFactory()
+    public function approveBy()
+    {
+        return $this->belongsTo(User::class, 'approved_by');
+    }
+
+    public function rejectBy()
+    {
+        return $this->belongsTo(User::class, 'rejected_by');
+    }
+
+    protected static function newFactory()
     {
         return MembershipFactory::new();
     }
