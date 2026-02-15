@@ -142,15 +142,14 @@
                             </select>
                             <button type="button" id="bulkUpdateBtn"
                                 class="px-4 py-2 text-sm font-semibold rounded-lg bg-orange-600 text-white hover:scale-105 transition">
-                                Bulk Update
+                                Update All
                             </button>
                         </div>
 
                         @forelse ($membership->accounts as $index => $account)
-                            <form class=""
+                            <form class="account-form  p-4 rounded-xl bg-slate-50 border"
                                 action="{{ route('admin.membership.update-account-status', $account->id) }}"
-                                method="POST" class="account-form"
-                                class="flex items-center justify-between gap-4 p-4 rounded-xl bg-slate-50 border">
+                                method="POST">
                                 @csrf
                                 @method('PUT')
 
