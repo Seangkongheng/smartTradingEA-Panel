@@ -5,7 +5,6 @@ namespace Modules\APIFrontEnd\App\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Modules\APIFrontEnd\Database\factories\MembershipFactory;
 
 class Membership extends Model
 {
@@ -51,10 +50,5 @@ class Membership extends Model
     public function rejectBy()
     {
         return $this->belongsTo(User::class, 'rejected_by');
-    }
-
-    protected static function newFactory()
-    {
-        return MembershipFactory::new();
     }
 }
