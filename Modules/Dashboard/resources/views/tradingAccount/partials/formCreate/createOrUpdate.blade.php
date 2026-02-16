@@ -52,7 +52,7 @@
                     <label class="text-white">Account ID <span class="text-red-500">*</span></label>
                 </div>
                 <div class="md:col-span-9">
-                    <input type="number" required placeholder="Enter server name.." name="account_id"
+                    <input type="number" required placeholder="Enter account ID.." name="account_id"
                         value="{{ old('account_id', $tradingAccountEdit->account_id ?? '') }}"
                         class="w-full px-4 py-3 rounded-lg text-black" required>
                 </div>

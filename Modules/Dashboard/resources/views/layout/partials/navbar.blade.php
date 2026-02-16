@@ -26,7 +26,7 @@
                     <div class="account-txt text-center">
                         <span class="text-xs text-gray-600">Welcome Back</span>
                         <h1 class="m-0 p-0 text-sm kantumruy-pro font-[500] ">
-                            <span>{{ $userName->first_name ?? '' }} &nbsp;
+                            <span>{{ $userName->first_name ?? '' }}
                                 {{ $userName->last_name ?? '' }}</span>
                         </h1>
                     </div>

@@ -188,8 +188,6 @@
                                         </button>
                                     </div>
                                 </div>
-
-
                             </form>
                         @empty
                             <p class="text-sm text-gray-500">No accounts found.</p>
