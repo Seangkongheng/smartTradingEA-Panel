@@ -22,15 +22,16 @@
             </div>
 
             @php
-                $statusColors = [
-                    'pending' => 'bg-yellow-100 text-yellow-800',
-                    'confirmed' => 'bg-blue-100 text-blue-800',
-                    'paid' => 'bg-green-100 text-green-800',
-                    'rejected' => 'bg-red-100 text-red-800',
-                ];
+            $statusColors = [
+            'pending' => 'bg-yellow-100 text-yellow-800',
+            'confirmed' => 'bg-blue-100 text-blue-800',
+            'paid' => 'bg-green-100 text-green-800',
+            'rejected' => 'bg-red-100 text-red-800',
+            ];
             @endphp
 
-            <span class="px-5 py-2 rounded-full text-sm font-semibold {{ $statusColors[$subscription->status] ?? 'bg-gray-100 text-gray-800' }}">
+            <span
+                class="px-5 py-2 rounded-full text-sm font-semibold {{ $statusColors[$subscription->status] ?? 'bg-gray-100 text-gray-800' }}">
                 {{ ucfirst($subscription->status) }}
             </span>
         </div>
@@ -44,8 +45,9 @@
 
                 <div class="flex justify-between text-sm">
                     <span class="text-slate-500">Payment Status</span>
-                    <span class="px-3 py-1 rounded-full {{ $statusColors[$subscription->status] ?? 'bg-gray-100 text-gray-800' }}" font-medium">
-                       {{ ucfirst($subscription->status) }}
+                    <span
+                        class="px-3 py-1 font-medium rounded-full {{ $statusColors[$subscription->status] ?? 'bg-gray-100 text-gray-800' }}">
+                        {{ ucfirst($subscription->status) }}
                     </span>
                 </div>
 
@@ -79,7 +81,8 @@
                     <h2 class="text-lg font-semibold text-slate-900 mb-4">Subscription Details</h2>
 
                     <div class="flex items-center gap-5 p-5 rounded-xl bg-slate-50 border">
-                        <div class="w-14 h-14 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold text-lg">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold text-lg">
                             1
                         </div>
 
@@ -111,7 +114,7 @@
                         @csrf
                         @method('PUT')
 
-                        <select name="status"
+                        <select id="status" name="status"
                             class="w-full px-4 py-3  text-black rounded-xl border-2 border-slate-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none">
                             <option value="rejected" {{ $subscription->status == 'rejected' ? 'selected' : '' }}>
                                 Rejected
@@ -119,10 +122,22 @@
                             <option value="confirmed" {{ $subscription->status == 'confirmed' ? 'selected' : '' }}>
                                 Confirmed
                             </option>
+
                         </select>
 
+
+                        <div id="noteInput" class="hidden text-black">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">
+                                Note
+                            </label>
+
+                            <textarea name="note" rows="6" placeholder="Enter note here..."
+                                class="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none">{{ old('note', $subscription->note) }}</textarea>
+                        </div>
+
+
                         <button type="submit"
-                            class="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white py-3 rounded-xl font-semibold hover:scale-[1.02] transition">
+                            class="w-full bg-green-500 text-white py-3 rounded-xl font-semibold hover:scale-[1.02] transition">
                             Update Status
                         </button>
                     </form>
@@ -132,3 +147,23 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    const statusSelect = document.getElementById('status');
+    const noteInput = document.getElementById('noteInput');
+
+    function toggleLicenseKey() {
+        if (statusSelect.value === 'confirmed') {
+            noteInput.classList.remove('hidden');
+        } else {
+            noteInput.classList.add('hidden');
+        }
+    }
+
+    // Run on page load
+    toggleLicenseKey();
+
+    // Run when status changes
+    statusSelect.addEventListener('change', toggleLicenseKey);
+</script>

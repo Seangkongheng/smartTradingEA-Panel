@@ -85,6 +85,7 @@ class SubscribeController extends Controller
 
             $subscription->update([
                 'status' => $request->status,
+                'note' => $request->note,
                 'confirmation_date' => $now,
                 'expire_date' => $expire_date,
             ]);

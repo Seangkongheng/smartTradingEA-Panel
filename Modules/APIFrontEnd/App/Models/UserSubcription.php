@@ -15,7 +15,7 @@ class UserSubcription extends Model
 
     protected $table = 'user_subscriptions';
 
-    protected $primaryKey = 'id'; // ✅ FIXED
+    protected $primaryKey = 'id'; 
 
     protected $fillable = [
         'user_id',
@@ -27,6 +27,7 @@ class UserSubcription extends Model
         'subscription_date',
         'confirmation_date',
         'expire_date',
+        'note',
         'created_at',
         'updated_at',
     ];
