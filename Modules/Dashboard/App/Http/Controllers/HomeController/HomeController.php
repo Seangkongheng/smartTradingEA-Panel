@@ -25,10 +25,9 @@ class HomeController extends Controller
         $usersActives = User::withoutRole('user')->where('is_active', 1)->count();
         $totalMembershipPendings = Membership::where("status", "pending")->count();
         $totalMembershipConfirms = Membership::where("status", "confirmed")->count();
-            $totalSubscriptionConfirmeds = UserSubcription::where('status', 'confirmed')->count();
-                   $totalSubscriptionPendings = UserSubcription::where('status', 'pending')->count();
-
-        return view('dashboard::index.index', compact('authName', 'totalSaless', 'totalSubscriptionPendings','totalSubscriptionConfirmeds','totalRegisters', 'totalRevenue', 'usersActives', 'totalMembershipPendings', 'totalMembershipConfirms'));
+        $totalSubscriptionConfirmeds = UserSubcription::where('status', 'confirmed')->count();
+        $totalSubscriptionPendings = UserSubcription::where('status', 'pending')->count();
+        return view('dashboard::index.index', compact('authName', 'totalSaless', 'totalSubscriptionPendings', 'totalSubscriptionConfirmeds', 'totalRegisters', 'totalRevenue', 'usersActives', 'totalMembershipPendings', 'totalMembershipConfirms'));
     }
 
 }

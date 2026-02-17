@@ -12,7 +12,7 @@ class MembershipController extends Controller
 {
     public function index()
     {
-        $memberships = Membership::with('accounts')->get();
+        $memberships = Membership::with('accounts')->paginate(15);
 
         return view('dashboard::membership.index', compact('memberships'));
     }

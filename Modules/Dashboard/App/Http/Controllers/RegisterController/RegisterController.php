@@ -12,7 +12,7 @@ class RegisterController extends Controller
     public function index()
     {
 
-        $userRegisters = User::role('user')->get();
+        $userRegisters = User::role('user')->paginate(15);
 
         return view('dashboard::register.index', compact('userRegisters'));
     }

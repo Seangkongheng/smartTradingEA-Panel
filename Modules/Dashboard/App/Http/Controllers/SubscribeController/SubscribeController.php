@@ -4,6 +4,7 @@ namespace Modules\Dashboard\App\Http\Controllers\SubscribeController;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Modules\APIFrontEnd\App\Models\Order;
 use Modules\APIFrontEnd\App\Models\UserSubcription;
@@ -18,7 +19,7 @@ class SubscribeController extends Controller
             'subscriptionPlan',
             'marketplace.plans',
         ])
-            ->get();
+            ->paginate(15);
 
         return view('dashboard::subscribe.index', compact('subscriptions'));
     }
@@ -29,11 +30,13 @@ class SubscribeController extends Controller
         $status = $request->status;
 
         $subscriptions = UserSubcription::whereHas('user', function ($query) use ($search_string) {
-            $query->where('email', 'like', '%'.$search_string.'%')
-                ->orWhere('first_name', 'like', '%'.$search_string.'%');
-        })->with('marketplace',
-            'subscriptionPlan',
-            'marketplace.plans', );
+            $query->where('email', 'like', '%' . $search_string . '%')
+                ->orWhere('first_name', 'like', '%' . $search_string . '%');
+        })->with(
+                'marketplace',
+                'subscriptionPlan',
+                'marketplace.plans',
+            );
 
         // Apply status filter if provided
         if ($status == 1) {
