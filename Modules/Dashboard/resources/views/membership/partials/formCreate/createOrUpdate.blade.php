@@ -342,15 +342,7 @@ $userRole = auth()->user()->roles->pluck('name')->first();
 </script>
 
 
-
-
-
-
 @push('scripts')
-
-
-
-
 <script>
     document.addEventListener("DOMContentLoaded", function () {
     // ===== VIDEO PREVIEW =====

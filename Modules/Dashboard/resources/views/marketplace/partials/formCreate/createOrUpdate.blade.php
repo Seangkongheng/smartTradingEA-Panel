@@ -174,10 +174,6 @@ $userRole = auth()->user()->roles->pluck('name')->first();
                             </div>
                         </div>
 
-
-
-
-
                         {{-- status button --}}
                         <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
                             <div class="md:col-span-3 flex items-center h-full">
@@ -336,9 +332,6 @@ $userRole = auth()->user()->roles->pluck('name')->first();
 
 
 @push('scripts')
-
-
-
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
