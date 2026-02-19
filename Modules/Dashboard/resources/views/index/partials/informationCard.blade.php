@@ -25,7 +25,7 @@
         <div class="bg-gradient-to-r from-purple-500 to-pink-600 p-8 rounded-2xl shadow-2xl text-white">
             <h3 class="text-sm uppercase opacity-80 tracking-wide">Active Users</h3>
             <p class="text-4xl font-extrabold mt-2">
-                {{ $usersActives ?? 0 }}
+                {{ $totalRegisters ?? 0 }}
             </p>
             <p class="text-sm mt-2 opacity-80">Currently active accounts</p>
         </div>
