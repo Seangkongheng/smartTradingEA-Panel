@@ -17,7 +17,7 @@
         <h1 class="text-xl font-semibold text-gray-800 kantumruy-pro m-0 p-0">
             <span class="text-white font-bold">Memberships</span></span>
             <span class="text-gray-300 mx-2">/</span>
-            <span class="text-gray-600">List</span>
+            <span class="text-gray-600">Pending List</span>
         </h1>
         <a href="{{ route('admin.membership.create') }}"
             class="flex md:hidden items-center gap-2 px-4 py-2.5 rounded-lg border border-green-600 bg-green-600 hover:bg-green-50 transition-colors">
@@ -50,8 +50,6 @@
                 class="w-full px-2 md:px-4 kantumruy-pro  pr-8 py-2.5 rounded-lg border border-gray-200 bg-gray-50 focus:bg-white focus:ring-1 focus:ring-green-500 focus:outline-none focus:border-green-500 text-gray-700 appearance-none transition-all">
                 <option value="" selected>Status</option>
                 <option value="1">Pending</option>
-                <option value="2">Confirmed</option>
-                <option value="3">Rejected</option>
             </select>
             <svg class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,43 +68,12 @@
     </div>
 
 </div>
-  {{-- Status Filter Buttons --}}
-<div class="flex flex-wrap gap-3 mt-4">
-
-    <!-- Pending -->
-    <a href="{{ route('admin.membership.pending') }}"
-        class="px-5 py-2 rounded-full text-sm font-semibold kantumruy-pro
-        bg-yellow-500/10 text-yellow-400 border border-yellow-400/30
-        hover:bg-yellow-400 hover:text-black
-        transition-all duration-300 shadow-md hover:shadow-yellow-400/40">
-        ⏳ Pending
-    </a>
-
-    <!-- Confirmed -->
-    <a  href="{{ route('admin.membership.confirmed') }}"
-        class="px-5 py-2 rounded-full text-sm font-semibold kantumruy-pro
-        bg-green-500/10 text-green-400 border border-green-400/30
-        hover:bg-green-400 hover:text-black
-        transition-all duration-300 shadow-md hover:shadow-green-400/40">
-        ✔ Confirmed
-    </a>
-
-    <!-- Rejected -->
-    <a  href="{{ route('admin.membership.rejected') }}"
-        class="px-5 py-2 rounded-full text-sm font-semibold kantumruy-pro
-        bg-red-500/10 text-red-400 border border-red-400/30
-        hover:bg-red-400 hover:text-white
-        transition-all duration-300 shadow-md hover:shadow-red-400/40">
-        ✖ Rejected
-    </a>
-
-</div>
 {{-- start main --}}
 <div class="main-content mt-5 w-full rounded-3xl p-5  bg-[#131d41]  ">
     <div class="main-full-content w-full">
         <div class="table-content w-full">
             <div class="relative overflow-x-auto sm:rounded-lg">
-                @include('dashboard::membership.partials.tableInformation.productTable')
+                @include('dashboard::membership.partials.tableInformation.pending')
             </div>
         </div>
     </div>

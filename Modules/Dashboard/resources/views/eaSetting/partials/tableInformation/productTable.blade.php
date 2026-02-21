@@ -7,6 +7,7 @@
             <th class="px-6 py-4">Balance</th>
             <th class="px-6 py-4">Profit</th>
             <th class="px-6 py-4">Drawdown</th>
+            <th class="px=6 py-4">Last Update</th>
             <th class="px-6 py-4">Status</th>
             <th class="px-6 py-4 text-center">Action</th>
         </tr>
@@ -46,20 +47,25 @@
                 {{ $eaSetting->title ?? '-' }}
             </td>
 
-            {{-- Title --}}
+            {{-- profit --}}
             <td class="px-6 py-4 font-medium text-white">
-              %  {{ $eaSetting->profit ?? '-' }}
+                % {{ $eaSetting->profit ?? '-' }}
             </td>
 
             {{-- Title --}}
-            <td class="px-6 py-4 font-medium text-white">
-               $ {{ $eaSetting->balance ?? '-' }}
+            <td balance="px-6 py-4 font-medium text-white">
+                $ {{ $eaSetting->balance ?? '-' }}
             </td>
 
-            {{-- Title --}}
+            {{-- drawdown --}}
             <td class="px-6 py-4 font-medium text-white">
-              %  {{ $eaSetting->drawdown ?? '-' }}
+                % {{ $eaSetting->drawdown ?? '-' }}
             </td>
+
+            <td class="px-6 py-4 font-medium text-white">
+                {{ $eaSetting->updated_at ? $eaSetting->updated_at->format('d M Y') : '-' }}
+            </td>
+
 
 
             {{-- Status --}}

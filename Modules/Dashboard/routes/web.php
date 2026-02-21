@@ -223,6 +223,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/update/{id}', [MembershipController::class, 'update'])->name('update');
         Route::get('/search', [MembershipController::class, 'search'])->name('search');
         Route::delete('/destroy/{id}', [MembershipController::class, 'destroy'])->name('destroy');
+        Route::get('/pending', [MembershipController::class, 'pending'])->name('pending');
+        Route::get('/confirmed', [MembershipController::class, 'confirmed'])->name('confirmed');
+        Route::get('/rejected', [MembershipController::class, 'rejected'])->name('rejected');
         Route::put('/update-account-status/{id}', [MembershipController::class, 'updateAcountStatus'])->name('update-account-status');
 
     });
