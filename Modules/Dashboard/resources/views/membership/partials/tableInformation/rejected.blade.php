@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody class="divide-y divide-gray-700">
-        @forelse($memberships as $index => $membership)
+        @forelse($membershipsRejected as $index => $membership)
         <tr class="hover:bg-gray-700/40 transition-colors duration-200">
             <td class="px-6 py-4">{{ $index + 1 }}</td>
             <td class="px-6 py-4 font-medium">

@@ -10,11 +10,19 @@ use Modules\APIFrontEnd\App\Models\MembershipAccount;
 
 class MembershipController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $memberships = Membership::with('accounts')->paginate(15);
+        $status = $request->status;
 
-        return view('dashboard::membership.index', compact('memberships'));
+        $memberships = Membership::with('accounts')
+            ->when($status && $status !== 'all', function ($query) use ($status) {
+                $query->where('status', $status);
+            })
+            ->latest()
+            ->paginate(15)
+            ->withQueryString();
+
+        return view('dashboard::membership.index', compact('memberships', 'status'));
     }
 
     public function create()
@@ -25,17 +33,21 @@ class MembershipController extends Controller
     public function pending()
     {
         $memberships = Membership::with('accounts')->where('status', 'pending')->paginate(15);
+
         return view('dashboard::membership.pending', compact('memberships'));
     }
 
     public function confirmed()
     {
         $memberships = Membership::with('accounts')->where('status', 'confirmed')->paginate(15);
+
         return view('dashboard::membership.confirmed', compact('memberships'));
     }
+
     public function rejected()
     {
         $memberships = Membership::with('accounts')->where('status', 'rejected')->paginate(15);
+
         return view('dashboard::membership.rejected', compact('memberships'));
     }
 
@@ -56,8 +68,8 @@ class MembershipController extends Controller
         $status = $request->status;
 
         $memberships = Membership::whereHas('user', function ($query) use ($search_string) {
-            $query->where('email', 'like', '%' . $search_string . '%')
-                ->orWhere('first_name', 'like', '%' . $search_string . '%');
+            $query->where('email', 'like', '%'.$search_string.'%')
+                ->orWhere('first_name', 'like', '%'.$search_string.'%');
         });
 
         // Apply status filter if provided
@@ -132,7 +144,7 @@ class MembershipController extends Controller
                 ->route('admin.membership.show', $membership->id)
                 ->with('success', 'Membership status updated successfully.');
         } catch (\Exception $e) {
-            return back()->with('error', 'An error occurred: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred: '.$e->getMessage());
         }
     }
 
@@ -147,7 +159,7 @@ class MembershipController extends Controller
                 ->route('admin.membership.show', $account->membership_id)
                 ->with('success', 'Account status updated successfully.');
         } catch (\Exception $e) {
-            return back()->with('error', 'An error occurred: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred: '.$e->getMessage());
         }
     }
 
@@ -160,7 +172,7 @@ class MembershipController extends Controller
 
             return redirect()->route('admin.membership.index')->with('success', 'Membership deleted successfully.');
         } catch (\Exception $e) {
-            return back()->with('error', 'An error occurred: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred: '.$e->getMessage());
         }
 
     }

@@ -11,9 +11,7 @@ class RegisterController extends Controller
 {
     public function index()
     {
-
-        $userRegisters = User::role('user')->paginate(15);
-
+        $userRegisters = User::role('user')->orderBy('id',"DESC")->paginate(15);
         return view('dashboard::register.index', compact('userRegisters'));
     }
 
